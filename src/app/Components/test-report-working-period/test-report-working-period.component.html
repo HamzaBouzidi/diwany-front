@@ -1,0 +1,176 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="شعار" class="form-logo" />
+      <h2>تقرير عن فترة الاختبار خلال فترة العمل</h2>
+    </div>
+
+    <form #reportForm="ngForm" (ngSubmit)="onSubmit(reportForm)">
+      <!-- Section for Text Fields in a Grid -->
+      <div class="form-grid">
+        <!-- Name -->
+        <div class="form-field">
+          <label for="name">الاسم</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-user"></i>
+            <input id="name" type="text" name="name" placeholder="أدخل الاسم" [(ngModel)]="name" #nameCtrl="ngModel" required />
+          </span>
+          <div *ngIf="nameCtrl.invalid && nameCtrl.touched" class="error-message">الرجاء إدخال الاسم</div>
+        </div>
+
+        <!-- Job Title -->
+        <div class="form-field">
+          <label for="jobTitle">الوظيفة</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-briefcase"></i>
+            <input id="jobTitle" type="text" name="jobTitle" placeholder="أدخل الوظيفة" [(ngModel)]="jobTitle"
+              #jobTitleCtrl="ngModel" required />
+          </span>
+          <div *ngIf="jobTitleCtrl.invalid && jobTitleCtrl.touched" class="error-message">الرجاء إدخال الوظيفة</div>
+        </div>
+
+        <!-- National Number -->
+        <div class="form-field">
+          <label for="nationalNumber">الرقم الوطني</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-id-card"></i>
+            <input id="nationalNumber" type="text" name="nationalNumber" placeholder="أدخل الرقم الوطني"
+              [(ngModel)]="nationalNumber" #nationalNumberCtrl="ngModel" required />
+          </span>
+          <div *ngIf="nationalNumberCtrl.invalid && nationalNumberCtrl.touched" class="error-message">الرجاء إدخال الرقم
+            الوطني</div>
+        </div>
+
+        <!-- Nationality -->
+        <div class="form-field">
+          <label for="nationality">الجنسية</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-flag"></i>
+            <input id="nationality" type="text" name="nationality" placeholder="أدخل الجنسية" [(ngModel)]="nationality"
+              #nationalityCtrl="ngModel" required />
+          </span>
+          <div *ngIf="nationalityCtrl.invalid && nationalityCtrl.touched" class="error-message">الرجاء إدخال الجنسية
+          </div>
+        </div>
+
+        <!-- Department -->
+        <div class="form-field">
+          <label for="department">الإدارة</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-sitemap"></i>
+            <input id="department" type="text" name="department" placeholder="أدخل الإدارة" [(ngModel)]="department"
+              #departmentCtrl="ngModel" required />
+          </span>
+          <div *ngIf="departmentCtrl.invalid && departmentCtrl.touched" class="error-message">الرجاء إدخال الإدارة</div>
+        </div>
+
+        <!-- Section -->
+        <div class="form-field">
+          <label for="section">القسم</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-sitemap"></i>
+            <input id="section" type="text" name="section" placeholder="أدخل القسم" [(ngModel)]="section" #sectionCtrl="ngModel"
+              required />
+          </span>
+          <div *ngIf="sectionCtrl.invalid && sectionCtrl.touched" class="error-message">الرجاء إدخال القسم</div>
+        </div>
+
+        <!-- Start Date -->
+        <div class="form-field">
+          <label for="startDate">تاريخ المباشرة</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-calendar"></i>
+            <input id="startDate" type="date" name="startDate" [(ngModel)]="startDate" #startDateCtrl="ngModel" required />
+          </span>
+          <div *ngIf="startDateCtrl.invalid && startDateCtrl.touched" class="error-message">الرجاء إدخال تاريخ المباشرة
+          </div>
+        </div>
+
+        <!-- End Date of Probation Period -->
+        <div class="form-field">
+          <label for="endDate">تاريخ انتهاء فترة الاختبار</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-calendar"></i>
+            <input id="endDate" type="date" name="endDate" [(ngModel)]="endDate" #endDateCtrl="ngModel" required />
+          </span>
+          <div *ngIf="endDateCtrl.invalid && endDateCtrl.touched" class="error-message">الرجاء إدخال تاريخ انتهاء فترة
+            الاختبار</div>
+        </div>
+      </div>
+
+      <!-- Evaluation Section -->
+      <div class="evaluation-section">
+        <h3>تقييم الأداء</h3>
+
+        <table class="evaluation-table">
+          <thead>
+            <tr>
+              <th>البند</th>
+              <th>أعلى من المستوى</th>
+              <th>في مستوى المطلوب</th>
+              <th>أقل من المستوى</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Job Knowledge -->
+            <tr>
+              <td>معرفة الوظيفة</td>
+              <td><input type="radio" name="jobKnowledge" value="above" [(ngModel)]="jobKnowledge"></td>
+              <td><input type="radio" name="jobKnowledge" value="meets" [(ngModel)]="jobKnowledge"></td>
+              <td><input type="radio" name="jobKnowledge" value="below" [(ngModel)]="jobKnowledge"></td>
+            </tr>
+
+            <!-- Technical Skills -->
+            <tr>
+              <td>الاتقانية</td>
+              <td><input type="radio" name="technicalSkills" value="above" [(ngModel)]="technicalSkills"></td>
+              <td><input type="radio" name="technicalSkills" value="meets" [(ngModel)]="technicalSkills"></td>
+              <td><input type="radio" name="technicalSkills" value="below" [(ngModel)]="technicalSkills"></td>
+            </tr>
+
+            <!-- Teamwork -->
+            <tr>
+              <td>مهارات التعامل مع الآخرين</td>
+              <td><input type="radio" name="teamwork" value="above" [(ngModel)]="teamwork"></td>
+              <td><input type="radio" name="teamwork" value="meets" [(ngModel)]="teamwork"></td>
+              <td><input type="radio" name="teamwork" value="below" [(ngModel)]="teamwork"></td>
+            </tr>
+
+            <!-- Problem Solving -->
+            <tr>
+              <td>حل المشكلات</td>
+              <td><input type="radio" name="problemSolving" value="above" [(ngModel)]="problemSolving"></td>
+              <td><input type="radio" name="problemSolving" value="meets" [(ngModel)]="problemSolving"></td>
+              <td><input type="radio" name="problemSolving" value="below" [(ngModel)]="problemSolving"></td>
+            </tr>
+
+            <!-- Time Management -->
+            <tr>
+              <td>إدارة الوقت</td>
+              <td><input type="radio" name="timeManagement" value="above" [(ngModel)]="timeManagement"></td>
+              <td><input type="radio" name="timeManagement" value="meets" [(ngModel)]="timeManagement"></td>
+              <td><input type="radio" name="timeManagement" value="below" [(ngModel)]="timeManagement"></td>
+            </tr>
+
+            <!-- Decision Making -->
+            <tr>
+              <td>التفكير واتخاذ القرارات</td>
+              <td><input type="radio" name="decisionMaking" value="above" [(ngModel)]="decisionMaking"></td>
+              <td><input type="radio" name="decisionMaking" value="meets" [(ngModel)]="decisionMaking"></td>
+              <td><input type="radio" name="decisionMaking" value="below" [(ngModel)]="decisionMaking"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">إرسال</button>
+      </div>
+    </form>
+  </div>
+        <!-- Success Modal -->
+        <app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+          <h3>تم تقديم التقرير بنجاح</h3>
+        </app-done-modal>
+</div>

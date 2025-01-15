@@ -1,0 +1,138 @@
+:host {
+  display: block;
+  direction: rtl; /* RTL structure */
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 50px); /* Space for footer */
+  background-color: #ffffff;
+}
+
+.form-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-logo {
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.form-header h2 {
+  font-size: 2rem;
+  color: #23689B; /* Header color */
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two-column grid */
+  gap: 1.5rem;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  color: #23689B; /* Label color */
+  text-align: right;
+}
+
+.p-input-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.p-input-icon-left .pi {
+  position: absolute;
+  right: 10px;
+  color: #23689B; /* Icon color */
+}
+
+.p-input-icon-left input {
+  padding-left: 2.5rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #23689B; /* Input border */
+  width: 100%;
+  font-size: 1rem;
+}
+
+.evaluation-section {
+  margin-top: 2rem;
+}
+
+.evaluation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.evaluation-table th,
+.evaluation-table td {
+  padding: 12px 16px;
+  text-align: center;
+  border: 1px solid #23689B;
+}
+
+.evaluation-table th {
+  background-color: #0799BC;
+  color: white;
+  font-weight: bold;
+}
+
+.evaluation-table td input[type="radio"] {
+  transform: scale(1.2);
+}
+
+.is-invalid {
+  border-color: red !important;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+button.blue-button {
+  width: 50%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  background-color: #0799BC;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.blue-button:hover {
+  background-color: #23689B;
+}

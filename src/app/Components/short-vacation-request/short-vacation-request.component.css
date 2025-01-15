@@ -1,0 +1,184 @@
+:host {
+  display: block;
+  direction: rtl; /* Ensure RTL structure is set */
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 50px); /* Adjust height to leave space for the footer */
+  background-color: #f9f9f9; /* Light gray background for the form container */
+}
+
+.form-card {
+  background-color: #ffffff;
+  border-radius: 8px; /* Slightly less rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 2.5rem;
+  max-width: 1200px; /* Set larger max-width for full space */
+  width: 100%; /* Form takes full space */
+  box-sizing: border-box; /* Ensures padding is included in the element's width */
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column; /* Stack the logo and title vertically */
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.form-logo {
+  height: 120px; /* Adjust the height of the logo as needed */
+  margin-bottom: 15px; /* Space between logo and title */
+}
+
+h2 {
+  color: #23689B; /* Dark gray for the heading */
+  font-size: 1.8rem;
+  margin: 0; /* Remove margin to align properly with the logo */
+  text-align: center; /* Center the heading text */
+}
+
+/* Flexbox for form rows */
+.form-row {
+  display: flex;
+  flex-wrap: wrap; /* Ensures that fields wrap if necessary */
+  gap: 1.5rem; /* Spacing between fields */
+  margin-bottom: 1.5rem;
+  justify-content: space-between; /* Space between form fields */
+  align-items: center; /* Vertically align the fields */
+}
+
+.form-field {
+  flex: 1;
+  min-width: 300px; /* Minimum width to avoid shrinking too much */
+  box-sizing: border-box; /* Ensures padding/margin does not cause overflow */
+  text-align: right; /* Ensure labels and input fields are aligned to the right */
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  color: #555555; /* Medium gray for labels */
+  text-align: right; /* Right-align labels for RTL */
+}
+
+.p-input-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.p-input-icon-left .pi {
+  position: absolute;
+  right: 10px; /* Place icon on the right for RTL */
+  color: #888888; /* Light gray for icons */
+}
+
+/* Style for text input fields */
+.p-input-icon-left input,
+.p-input-icon-left textarea,
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea#vacationPurpose,
+select {
+  padding-left: 1rem; /* Adjust padding for input */
+  padding-right: 2.5rem; /* Adjust padding for RTL with input icon */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 6px; /* Slightly less rounded corners */
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box; /* Ensures padding does not cause overflow */
+}
+
+/* Focus effect for all input fields */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+textarea#vacationPurpose:focus,
+select:focus {
+  border-color: #777777; /* Darker gray for focus */
+}
+
+/* Specific width and height for "الغرض من الحصول على الاجازة" */
+textarea#vacationPurpose {
+  width: 100%; /* Ensure it stays within form boundaries */
+  height: 100px; /* Adjust height as needed */
+  resize: none;
+  box-sizing: border-box; /* Ensures padding does not cause overflow */
+}
+
+/* Style for form actions (buttons) */
+.form-actions {
+  display: flex;
+  justify-content: center; /* Center the button */
+  margin-top: 2rem;
+}
+
+button {
+  width: 100%; /* Make the button full-width */
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 6px; /* Slightly less rounded corners */
+  background-color: #555555; /* Medium gray for buttons */
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for buttons */
+button:hover {
+  background-color: #333333; /* Darker gray on hover */
+}
+
+/* Specific styles for success button */
+.p-button-success {
+  background-color: #23689B ;
+  border-color: #23689B ;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start (right in RTL) */
+  gap: 1rem; /* Space between radio options */
+  margin-bottom: 1.5rem; /* Space between this field and the next one */
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #555555; /* Medium gray */
+}
+
+.radio-group input[type="radio"] {
+  margin-left: 0.5rem; /* Space between the radio button and the label */
+}
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* Highlight invalid inputs with a red border */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: red;
+}
+.p-toast {
+  z-index: 9999; /* Ensure it appears above other content */
+}
+
+.p-toast-message {
+  font-size: 1rem;
+}

@@ -1,0 +1,111 @@
+<div class="registration-container">
+  <div class="registration-form1">
+
+
+    
+
+    
+    
+    <div class="registration-form">
+
+
+
+
+      <div class="registration-head">
+
+        <img src="assets/logo.png" alt="Logo" class="form-logo" />
+        
+      </div>
+
+
+
+
+      <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+        <!-- Name and Email Row -->
+        <div>
+
+          <!-- Email Field -->
+          <div class="form-field">
+
+            <input id="email" type="email" name="email" placeholder="أدخل البريد الإلكتروني" [(ngModel)]="email"
+              required />
+            <!-- Error message for empty email field -->
+            <div *ngIf="emptyEmail" class="error-message">
+              البريد الإلكتروني مطلوب
+            </div>
+            <!-- Error message for invalid email format -->
+            <div *ngIf="invalidEmail" class="error-message">
+              الرجاء إدخال بريد إلكتروني صالح
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-field">
+
+            <input id="password" type="password" name="password" placeholder="أدخل كلمة المرور" [(ngModel)]="password"
+              required />
+            <!-- Error message for empty password field -->
+            <div *ngIf="emptyPassword" class="error-message">
+              كلمة المرور مطلوبة
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+          <app-my-button [buttonClass]="'blue-button'" [buttonType]="'submit'" [text]="'تسجيل الدخول'"
+            (clicked)="registrationForm.ngSubmit.emit()"> </app-my-button>
+        </div>
+      </form>
+      <!-- Error message for failed login attempt -->
+      <div *ngIf="loginFailed" class="error-message">
+        فشل تسجيل الدخول، يرجى التأكد من البريد الإلكتروني وكلمة المرور
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="registration-info">
+      <h2>منصة ديواني <sup>
+          <small class="text-secondary"> 2024 </small></sup> </h2>
+
+
+
+      <h4>عن المنصة</h4>
+      <p>
+
+        المنصة الإلكترونية هي عبارة عن بنية تكنولوجية معينة تسمح للأفراد بالتفاعل وتبادل المعلومات والخدمات عبر
+        الإنترنت. تقدم هذه المنصات بيئة آمنة ومركزية للتواصل والتعاون، وتعتبر حلاً فعالًا لتلبية كل احتياجات <a
+          href="https://www.audit.gov.ly/ar/" class="button button-green">ديوان المحاسبة</a>
+      </p>
+      <h4>عن النظام</h4>
+      <p>
+
+        نظام متخصص لقبول طلبات المستخدمين و ادارتها الكترونيا كطلب الاجازة او السلف سواء كانت القصيرة منها او الطويلة و
+        اعداد مهام العمل و متابعتها ... و كما يمكن من ادارة الملفات المؤرشفة الكترونيا. </p>
+
+      <p>ان كنت أحد موظفي الديوان
+        &nbsp;
+        <a href="http://localhost:4200/sign-up">#انظم_الينا</a>
+      </p>
+
+
+
+
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+</div>
+<!-- Done Modal -->
+<app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+  <p> تم تسجيل الدخول بنجاح </p>
+</app-done-modal>
+
+<app-footer />

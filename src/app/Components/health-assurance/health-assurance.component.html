@@ -1,0 +1,84 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="Company Logo" class="form-logo" />
+      <h2>نموذج التأمين الصحي</h2>
+      <h3>بيانات خاصة بموظف الديوان</h3>
+    </div>
+
+    <form #insuranceForm="ngForm" (ngSubmit)="onSubmit(insuranceForm)">
+      <!-- Employee Name Section -->
+      <div class="form-field">
+        <label for="fullName">الاسم</label>
+        <input id="fullName" type="text" name="fullName" placeholder="أدخل الاسم" [(ngModel)]="fullName"
+          #fullNameCtrl="ngModel" required />
+        <div *ngIf="fullNameCtrl.invalid && fullNameCtrl.touched" class="error-message">
+          الرجاء إدخال الاسم
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="fatherName">الأب</label>
+          <input id="fatherName" type="text" name="fatherName" placeholder="أدخل اسم الأب" [(ngModel)]="fatherName"
+            #fatherNameCtrl="ngModel" required />
+        </div>
+        <div class="form-field">
+          <label for="grandFatherName">الجد</label>
+          <input id="grandFatherName" type="text" name="grandFatherName" placeholder="أدخل اسم الجد"
+            [(ngModel)]="grandFatherName" #grandFatherNameCtrl="ngModel" required />
+        </div>
+        <div class="form-field">
+          <label for="lastName">اللقب</label>
+          <input id="lastName" type="text" name="lastName" placeholder="أدخل اللقب" [(ngModel)]="lastName"
+            #lastNameCtrl="ngModel" required />
+        </div>
+      </div>
+
+      <!-- Employee ID Section -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="employeeId">رقم قيد الموظف</label>
+          <input id="employeeId" type="text" name="employeeId" placeholder="أدخل رقم قيد الموظف"
+            [(ngModel)]="employeeId" #employeeIdCtrl="ngModel" required />
+        </div>
+        <div class="form-field">
+          <label for="fatherId">رقم قيد الأب</label>
+          <input id="fatherId" type="text" name="fatherId" placeholder="أدخل رقم قيد الأب" [(ngModel)]="fatherId"
+            #fatherIdCtrl="ngModel" required />
+        </div>
+        <div class="form-field">
+          <label for="phoneNumber">رقم الهاتف</label>
+          <input id="phoneNumber" type="text" name="phoneNumber" placeholder="أدخل رقم الهاتف" [(ngModel)]="phoneNumber"
+            #phoneNumberCtrl="ngModel" required />
+        </div>
+      </div>
+
+      <!-- Branch and Family Section -->
+      <div class="form-field">
+        <label for="department">الإدارة أو الفرع</label>
+        <input id="department" type="text" name="department" placeholder="أدخل الإدارة أو الفرع"
+          [(ngModel)]="department" #departmentCtrl="ngModel" required />
+        <div *ngIf="departmentCtrl.invalid && departmentCtrl.touched" class="error-message">
+          الرجاء إدخال الإدارة أو الفرع
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="familyNames">أسماء العائلية</label>
+        <textarea id="familyNames" name="familyNames" placeholder="أدخل أسماء العائلية" [(ngModel)]="familyNames"
+          #familyNamesCtrl="ngModel" required></textarea>
+        <div *ngIf="familyNamesCtrl.invalid && familyNamesCtrl.touched" class="error-message">
+          الرجاء إدخال أسماء العائلية
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">
+          إرسال
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

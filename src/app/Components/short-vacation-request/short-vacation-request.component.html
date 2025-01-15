@@ -1,0 +1,63 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="Company Logo" class="form-logo" />
+      <h2>طلب إجازة</h2>
+    </div>
+    <p-toast></p-toast>
+    <form #vacationForm="ngForm" (ngSubmit)="onSubmit(vacationForm)">
+      <!-- Employee Details -->
+      <div class="form-row align-items-center">
+        <div class="form-field">
+          <label for="employeeName">اسم الموظف</label>
+          <input id="employeeName" type="text" name="employeeName" [(ngModel)]="employeeName" disabled class="readonly-input" />
+          </div>
+        <div class="form-field">
+          <label for="department">الادارة التي ينتمي اليها</label>
+          <input id="department" type="text" name="department" [(ngModel)]="selectedDepartment" disabled class="readonly-input" />
+          </div>
+          </div>
+
+      <!-- Vacation Duration and Start Date -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="vacationDuration">مدة الاجازة</label>
+          <span class="p-input-icon-left">
+            <i class="pi pi-clock"></i>
+            <input id="vacationDuration" type="number" name="vacationDuration" placeholder="أدخل مدة الاجازة"
+              [(ngModel)]="vacationDuration" (ngModelChange)="onVacationDurationChange()" required min="1" max="30" />
+          </span>
+        </div>
+
+        <div class="form-field">
+          <label for="vacationStartDate">التاريخ بدء الاجازة</label>
+          <input id="vacationStartDate" type="date" name="vacationStartDate" [(ngModel)]="vacationStartDate"
+            (ngModelChange)="onVacationStartDateChange()" required />
+          </div>
+          </div>
+
+<div class="form-field">
+  <label for="vacationEndDate">التاريخ نهاية الاجازة</label>
+  <input id="vacationEndDate" type="text" name="vacationEndDate" [(ngModel)]="vacationEndDate" disabled
+    class="readonly-input" />
+  </div>
+
+<!-- Vacation Purpose -->
+      <div class="form-field">
+        <label for="vacationPurpose">الغرض من الحصول على الاجازة</label>
+        <textarea id="vacationPurpose" name="vacationPurpose" placeholder="أدخل الغرض" rows="3" [(ngModel)]="vacationPurpose"
+          required></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success" [disabled]="vacationForm.invalid"
+          (click)="openModal()">
+          إرسال
+        </button>
+        <app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+          <h3>الرجاء انتظار قرار المعنيين بالأمر,</h3>
+        </app-done-modal>
+      </div>
+    </form>
+  </div>
+</div>

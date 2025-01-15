@@ -1,0 +1,100 @@
+<div class="registration-container">
+ <div class="registration-form">
+  <img src="assets/logo.png" alt="Logo" class="form-logo" />
+  <h2>التسجيل في منصة ديواني</h2>
+  <div class="heading-underline"></div>
+
+  <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+   <!-- Name and Email Row -->
+   <div class="form-row">
+    <!-- Full Name Field -->
+    <div class="form-field">
+     <label for="fullName">الاسم الثلاثي</label>
+     <input id="fullName" type="text" name="fullName" placeholder="أدخل الاسم الثلاثي" [(ngModel)]="fullName"
+      required />
+
+    </div>
+
+    <!-- Email Field -->
+    <div class="form-field">
+     <label for="email">البريد الإلكتروني</label>
+     <input id="email" type="email" name="email" placeholder="أدخل البريد الإلكتروني" [(ngModel)]="email"
+       required />
+    </div>
+   </div>
+
+   <!-- National ID and Department Row -->
+   <div class="form-row">
+    <!-- National ID Field -->
+    <div class="form-field">
+    <label for="nationalId">الرقم الوظيفي</label>
+     <input id="nationalId" type="text" name="nationalId" placeholder="أدخل الرقم الوطني" [(ngModel)]="nationalId"
+       required />
+
+    </div>
+
+   </div>
+
+   <!-- Phone and Job Title Row -->
+   <div class="form-row">
+    <!-- Phone Field -->
+    <div class="form-field">
+     <label for="phone">الهاتف</label>
+    <input id="phone" type="text" name="phone" placeholder="الهاتف (0910000000)" [(ngModel)]="phone"
+      required />
+
+    </div>
+
+   </div>
+
+   <!-- Password and Confirm Password Row -->
+   <div class="form-row">
+    <!-- Password Field -->
+    <div class="form-field">
+     <label for="password">كلمة المرور</label>
+     <input id="password" type="password" name="password" placeholder="أدخل كلمة المرور" [(ngModel)]="password"
+      required />
+
+    </div>
+
+    <!-- Confirm Password Field -->
+    <div class="form-field">
+     <label for="confirmPassword">تأكيد كلمة المرور</label>
+     <input id="confirmPassword" type="password" name="confirmPassword" placeholder="أدخل تأكيد كلمة المرور"
+      [(ngModel)]="confirmPassword"  required />
+
+    </div>
+   </div>
+
+   <!-- Submit Button -->
+   <div class="form-actions">
+    <app-my-button [buttonClass]="buttonClass" [buttonType]="buttonType" [text]="text"
+     (clicked)="registrationForm.ngSubmit.emit()"></app-my-button>
+   </div>
+  </form>
+ </div>
+
+ <!-- Info Section -->
+ <div class="registration-info">
+  <h3>منصة ديواني</h3>
+  <h4>2024</h4>
+  <h5>توجيهات للتسجيل</h5>
+  <p>
+   لتسهيل إجراءات انضمامك بسرعة يرجى إدخال جميع البيانات بالشكل الصحيح.
+  </p>
+  <h5>قواعد الانضمام</h5>
+  <p>
+   يتعامل معك النظام وفق بريدك الإلكتروني أو رقم هاتفك الذي سوف يتم اعتماده من طرف إدارة الديوان.
+   سوف يتم إرسال بريد أو وسيلة الاتصال الخاصة بك للتأكد من صحة المعلومات وتعديل بياناتك لاحقاً.
+  </p>
+  <p>
+  اذا كان لديك حساب يمكنك تسجيل الدخول من <a href="http://localhost:4200/login">هنا</a>.
+  </p>
+ </div>
+</div>
+<!-- Done Modal -->
+<app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+  <p>شكراً لتسجيلك في منصة ديواني. سيتم التواصل معك قريباً.</p>
+</app-done-modal>
+
+<app-footer />

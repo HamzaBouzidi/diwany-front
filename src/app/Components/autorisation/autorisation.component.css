@@ -1,0 +1,115 @@
+body {
+  font-family: 'Arial, sans-serif';
+  background-color: #f1f1f1; /* Background color similar to your example */
+  direction: rtl; /* Set the entire document to RTL */
+}
+
+.page-title {
+  text-align: right; /* Align text to the right */
+  margin-bottom: 40px; /* Increased margin for more space */
+  padding-right: 40px; /* Increased padding to the right */
+  font-family: 'Tajawal', sans-serif; /* Use a more appropriate Arabic font like Tajawal */
+}
+
+.page-title h2 {
+  font-size: 2.5rem; /* Increased font size */
+  color: #23689B;
+  margin: 0;
+}
+
+.page-title p {
+  font-size: 1.5rem; /* Increased font size */
+  color: #666;
+  margin-top: 10px; /* Slightly larger space between title and paragraph */
+}
+
+.divider {
+  border-bottom: 3px solid #D9DAB0; /* Green divider line */
+  margin: 40px 0; /* Increased margin for more space around the divider */
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between; /* Ensure even spacing between the cards */
+  gap: 40px; /* Increased space between cards */
+  margin: 100px auto; /* Increased margin to push the cards down further */
+  max-width: 1400px; /* Centering the card container */
+  direction: rtl; /* Ensure the cards respect RTL */
+  flex-wrap: wrap; /* Allow cards to wrap onto the next line if screen is too narrow */
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 35%; /* Initial card width */
+  padding: 30px; /* Increased padding inside each card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right; /* Align text to the right */
+  margin-bottom: 40px; /* Add margin below cards for spacing in smaller screens */
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.8rem; /* Increased font size for the card titles */
+  color: #487E95;
+  text-align: right; /* Ensure header text is aligned to the right */
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right; /* Ensure body text is aligned to the right */
+}
+
+.card-body p {
+  margin-bottom: 30px; /* Increased space below the paragraph */
+  font-size: 1.2rem; /* Increased font size for the card content */
+  color: #555;
+}
+
+.card-button {
+  align-self: flex-end; /* Align button to the right */
+  padding: 15px 30px; /* Increased padding for a larger button */
+  background-color: #23689B; /* Use the same green color as the sidebar */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem; /* Increased font size for the button */
+  font-weight: bold; /* Make the button text bold */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #0799BC; /* Slightly darker green on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .card {
+    width: 45%; /* Adjust card width on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%; /* Full width for small screens */
+  }
+  
+  .card-container {
+    gap: 20px; /* Reduce gap between cards */
+  }
+  
+  .page-title h2 {
+    font-size: 2rem; /* Adjust title size for small screens */
+  }
+  
+  .page-title p {
+    font-size: 1.2rem; /* Adjust paragraph size for small screens */
+  }
+}

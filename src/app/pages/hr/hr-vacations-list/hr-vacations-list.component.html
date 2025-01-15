@@ -1,0 +1,42 @@
+<div class="search-container">
+ <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الموظف أو نوع الإجازة" class="search-input"
+  dir="rtl" />
+ <i class="fas fa-search search-icon"></i>
+</div>
+
+<div *ngIf="isLoading" class="spinner">Loading...</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+ <div class="table-container">
+  <table class="vacation-table" dir="rtl">
+   <thead>
+    <tr>
+     <th>اسم الموظف</th>
+     <th>القسم</th>
+     <th>تاريخ بدء الإجازة</th>
+     <th>تاريخ نهاية الإجازة</th>
+     <th>مدة الإجازة</th>
+     <th>حالة الإجازة</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let vacation of vacations">
+     <td>{{ vacation.name }}</td>
+     <td>{{ vacation.department }}</td>
+     <td>{{ vacation.vacationStartDay | date: 'MMM dd, yyyy' }}</td>
+     <td>{{ vacation.vacationEndDate | date: 'MMM dd, yyyy' }}</td>
+     <td>{{ vacation.vacationDays }}</td>
+     <td>
+      <span *ngIf="vacation.bossApprovalStatus === 'Approved'" class="status accepted">✔️ مقبولة</span>
+      <span *ngIf="vacation.bossApprovalStatus === 'Rejected'" class="status rejected">❌ مرفوضة</span>
+      <span *ngIf="vacation.bossApprovalStatus === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
+     </td>
+    </tr>
+    <tr *ngIf="vacations.length === 0">
+     <td colspan="6" class="empty-message">لا توجد إجازات لعرضها.</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>

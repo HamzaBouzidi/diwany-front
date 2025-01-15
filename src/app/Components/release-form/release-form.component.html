@@ -1,0 +1,126 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="شعار" class="form-logo" />
+      <h2>نموذج إخلاء طرف</h2>
+    </div>
+
+    <form #clearanceForm="ngForm" (ngSubmit)="onSubmit(clearanceForm)">
+      <!-- Recipient Info Section -->
+      <div class="form-field">
+        <label for="directorName">السيد / مدير الإدارة العامة للشؤون التالية</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-user"></i>
+          <input id="directorName" type="text" name="directorName" placeholder="أدخل اسم المدير" [(ngModel)]="directorName"
+            required />
+        </span>
+      </div>
+
+      <div class="form-field">
+        <label for="employeeName">بمناسبة إنهاء خدمات:</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-user"></i>
+          <input id="employeeName" type="text" name="employeeName" placeholder="أدخل اسم الموظف" [(ngModel)]="employeeName"
+            required />
+        </span>
+      </div>
+
+      <div class="form-field">
+        <label for="department">التابع لإدارة / مكتب:</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-sitemap"></i>
+          <input id="department" type="text" name="department" placeholder="أدخل الإدارة" [(ngModel)]="department" required />
+        </span>
+      </div>
+
+      <div class="form-field">
+        <label for="reason">بسبب:</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-pencil"></i>
+          <textarea id="reason" name="reason" placeholder="أدخل السبب" [(ngModel)]="reason" required></textarea>
+        </span>
+      </div>
+
+      <!-- Single Table Section with both Titles and Input Fields -->
+      <div class="table-section">
+        <table class="clearance-table" dir="rtl">
+          <thead>
+            <tr>
+              <th>رقم</th>
+              <th>الجهة</th>
+              <th>التاريخ</th>
+              <th>الملاحظات</th>
+              <th>اسم</th>
+              <th>الصفة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row 1 -->
+            <tr>
+              <td>1</td>
+              <td>الإدارة أو المكتب التابع له الموظف</td>
+              <td><input type="date" [(ngModel)]="R1_date" name="R1_date" /></td>
+              <td><input type="text" [(ngModel)]="R1_notes" name="R1_notes" /></td>
+              <td><input type="text" [(ngModel)]="R1_name" name="R1_name" /></td>
+              <td><input type="text" [(ngModel)]="R1_position" name="R1_position" /></td>
+            </tr>
+<!-- Row 2 -->
+            <tr>
+              <td>2</td>
+              <td>المكتب</td>
+              <td><input type="date" [(ngModel)]="R2_date" name="R2_date" /></td>
+              <td><input type="text" [(ngModel)]="R2_notes" name="R2_notes" /></td>
+              <td><input type="text" [(ngModel)]="R2_name" name="R2_name" /></td>
+              <td><input type="text" [(ngModel)]="R2_position" name="R2_position" /></td>
+            </tr>
+<!-- Row 3 -->
+            <tr>
+              <td>3</td>
+              <td>رئيس قسم الخدمات والمصايف/الحرَكة</td>
+              <td><input type="date" [(ngModel)]="R3_date" name="R3_date" /></td>
+              <td><input type="text" [(ngModel)]="R3_notes" name="R3_notes" /></td>
+              <td><input type="text" [(ngModel)]="R3_name" name="R3_name" /></td>
+              <td><input type="text" [(ngModel)]="R3_position" name="R3_position" /></td>
+            </tr>
+<!-- Row 4 -->
+            <tr>
+              <td>4</td>
+              <td>صندوق العاملين</td>
+              <td><input type="date" [(ngModel)]="R4_date" name="R4_date" /></td>
+              <td><input type="text" [(ngModel)]="R4_notes" name="R4_notes" /></td>
+              <td><input type="text" [(ngModel)]="R4_name" name="R4_name" /></td>
+              <td><input type="text" [(ngModel)]="R4_position" name="R4_position" /></td>
+            </tr>
+<!-- Row 5 -->
+            <tr>
+              <td>5</td>
+              <td>مكتب تقنية المعلومات</td>
+              <td><input type="date" [(ngModel)]="R5_date" name="R5_date" /></td>
+              <td><input type="text" [(ngModel)]="R5_notes" name="R5_notes" /></td>
+              <td><input type="text" [(ngModel)]="R5_name" name="R5_name" /></td>
+              <td><input type="text" [(ngModel)]="R5_position" name="R5_position" /></td>
+            </tr>
+<!-- Row 6 -->
+            <tr>
+              <td>6</td>
+              <td>إدارة شؤون العاملين</td>
+              <td><input type="date" [(ngModel)]="R6_date" name="R6_date" /></td>
+              <td><input type="text" [(ngModel)]="R6_notes" name="R6_notes" /></td>
+              <td><input type="text" [(ngModel)]="R6_name" name="R6_name" /></td>
+              <td><input type="text" [(ngModel)]="R6_position" name="R6_position" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">إرسال</button>
+      </div>
+    </form>
+  </div>
+          <!-- Success Modal -->
+          <app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+            <h3>تم إرسال الطلب</h3>
+          </app-done-modal>
+</div>

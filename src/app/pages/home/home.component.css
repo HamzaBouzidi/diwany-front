@@ -1,0 +1,108 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Cairo', sans-serif;
+}
+
+.dashboard-layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #D9DAB0;
+}
+
+.sidebar ul li:hover {
+  color: #F4F5DB;
+}
+
+/* Main content grid layout */
+.dashboard-grid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 equal-width columns */
+  grid-gap: 20px;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Chart sizes */
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: whitesmoke;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+
+.chart-container.large {
+  grid-column: span 2; /* Spans 4 columns */
+  grid-row: span 1; /* Spans 2 rows */
+}
+
+.chart-container.small {
+  grid-column: span 1; /* Spans 2 columns */
+  grid-row: span 1;
+}
+
+/* Chart titles */
+.chart-container h4 {
+  font-family: 'tahoma';
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #23689B; /* Title color */
+  margin-bottom: 20px;
+}
+
+/* Canvas styling */
+canvas {
+  width: 100% ;
+  height: 25% ;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+  }
+
+  .chart-container.large, .chart-container.small {
+    grid-column: span 3; /* Large and small span 3 columns on medium screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* Stack charts on small screens */
+  }
+
+  .chart-container {
+    grid-column: span 2; /* Every chart takes up the full width on small screens */
+    grid-row: span 1;
+  }
+}

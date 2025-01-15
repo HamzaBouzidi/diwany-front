@@ -1,0 +1,141 @@
+/* Container for the report list */
+.list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: transparent; /* No background color */
+}
+
+/* Title styling */
+h2 {
+  text-align: center;
+  color: #23689B;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Search container */
+.search-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+  text-align: right;
+}
+
+.search-input {
+  padding: 10px 15px;
+  width: 300px;
+  font-size: 16px;
+  border: 2px solid #23689B;
+  border-radius: 8px;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #23689B;
+}
+
+/* Table wrapper */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  border-radius: 8px;
+}
+
+.report-table th,
+.report-table td {
+  padding: 15px;
+  text-align: right;
+  font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.report-table th {
+  background-color: #0799BC;
+  color: #fff;
+  font-weight: bold;
+}
+
+.report-table td {
+  background-color: #f9f9f9;
+}
+
+/* Add spacing between rows */
+.report-table tr {
+  transition: background-color 0.3s ease;
+}
+
+.report-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.btn-view,
+.btn-edit {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-view {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.btn-view:hover {
+  background-color: #45a049;
+}
+
+.btn-edit {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background-color: #ec971f;
+}
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.action-buttons button.btn-edit {
+  background-color: #2196F3;
+}
+
+.report-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}

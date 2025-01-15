@@ -1,0 +1,68 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="Company Logo" class="form-logo" />
+      <h2>إذن خروج</h2>
+    </div>
+
+    <form #exitAutorisationForm="ngForm" (ngSubmit)="onSubmit(exitAutorisationForm)">
+      <!-- Employee Name -->
+      <div class="form-field">
+        <label for="employeeName">اسم الموظف</label>
+        <input id="employeeName" type="text" [(ngModel)]="employeeName" name="employeeName" disabled class="readonly-input" />
+      </div>
+
+
+      <!-- Section for reason of exit -->
+      <div class="form-field">
+        <label for="reason">أسباب الخروج</label>
+        <textarea id="reason" name="reason" placeholder="أدخل أسباب الخروج" [(ngModel)]="reason" #reasonCtrl="ngModel"
+          required></textarea>
+        <!-- Error message for reason -->
+        <div *ngIf="reasonCtrl.invalid && reasonCtrl.touched" class="error-message">
+          الرجاء إدخال سبب الخروج
+        </div>
+        </div>
+
+      <!-- Date and time sections -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="exitDate">تاريخ الخروج</label>
+          <input id="exitDate" type="date" name="exitDate" [(ngModel)]="exitDate" #exitDateCtrl="ngModel" required />
+          <div *ngIf="exitDateCtrl.invalid && exitDateCtrl.touched" class="error-message">
+            الرجاء إدخال تاريخ الخروج
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="exitTime">وقت الخروج</label>
+          <input id="exitTime" type="time" name="exitTime" [(ngModel)]="exitTime" #exitTimeCtrl="ngModel" required />
+          <div *ngIf="exitTimeCtrl.invalid && exitTimeCtrl.touched" class="error-message">
+            الرجاء إدخال وقت الخروج
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="returnTime">وقت العودة</label>
+          <input id="returnTime" type="time" name="returnTime" [(ngModel)]="returnTime" #returnTimeCtrl="ngModel" required />
+          <div *ngIf="returnTimeCtrl.invalid && returnTimeCtrl.touched" class="error-message">
+            الرجاء إدخال وقت العودة
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Form actions -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success"
+          [disabled]="exitAutorisationForm.invalid">
+          إرسال
+        </button>
+      </div>
+    </form>
+  </div>
+<!-- Success Modal -->
+<app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+  <h3>تم إرسال طلب البطاقة الوطنية بنجاح</h3>
+</app-done-modal>
+</div>

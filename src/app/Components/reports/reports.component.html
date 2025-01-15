@@ -1,0 +1,38 @@
+<div class="report-container">
+  <h2>إدارة التقارير</h2>
+
+  <!-- Buttons to load different report types -->
+  <div class="report-buttons">
+    <button (click)="onReportTypeChange('member')" [class.active]="selectedReportType === 'member'">تقرير العضو</button>
+    <button (click)="onReportTypeChange('release')" [class.active]="selectedReportType === 'release'">تقرير
+      الإفراج</button>
+    <button (click)="onReportTypeChange('evaluation')" [class.active]="selectedReportType === 'evaluation'">تقرير
+      التقييم</button>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الاسم أو الوظيفة" class="search-input"
+      (input)="applyFilter()" />
+  </div>
+
+  <!-- Dynamic Reports Table -->
+  <div class="table-wrapper">
+    <table class="report-table" dir="rtl">
+      <thead>
+        <tr>
+          <th *ngFor="let header of tableHeaders">{{ header }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of filteredReports">
+          <td *ngFor="let key of getKeys(report)">{{ report[key] }}</td>
+          <td class="action-buttons">
+            <button class="btn-view">عرض</button>
+            <button class="btn-edit">تعديل</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

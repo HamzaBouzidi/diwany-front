@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Apply a modern font */
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+.registration-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f4f5f9;
+  gap: 2rem;
+}
+
+.registration-form {
+  background-color: #fff;
+  padding: 2.5rem; /* Increase padding for more space */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 60%; /* Increased form width */
+  max-width: 800px; /* Increased maximum width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  direction: rtl;
+  transition: transform 0.3s ease;
+}
+
+.registration-form:hover {
+  transform: translateY(-5px);
+}
+
+.form-logo {
+  width: 130px;
+  margin-bottom: 25px;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem; /* Slightly larger font size for the main title */
+  color: #23689B;
+  font-weight: 700; /* Bolder weight */
+}
+
+/* Form fields */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.form-field {
+  flex: 1;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%; /* Make the input field width 100% of the form-field */
+  padding: 14px; /* Increased padding */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #0799BC;
+  outline: none;
+  box-shadow: 0 0 8px rgba(7, 153, 188, 0.2);
+}
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* Submit Button */
+.form-actions {
+  text-align: center;
+  width: 100%;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  background-color: #0799BC;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #23689B;
+}
+
+/* Info Section */
+.registration-info {
+  padding-left: 2rem;
+  color: #333;
+  width: 40%;
+  direction: rtl;
+}
+
+.registration-info h3 {
+  font-size: 2rem;
+  color: #23689B;
+  font-weight: 700; /* Bolder weight */
+}
+
+.registration-info h4 {
+  font-size: 1.3rem; /* Slightly increased font size */
+  color: #23689B;
+  margin-bottom: 2rem;
+  font-weight: 700; /* Bolder weight */
+}
+
+.registration-info h5 {
+  font-size: 1.3rem;
+  color: #0799BC;
+  font-weight: 700; /* Bolder weight */
+}
+
+.registration-info p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.registration-info a {
+  color: #23689B;
+  text-decoration: none;
+}
+
+.registration-info a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #777;
+  text-align: center;
+}
+
+footer a {
+  color: #23689B;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.heading-underline {
+  width: 50%; /* Width of the line */
+  height: 3px; /* Thickness of the line */
+  background-color: #23689B; /* Color of the line */
+  margin: 10px auto; /* Center it and add space */
+}

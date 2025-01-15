@@ -1,0 +1,87 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="Company Logo" class="form-logo" />
+      <h2>طلب إصدار بطاقة تعريف</h2>
+    </div>
+
+    <form #identityForm="ngForm" (ngSubmit)="onSubmit(identityForm)">
+      <!-- Full Name Field -->
+      <div class="form-field">
+        <label for="fullName">الاسم رباعي</label>
+        <input 
+          id="fullName" 
+          type="text" 
+          name="fullName" 
+          placeholder="أدخل الاسم رباعي" 
+          [(ngModel)]="fullName" 
+          #fullNameCtrl="ngModel" 
+          required
+        />
+        <div *ngIf="fullNameCtrl.invalid && fullNameCtrl.touched" class="error-message">
+          الرجاء إدخال الاسم رباعي
+        </div>
+      </div>
+
+      <!-- Personal ID Field -->
+      <div class="form-field">
+        <label for="personalId">رقم البطاقة الشخصية</label>
+        <input 
+          id="personalId" 
+          type="text" 
+          name="personalId" 
+          placeholder="أدخل رقم البطاقة الشخصية" 
+          [(ngModel)]="personalId" 
+          #personalIdCtrl="ngModel" 
+          required
+        />
+        <div *ngIf="personalIdCtrl.invalid && personalIdCtrl.touched" class="error-message">
+          الرجاء إدخال رقم البطاقة الشخصية
+        </div>
+      </div>
+
+      <!-- National Number Field -->
+      <div class="form-field">
+        <label for="nationalNumber">الرقم الوطني</label>
+        <input 
+          id="nationalNumber" 
+          type="text" 
+          name="nationalNumber" 
+          placeholder="أدخل الرقم الوطني" 
+          [(ngModel)]="nationalNumber" 
+          #nationalNumberCtrl="ngModel" 
+          required
+        />
+        <div *ngIf="nationalNumberCtrl.invalid && nationalNumberCtrl.touched" class="error-message">
+          الرجاء إدخال الرقم الوطني
+        </div>
+      </div>
+
+      <!-- Position Field (Radio Buttons) -->
+      <div class="form-field">
+        <label for="position">الصفة</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="position" [(ngModel)]="position" value="عضو" /> عضو
+          </label>
+          <label>
+            <input type="radio" name="position" [(ngModel)]="position" value="مأمور ضبط قضائي" /> مأمور ضبط قضائي
+          </label>
+          <label>
+            <input type="radio" name="position" [(ngModel)]="position" value="موظف" /> موظف
+          </label>
+        </div>
+
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success" [disabled]="identityForm.invalid">إرسال</button>
+      </div>
+    </form>
+  </div>
+        <!-- Success Modal -->
+        <app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+          <h3>تم إرسال الطلب</h3>
+        </app-done-modal>
+</div>

@@ -1,0 +1,86 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="شعار" class="form-logo" />
+      <h2>نموذج ترشيح الحصول على صفة عضو ديوان المحاسبة</h2>
+    </div>
+
+    <form #nominationForm="ngForm" (ngSubmit)="onSubmit(nominationForm)">
+      <!-- Candidate Name -->
+      <div class="form-field">
+        <label for="candidateName">الاسم المرشح</label>
+        <input id="candidateName" type="text" [(ngModel)]="candidateName" name="candidateName" class="readonly-input"
+          disabled />
+      </div>
+
+      <!-- Nomination Entity -->
+      <div class="form-field">
+        <label for="nominationEntity">جهة الترشيح</label>
+        <input id="nominationEntity" type="text" [(ngModel)]="nominationDirection" name="nominationEntity"
+          class="readonly-input" disabled />
+      </div>
+
+      <!-- Nomination Date -->
+      <div class="form-field">
+        <label for="nominationDate">تاريخ الترشيح</label>
+        <input id="nominationDate" type="text" [(ngModel)]="nominationDate" name="nominationDate" class="readonly-input"
+          disabled />
+      </div>
+
+      <!-- Current Job -->
+      <div class="form-field">
+        <label for="currentJob">جهة العمل الحالية</label>
+        <input id="currentJob" type="text" [(ngModel)]="currentJob" name="currentJob" class="readonly-input" disabled />
+      </div>
+
+      <!-- Date of Joining -->
+      <div class="form-field">
+        <label for="joiningDate">تاريخ الالتحاق بالديوان</label>
+        <input id="joiningDate" type="text" [(ngModel)]="joiningDate" name="joiningDate" class="readonly-input" disabled />
+      </div>
+
+      <!-- Qualifications -->
+      <div class="form-field">
+        <label for="qualifications">المؤهل العلمي</label>
+        <input id="qualifications" type="text" [(ngModel)]="qualifications" name="qualifications" class="readonly-input"
+          disabled />
+      </div>
+
+      <!-- Previous Experience (Large Textarea) -->
+      <div class="form-field">
+        <label for="experience">الخبرة العملية</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-briefcase"></i>
+          <textarea id="experience" name="experience" placeholder="أدخل الخبرة العملية" [(ngModel)]="experience"
+            #experienceCtrl="ngModel" [ngClass]="{'is-invalid': experienceCtrl.invalid && experienceCtrl.touched}"
+            required></textarea>
+        </span>
+        <div *ngIf="experienceCtrl.invalid && experienceCtrl.touched" class="error-message">
+          الرجاء إدخال الخبرة العملية
+        </div>
+      </div>
+
+      <!-- Nationality -->
+      <div class="form-field">
+        <label for="nationality">الجنسية</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-flag"></i>
+          <input id="nationality" type="text" name="nationality" placeholder="أدخل الجنسية" [(ngModel)]="nationality"
+            #nationalityCtrl="ngModel" [ngClass]="{'is-invalid': nationalityCtrl.invalid && nationalityCtrl.touched}" required />
+        </span>
+        <div *ngIf="nationalityCtrl.invalid && nationalityCtrl.touched" class="error-message">
+          الرجاء إدخال الجنسية
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">إرسال</button>
+      </div>
+    </form>
+  </div>
+<!-- Success Modal -->
+<app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+  <h3>تم تقديم طلب الترشيح بنجاح</h3>
+</app-done-modal>
+</div>

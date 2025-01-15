@@ -1,0 +1,107 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="شعار" class="form-logo" />
+      <h2>إقرار وتعهد</h2>
+    </div>
+
+    <form #commitmentForm="ngForm" (ngSubmit)="onSubmit(commitmentForm)">
+      <!-- Name -->
+      <div class="form-field">
+        <label for="name">الاسم</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-user"></i>
+          <input 
+            id="name" 
+            type="text" 
+            name="name" 
+            placeholder="أدخل الاسم" 
+            [(ngModel)]="name" 
+            #nameCtrl="ngModel" 
+            [ngClass]="{'is-invalid': nameCtrl.invalid && nameCtrl.touched}"
+            required
+          />
+        </span>
+        <div *ngIf="nameCtrl.invalid && nameCtrl.touched" class="error-message">
+          الرجاء إدخال الاسم
+        </div>
+      </div>
+
+      <!-- National Number -->
+      <div class="form-field">
+        <label for="nationalNumber">الرقم الوطني</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-id-card"></i>
+          <input 
+            id="nationalNumber" 
+            type="text" 
+            name="nationalNumber" 
+            placeholder="أدخل الرقم الوطني" 
+            [(ngModel)]="nationalNumber" 
+            #nationalNumberCtrl="ngModel" 
+            [ngClass]="{'is-invalid': nationalNumberCtrl.invalid && nationalNumberCtrl.touched}"
+            required
+          />
+        </span>
+        <div *ngIf="nationalNumberCtrl.invalid && nationalNumberCtrl.touched" class="error-message">
+          الرجاء إدخال الرقم الوطني
+        </div>
+      </div>
+
+      <!-- Educational Qualification -->
+      <div class="form-field">
+        <label for="qualification">المؤهل العلمي</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-graduation-cap"></i>
+          <input 
+            id="qualification" 
+            type="text" 
+            name="qualification" 
+            placeholder="أدخل المؤهل العلمي" 
+            [(ngModel)]="qualification" 
+            #qualificationCtrl="ngModel" 
+            [ngClass]="{'is-invalid': qualificationCtrl.invalid && qualificationCtrl.touched}"
+            required
+          />
+        </span>
+        <div *ngIf="qualificationCtrl.invalid && qualificationCtrl.touched" class="error-message">
+          الرجاء إدخال المؤهل العلمي
+        </div>
+      </div>
+
+      <!-- Declarations Section -->
+      <div class="declaration-section">
+        <h3>إقرار وتعهد</h3>
+
+        <!-- Declaration: All information is correct -->
+        <div class="declaration">
+          <h4>أقر بأن جميع مؤهلاتي صحيحة</h4>
+          <p>أقر بأن جميع مؤهلاتي المقدمة من قبلي للديوان صحيحة، وأن جميع البيانات الواردة بها سليمة ولا يشوبها أي شائبة.</p>
+        </div>
+
+        <!-- Declaration: No prior work in another organization -->
+        <div class="declaration">
+          <h4>أقر بعدم العمل لدى جهة أخرى</h4>
+          <p>أني لا أزاول أي عمل أخر وفقا للمادة رقم (30) من القانون رقم (19) لسنة 2013 بشأن إعادة تنظيم ديوان المحاسبة.</p>
+        </div>
+
+        <!-- Declaration: Commitment to behavior rules -->
+        <div class="declaration">
+          <h4>قواعد السلوك الوظيفي</h4>
+          <p>أني اطلعت على قرار السيد رئيس الديوان رقم 422 لسنة 2013 بشأن اعتماد قواعد السلوك الوظيفي، وأتعهد بالالتزام بما ورد به وتحمل المسؤولية كاملة في حال ثبوت مخالفتي له.</p>
+        </div>
+
+        <!-- Declaration: Commitment to political neutrality -->
+        <div class="declaration">
+          <h4>الحياد السياسي</h4>
+          <p>أني اطلعت على منشور السيد وكيل الديوان رقم (1) لسنة 2014 بشأن الحياد وأتعهد بأن التزم بما ورد به.</p>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">إرسال</button>
+      </div>
+    </form>
+  </div>
+</div>

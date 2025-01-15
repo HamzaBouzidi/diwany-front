@@ -1,0 +1,80 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="Company Logo" class="form-logo" />
+      <h2>إذن تأخر صباحي</h2>
+    </div>
+
+    <form #lateRequestForm="ngForm" (ngSubmit)="onSubmit(lateRequestForm)">
+      <!-- Form section for employee details -->
+      <!-- Employee Name -->
+      <div class="form-field">
+        <label for="employeeName">اسم الموظف</label>
+        <input id="employeeName" type="text" [(ngModel)]="employeeName" name="employeeName" disabled class="readonly-input" />
+      </div>
+
+    
+
+      <!-- Reason for lateness section -->
+      <div class="form-field">
+        <label for="reason">أسباب التأخير</label>
+        <textarea
+          id="reason"
+          name="reason"
+          placeholder="أدخل أسباب التأخير"
+          [(ngModel)]="reason"
+          #reasonCtrl="ngModel"
+          required
+        ></textarea>
+        <!-- Error message for reason -->
+        <div *ngIf="reasonCtrl.invalid && reasonCtrl.touched" class="error-message">
+          الرجاء إدخال سبب التأخير
+        </div>
+      </div>
+
+      <!-- Date and time sections -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="date">تاريخ التأخير</label>
+          <input 
+            id="date" 
+            type="date" 
+            name="date" 
+            [(ngModel)]="date" 
+            #dateCtrl="ngModel" 
+            required
+          />
+          <div *ngIf="dateCtrl.invalid && dateCtrl.touched" class="error-message">
+            الرجاء إدخال تاريخ التأخير
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="arrivalTime">وقت الوصول</label>
+          <input 
+            id="arrivalTime" 
+            type="time" 
+            name="arrivalTime" 
+            [(ngModel)]="arrivalTime" 
+            #arrivalTimeCtrl="ngModel" 
+            required
+          />
+          <div *ngIf="arrivalTimeCtrl.invalid && arrivalTimeCtrl.touched" class="error-message">
+            الرجاء إدخال وقت الوصول
+          </div>
+        </div>
+      </div>
+
+      <!-- Form actions -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success" [disabled]="lateRequestForm.invalid">
+          إرسال
+        </button>
+      </div>
+    </form>
+  </div>
+<!-- Success Modal -->
+<app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+  <h3>تم إرسال إذن التأخر بنجاح</h3>
+</app-done-modal>
+</div>

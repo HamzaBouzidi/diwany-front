@@ -1,0 +1,132 @@
+:host {
+  display: block;
+  direction: rtl; /* RTL structure */
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 50px); /* Space for footer */
+  background-color: #f9f9f9;
+}
+
+.form-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-logo {
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.form-header h2 {
+  font-size: 2rem;
+  color: #23689B;
+}
+
+.form-header h3 {
+  color: #555;
+  margin: 0;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  color: #555;
+  text-align: right;
+}
+
+.p-input-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.p-input-icon-left .pi {
+  position: absolute;
+  right: 10px;
+  color: #888;
+}
+
+.p-input-icon-left input,
+.p-input-icon-left textarea {
+  padding-left: 2.5rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 1rem;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+.table-section {
+  margin-top: 1.5rem;
+}
+
+.clearance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.clearance-table th, .clearance-table td {
+  padding: 12px;
+  text-align: right;
+  border: 1px solid #ddd;
+}
+
+.clearance-table th {
+  background-color: #0799BC;
+  color: white;
+}
+
+.clearance-table td {
+  background-color: white;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Change the button style to blue */
+button.blue-button {
+  width: 50%; /* Increased width */
+  padding: 1rem; /* Larger padding for the button */
+  font-size: 1.2rem;
+  border-radius: 6px;
+  background-color: #23689B; /* Blue color */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.blue-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

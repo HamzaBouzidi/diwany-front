@@ -1,0 +1,57 @@
+.navbar {
+  background-color: #384B70;
+  color: white;
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+ 
+  z-index: 1000;
+  border-radius: 15px;
+ 
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px; /* Adds space between the two buttons */
+}
+
+.nav-button {
+  background-color: #555;
+  border: 1px solid #777;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-post-btn {
+  background-color: #5A5A5A;
+}
+
+.forum-btn {
+  background-color: #FFD700;
+  border: 1px solid #FFC107;
+  color: black;
+}
+
+.nav-button:hover {
+  opacity: 0.9;
+}

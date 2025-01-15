@@ -1,0 +1,84 @@
+<div class="search-container">
+ <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الموظف أو نوع الإذن" class="search-input" dir="rtl" />
+ <i class="fas fa-search search-icon"></i>
+</div>
+
+<div class="toggle-buttons">
+ <button class="toggle-button" (click)="toggleTable('exitAuthorizations')" [class.active]="showExitAuthorizations">
+  أذونات الخروج
+ </button>
+ <button class="toggle-button" (click)="toggleTable('morningDelays')" [class.active]="!showExitAuthorizations">
+  تأخيرات الصباح
+ </button>
+</div>
+
+<div *ngIf="isLoading" class="spinner">Loading...</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+<!-- Exit Authorizations Table -->
+<div *ngIf="!isLoading && showExitAuthorizations && !errorMessage">
+ <div class="table-container">
+  <table class="authorization-table" dir="rtl">
+   <thead>
+    <tr>
+     <th>اسم الموظف</th>
+     <th>التاريخ</th>
+     <th>وقت الخروج</th>
+     <th>وقت العودة</th>
+     <th>نوع الإذن</th>
+     <th>الحالة</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let exit of filteredExitAuthorizations">
+     <td>{{ exit.name }}</td>
+     <td>{{ exit.day | date: 'MMM dd, yyyy' }}</td>
+     <td>{{ exit.exitStartTime }}</td>
+     <td>{{ exit.returnTime }}</td>
+     <td>{{ exit.exitDescription }}</td>
+     <td>
+      <span *ngIf="exit.state === 'مقبولة'" class="status accepted">✔️ مقبولة</span>
+      <span *ngIf="exit.state === 'مرفوضة'" class="status rejected">❌ مرفوضة</span>
+      <span *ngIf="exit.state === 'قيد الانتظار'" class="status pending">🔄 قيد التنفيذ</span>
+     </td>
+    </tr>
+    <tr *ngIf="filteredExitAuthorizations.length === 0">
+     <td colspan="6" class="empty-message">لا توجد أذونات خروج لعرضها.</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>
+
+<!-- Morning Delays Table -->
+<div *ngIf="!isLoading && !showExitAuthorizations && !errorMessage">
+ <div class="table-container">
+  <table class="authorization-table" dir="rtl">
+   <thead>
+    <tr>
+     <th>اسم الموظف</th>
+     <th>التاريخ</th>
+     <th>وقت التأخير</th>
+     <th>الوصف</th>
+     <th>الحالة</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let delay of filteredMorningDelays">
+     <td>{{ delay.name }}</td>
+     <td>{{ delay.day | date: 'MMM dd, yyyy' }}</td>
+     <td>{{ delay.time }}</td>
+     <td>{{ delay.description }}</td>
+     <td>
+      <span *ngIf="delay.state === 'مقبولة'" class="status accepted">✔️ مقبولة</span>
+      <span *ngIf="delay.state === 'مرفوضة'" class="status rejected">❌ مرفوضة</span>
+      <span *ngIf="delay.state === 'قيد الانتظار'" class="status pending">🔄 قيد التنفيذ</span>
+     </td>
+    </tr>
+    <tr *ngIf="filteredMorningDelays.length === 0">
+     <td colspan="5" class="empty-message">لا توجد تأخيرات لعرضها.</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>

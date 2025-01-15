@@ -1,0 +1,164 @@
+:host {
+  display: block;
+  direction: rtl; /* RTL structure */
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 50px); /* Space for footer */
+  background-color: #f9f9f9;
+}
+
+.form-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More noticeable shadow */
+  padding: 2.5rem;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-logo {
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.form-header h2 {
+  font-size: 2rem;
+  color: #23689B;
+}
+
+.form-header h3 {
+  color: #555;
+  margin: 0;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  color: #555;
+  text-align: right;
+}
+
+.p-input-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.p-input-icon-left .pi {
+  position: absolute;
+  right: 10px;
+  color: #888;
+}
+
+.p-input-icon-left input,
+.p-input-icon-left textarea,
+input[type="text"],
+input[type="date"],
+textarea {
+  padding-left: 2.5rem; /* Adjust padding for the icon */
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease; /* Smooth transition */
+  background-color: #fafafa;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #23689B; /* Blue border on focus */
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(35, 104, 155, 0.2); /* Add subtle shadow on focus */
+}
+
+/* Disabled input fields styling */
+input[disabled],
+textarea[disabled] {
+  background-color: #e9ecef;
+  color: #6c757d;
+  border-color: #d1d5db;
+}
+
+/* Styling for textareas */
+textarea {
+  height: 150px;
+  resize: none;
+}
+
+/* Red border for invalid fields */
+.is-invalid {
+  border-color: red !important;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Button styling */
+button.blue-button {
+  width: 50%; /* Increased width */
+  padding: 1rem; /* Larger padding for the button */
+  font-size: 1.2rem;
+  border-radius: 6px;
+  background-color: #23689B; /* Blue color */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button.blue-button:hover {
+  background-color: #1d577d; /* Slightly darker blue on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Add shadow on hover */
+}
+
+button.blue-button:active {
+  background-color: #144b6e; /* Even darker blue on active */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Less shadow on active */
+}
+
+/* Ensure form inputs are fully responsive */
+@media (max-width: 768px) {
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  .form-header h2 {
+    font-size: 1.5rem;
+  }
+
+  button.blue-button {
+    width: 100%; /* Full width button on smaller screens */
+  }
+}

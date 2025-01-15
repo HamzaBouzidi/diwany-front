@@ -1,0 +1,108 @@
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الموظف أو نوع الإجازة" class="search-input"
+    dir="rtl" />
+  <i class="fas fa-search search-icon"></i>
+</div>
+
+<div class="toggle-buttons">
+  <button class="toggle-button" (click)="toggleTable('myVacations')" [class.active]="showMyVacations">
+    إجازاتي
+  </button>
+  <button class="toggle-button" (click)="toggleTable('employeeVacations')" [class.active]="!showMyVacations">
+    إجازات الموظفين
+  </button>
+</div>
+
+<div *ngIf="isLoading" class="spinner">
+  Loading...
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<!-- My Vacations Table -->
+<div *ngIf="!isLoading && showMyVacations && !errorMessage">
+  <h2>إجازاتي</h2>
+  <div class="table-container">
+    <table class="vacation-table" dir="rtl">
+      <thead>
+        <tr>
+          <th>تاريخ بدء الإجازة</th>
+          <th>تاريخ نهاية الإجازة</th>
+          <th>مدة الإجازة</th>
+          <th>نوع الإجازة</th>
+          <th>حالة الإجازة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vacation of myVacations">
+          <td>{{ vacation.vacationStartDate | date: 'MMM dd, yyyy' }}</td>
+          <td>{{ vacation.vacationEndDate | date: 'MMM dd, yyyy' }}</td>
+          <td>{{ vacation.vacationDays }}</td>
+          <td>{{ vacation.vacationType }}</td>
+          <td>
+            <span *ngIf="vacation.state === 'مقبولة'" class="status accepted">✔️ مقبولة</span>
+            <span *ngIf="vacation.state === 'مرفوضة'" class="status rejected">❌ مرفوضة</span>
+            <span *ngIf="vacation.state === 'قيد الانتظار'" class="status pending">🔄 قيد التنفيذ</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Employee Vacations Table -->
+<div *ngIf="!isLoading && !showMyVacations && !errorMessage">
+  <h2>إجازات الموظفين</h2>
+  <div class="table-container">
+    <table class="vacation-table" dir="rtl">
+      <thead>
+        <tr>
+          <th>اسم الموظف</th>
+          <th>القسم</th>
+          <th>تاريخ بدء الإجازة</th>
+          <th>تاريخ نهاية الإجازة</th>
+          <th>مدة الإجازة</th>
+          <th>نوع الإجازة</th>
+          <th>حالة الإجازة</th>
+          <th>إجراء</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of filteredEmployees">
+            <td>
+            <img [src]="employee.profilePicture" alt="صورة الموظف" class="profile-img" />
+            <span class="employee-name">{{ employee.name }}</span>
+            </td>
+          <td>{{ employee.department }}</td>
+          <td>{{ employee.vacationStartDate | date: 'MMM dd, yyyy' }}</td>
+          <td>{{ employee.vacationEndDate | date: 'MMM dd, yyyy' }}</td>
+          <td>{{ employee.vacationDays }}</td>
+          <td>{{ employee.vacationType }}</td>
+          <td>
+            <span *ngIf="employee.state === 'مقبولة'" class="status accepted">✔️ مقبولة</span>
+            <span *ngIf="employee.state === 'مرفوضة'" class="status rejected">❌ مرفوضة</span>
+            <span *ngIf="employee.state === 'قيد الانتظار'" class="status pending">🔄 قيد التنفيذ</span>
+          </td>
+          <td>
+            <ng-container *ngIf="employee.state === 'قيد الانتظار'; else noAction">
+              <button pButton type="button" label="موافقة" icon="pi pi-check" class="approve-btn"
+                (click)="approveVacation(employee.id)">
+              </button>
+              <button pButton type="button" label="رفض" icon="pi pi-times" class="reject-btn"
+                (click)="rejectVacation(employee.id)">
+              </button>
+            </ng-container>
+            <ng-template #noAction>
+              <span>-</span>
+            </ng-template>
+          </td>
+          </tr>
+          <tr *ngIf="filteredEmployees.length === 0">
+            <td colspan="8" class="empty-message">لا توجد إجازات لعرضها.</td>
+        </tr>
+        </tbody>
+        </table>
+  </div>
+  </div>

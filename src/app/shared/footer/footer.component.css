@@ -1,0 +1,19 @@
+/* Footer styling */
+.page-footer {
+  background-color: #f0f0f0; /* Light gray background to match the form */
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  color: #777777; /* Subdued gray for footer text */
+  width: 100%; /* Ensure it spans the entire page width */
+  position: relative; /* Position relative to the page */
+}
+
+.page-footer a {
+  color: #4CAF50; /* Link color to match the button's green */
+  text-decoration: none;
+}
+
+.page-footer a:hover {
+  text-decoration: underline; 
+}

@@ -1,0 +1,16 @@
+<div class="modal-overlay" (click)="closeModal()" *ngIf="isVisible">
+ <div class="modal-content" (click)="$event.stopPropagation()">
+  <button class="close-button" (click)="closeModal()">X</button>
+
+  <!-- Icon and Title -->
+  <div class="modal-header">
+   <img src="assets/checkmark.png" class="check-icon" alt="Success Icon" /> <!-- Make sure this path is correct -->
+   <h1 class="modal-title">تم ارسال طلبكم بنجاح</h1>
+  </div>
+
+  <!-- Content -->
+  <div class="modal-body">
+   <ng-content></ng-content>
+  </div>
+ </div>
+</div>

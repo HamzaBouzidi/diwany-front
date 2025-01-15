@@ -1,0 +1,44 @@
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+  
+}
+
+.sidebar {
+  width: 300px;
+  background-color: #ffffff;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.main-content {
+  flex-grow: 1;
+  margin-right: 300px; /* Ensure main content is pushed to the left of the sidebar */
+  display: flex;
+  flex-direction: column;
+  margin-top: 90px;
+}
+
+.header {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}

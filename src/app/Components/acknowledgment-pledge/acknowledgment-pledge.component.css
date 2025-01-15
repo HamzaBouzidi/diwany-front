@@ -1,0 +1,139 @@
+:host {
+  display: block;
+  direction: rtl; /* RTL structure */
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 50px); /* Space for footer */
+  background-color: #ffffff; /* Simple white background */
+}
+
+.form-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-logo {
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.form-header h2 {
+  font-size: 2rem;
+  color: #23689B; /* Header color */
+}
+
+.form-header h3 {
+  color: #23689B; /* Sub-header color */
+  margin: 0;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  color: #23689B; /* Label color */
+  text-align: right;
+}
+
+.p-input-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.p-input-icon-left .pi {
+  position: absolute;
+  right: 10px;
+  color: #23689B; /* Icon color */
+}
+
+.p-input-icon-left input,
+.p-input-icon-left textarea {
+  padding-left: 2.5rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #23689B; /* Input border */
+  width: 100%;
+  font-size: 1rem;
+}
+
+/* Red border for invalid fields */
+.is-invalid {
+  border-color: red !important;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Blue button */
+button.blue-button {
+  width: 50%; /* Increased width */
+  padding: 1rem; /* Larger padding for the button */
+  font-size: 1.2rem;
+  border-radius: 6px;
+  background-color: #0799BC; /* Blue button */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.blue-button:hover {
+  background-color: #23689B; /* Darker blue on hover */
+}
+
+/* Declarations Section Styling */
+.declaration-section {
+  margin-top: 2rem;
+}
+
+.declaration {
+  background-color: #f0f8ff; /* Light background */
+  padding: 1.5rem;
+  border-left: 6px solid #0799BC; /* Left border */
+  margin-bottom: 1.5rem;
+}
+
+.declaration h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #23689B; /* Heading color */
+}
+
+.declaration p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
