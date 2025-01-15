@@ -1,1 +1,62 @@
-<p>hr-national-identity-card-list works!</p>
+<div class="search-container">
+ <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المستخدم" class="search-input" dir="rtl" />
+</div>
+
+<div *ngIf="isLoading" class="spinner">Loading...</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+ <div class="table-container">
+  <h2>قائمة بطاقات التعريف</h2>
+  <table class="cin-table" dir="rtl">
+   <thead>
+    <tr>
+     <th>اسم المستخدم</th>
+     <th>الرقم الوطني</th>
+     <th>الصفة</th>
+     <th>الحالة</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let cin of filteredCins" (click)="openModal(cin)" class="clickable-row">
+     <td>{{ cin.user_name }}</td>
+     <td>{{ cin.user_natio_num }}</td>
+     <td>{{ cin.user_sifa }}</td>
+     <td>
+      <span *ngIf="cin.state === 'Approved'" class="status accepted">✔️ مقبولة</span>
+      <span *ngIf="cin.state === 'Rejected'" class="status rejected">❌ مرفوضة</span>
+      <span *ngIf="cin.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
+     </td>
+    </tr>
+    <tr *ngIf="filteredCins.length === 0">
+     <td colspan="4" class="empty-message">لا توجد بيانات لعرضها.</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>
+
+<!-- Modal for CIN Details -->
+<div *ngIf="isModalVisible" class="modal">
+ <div class="modal-content">
+  <!-- Close button (X) -->
+  <button class="close-btn" (click)="closeModal()">×</button>
+
+  <h3>تفاصيل الطلب</h3>
+  <p><strong>اسم المستخدم:</strong> {{ selectedCin?.user_name }}</p>
+  <p><strong>رقم البطاقة:</strong> {{ selectedCin?.user_num }}</p>
+  <p><strong>الرقم الوطني:</strong> {{ selectedCin?.user_natio_num }}</p>
+  <p><strong>الصفة:</strong> {{ selectedCin?.user_sifa }}</p>
+  <p><strong>الحالة الحالية:</strong>
+   <span *ngIf="selectedCin?.state === 'Approved'" class="status accepted">✔️ مقبولة</span>
+   <span *ngIf="selectedCin?.state === 'Rejected'" class="status rejected">❌ مرفوضة</span>
+   <span *ngIf="selectedCin?.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
+  </p>
+
+  <!-- Show buttons only if the state is 'Pending' -->
+  <div class="button-group" *ngIf="selectedCin?.state === 'Pending'">
+   <button class="approve-btn" (click)="updateCinState('Approved')">موافقة</button>
+   <button class="reject-btn" (click)="updateCinState('Rejected')">رفض</button>
+  </div>
+  </div>
+  </div>

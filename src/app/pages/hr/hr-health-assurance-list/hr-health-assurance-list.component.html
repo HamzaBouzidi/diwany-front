@@ -1,1 +1,75 @@
-<p>hr-health-assurance-list works!</p>
+<div class="search-container">
+ <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المستخدم" class="search-input" dir="rtl" />
+</div>
+
+<div *ngIf="isLoading" class="spinner">Loading...</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+ <div class="table-container">
+  <h2>قائمة طلبات التأمين الصحي</h2>
+  <table class="health-assurance-table" dir="rtl">
+   <thead>
+    <tr>
+     <th>اسم الموظف</th>
+     <th>الإدارة</th>
+     <th>الحالة</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let assurance of filteredHealthAssurances" (click)="openModal(assurance)" class="clickable-row">
+     <td>{{ assurance.name }}</td>
+     <td>{{ assurance.administration }}</td>
+     <td>
+      <span *ngIf="assurance.state === 'Approved'" class="status accepted">✔️ مقبولة</span>
+      <span *ngIf="assurance.state === 'Rejected'" class="status rejected">❌ مرفوضة</span>
+      <span *ngIf="assurance.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
+     </td>
+    </tr>
+    <tr *ngIf="filteredHealthAssurances.length === 0">
+     <td colspan="3" class="empty-message">لا توجد بيانات لعرضها.</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>
+
+<!-- Modal for Health Assurance Details -->
+<div *ngIf="isModalVisible" class="modal">
+ <div class="modal-content">
+  <!-- Close button (X) -->
+  <button class="close-btn" (click)="closeModal()">×</button>
+
+  <h3>تفاصيل الطلب</h3>
+  <p><strong>اسم الموظف:</strong> {{ selectedAssurance?.name }}</p>
+  <p><strong>اسم الأب:</strong> {{ selectedAssurance?.father_name }}</p>
+  <p><strong>اسم الجد:</strong> {{ selectedAssurance?.grandfather_name }}</p>
+  <p><strong>اسم الأم:</strong> {{ selectedAssurance?.mother_name }}</p>
+  <p><strong>اسم العائلة:</strong> {{ selectedAssurance?.family_last_name }}</p>
+  <p><strong>الإدارة:</strong> {{ selectedAssurance?.administration }}</p>
+  <p><strong>الحالة الحالية:</strong>
+   <span *ngIf="selectedAssurance?.state === 'Approved'" class="status accepted">✔️ مقبولة</span>
+   <span *ngIf="selectedAssurance?.state === 'Rejected'" class="status rejected">❌ مرفوضة</span>
+   <span *ngIf="selectedAssurance?.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
+  </p>
+
+  <!-- Document Links -->
+  <div *ngIf="selectedAssurance?.birth_certificate || selectedAssurance?.family_state_certificate"
+   class="document-links">
+   <h4>الوثائق:</h4>
+   <button *ngIf="selectedAssurance?.birth_certificate" (click)="openDocument(selectedAssurance.birth_certificate)">
+    عرض شهادة الميلاد
+   </button>
+   <button *ngIf="selectedAssurance?.family_state_certificate"
+    (click)="openDocument(selectedAssurance.family_state_certificate)">
+    عرض شهادة الوضع العائلي
+   </button>
+  </div>
+
+  <!-- Show buttons only if the state is 'Pending' -->
+  <div class="button-group" *ngIf="selectedAssurance?.state === 'Pending'">
+   <button class="approve-btn" (click)="updateAssuranceState('Approved')">موافقة</button>
+   <button class="reject-btn" (click)="updateAssuranceState('Rejected')">رفض</button>
+  </div>
+  </div>
+  </div>

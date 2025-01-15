@@ -1,0 +1,207 @@
+/* General table styles */
+.cin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.cin-table th,
+.cin-table td {
+  padding: 12px 16px;
+  text-align: right;
+  border-bottom: 1px solid #ddd;
+}
+
+.cin-table th {
+  background-color: #0799bc;
+  color: white;
+}
+
+.cin-table td {
+  background-color: white;
+}
+
+.cin-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Status styles */
+.status {
+  font-size: 1.2em;
+}
+
+.status.accepted {
+  color: green;
+}
+
+.status.rejected {
+  color: red;
+}
+
+.status.pending {
+  color: orange;
+}
+
+/* Search box styles */
+.search-container {
+  position: relative;
+  margin: 20px 0;
+  text-align: right;
+}
+
+.search-input {
+  padding: 10px 40px 10px 10px;
+  width: 300px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  direction: rtl;
+  text-align: right;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #aaa;
+}
+
+/* Empty message styles */
+.empty-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  font-size: 16px;
+  background-color: #f9f9f9;
+}
+.accepted {
+  color: green;
+  font-weight: bold;
+}
+
+.rejected {
+  color: red;
+  font-weight: bold;
+}
+
+.pending {
+  color: orange;
+  font-weight: bold;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.clickable-row:hover {
+  background-color: #f1f1f1;
+}
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white; /* White background for the modal */
+  color: #333; /* Dark text for contrast */
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+  position: relative; /* For positioning the close button */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  direction: rtl; /* Proper text direction for Arabic */
+}
+
+/* Close button (X) in the top-left corner */
+.modal-content .close-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.5em;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-content .close-btn:hover {
+  color: #dc3545; /* Red color on hover */
+}
+
+.modal-content h3 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  text-align: right; /* Align header text to the right */
+}
+
+.modal-content p {
+  margin-bottom: 10px;
+  font-size: 1em;
+  line-height: 1.5;
+  text-align: right; /* Align paragraphs to the right */
+}
+
+/* Button group styles */
+.modal-content .button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.approve-btn,
+.reject-btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+/* Approve button */
+.approve-btn {
+  background-color: #28a745; /* Green */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.approve-btn:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* Reject button */
+.reject-btn {
+  background-color: #dc3545; /* Red */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.reject-btn:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+/* Align the heading to the right */
+.table-container h2 {
+  text-align: right; /* Align text to the right */
+  direction: rtl;    /* Ensure proper text direction for Arabic */
+  margin-bottom: 20px; /* Add some spacing below the heading */
+  padding-right: 10px; /* Optional: Add padding to the right for spacing */
+}

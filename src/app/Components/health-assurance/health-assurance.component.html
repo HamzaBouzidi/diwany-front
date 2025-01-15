@@ -11,7 +11,7 @@
       <div class="form-field">
         <label for="fullName">الاسم</label>
         <input id="fullName" type="text" name="fullName" placeholder="أدخل الاسم" [(ngModel)]="fullName"
-          #fullNameCtrl="ngModel" required />
+          #fullNameCtrl="ngModel" required readonly />
         <div *ngIf="fullNameCtrl.invalid && fullNameCtrl.touched" class="error-message">
           الرجاء إدخال الاسم
         </div>
@@ -35,17 +35,26 @@
         </div>
       </div>
 
-      <!-- Employee ID Section -->
+      <!-- Mother's Name Section -->
       <div class="form-row">
         <div class="form-field">
-          <label for="employeeId">رقم قيد الموظف</label>
-          <input id="employeeId" type="text" name="employeeId" placeholder="أدخل رقم قيد الموظف"
-            [(ngModel)]="employeeId" #employeeIdCtrl="ngModel" required />
+          <label for="motherName">اسم الأم</label>
+          <input id="motherName" type="text" name="motherName" placeholder="أدخل اسم الأم" [(ngModel)]="motherName"
+            #motherNameCtrl="ngModel" required />
         </div>
         <div class="form-field">
-          <label for="fatherId">رقم قيد الأب</label>
-          <input id="fatherId" type="text" name="fatherId" placeholder="أدخل رقم قيد الأب" [(ngModel)]="fatherId"
-            #fatherIdCtrl="ngModel" required />
+          <label for="motherLastName">اللقب (الأم)</label>
+          <input id="motherLastName" type="text" name="motherLastName" placeholder="أدخل لقب الأم" [(ngModel)]="motherLastName"
+            #motherLastNameCtrl="ngModel" required />
+          </div>
+          </div>
+          
+          <!-- Employee ID and Phone Section -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="employeeId">رقم قيد الموظف</label>
+              <input id="employeeId" type="text" name="employeeId" placeholder="أدخل رقم قيد الموظف" [(ngModel)]="ref_emp"
+                #employeeIdCtrl="ngModel" required readonly />
         </div>
         <div class="form-field">
           <label for="phoneNumber">رقم الهاتف</label>
@@ -67,15 +76,29 @@
       <div class="form-field">
         <label for="familyNames">أسماء العائلية</label>
         <textarea id="familyNames" name="familyNames" placeholder="أدخل أسماء العائلية" [(ngModel)]="familyNames"
-          #familyNamesCtrl="ngModel" required></textarea>
+          #familyNamesCtrl="ngModel" ></textarea>
         <div *ngIf="familyNamesCtrl.invalid && familyNamesCtrl.touched" class="error-message">
           الرجاء إدخال أسماء العائلية
         </div>
       </div>
 
+<div class="file-input-container">
+  <label for="birthCertificate" class="file-input-label">اختر شهادة الميلاد</label>
+  <input id="birthCertificate" type="file" name="birthCertificate" class="file-input"
+    (change)="onFileSelect($event, 'birthCertificate')" />
+  <span class="file-name">{{ birthCertificate?.name || 'لم يتم اختيار ملف' }}</span>
+</div>
+
+<div class="file-input-container">
+  <label for="familyStateCertificate" class="file-input-label">اختر شهادة الوضع العائلي</label>
+  <input id="familyStateCertificate" type="file" name="familyStateCertificate" class="file-input"
+    (change)="onFileSelect($event, 'familyStateCertificate')" />
+  <span class="file-name">{{ familyStateCertificate?.name || 'لم يتم اختيار ملف' }}</span>
+</div>
+
       <!-- Submit Button -->
       <div class="form-actions">
-        <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button" [disabled]="isSubmitting">
           إرسال
         </button>
       </div>

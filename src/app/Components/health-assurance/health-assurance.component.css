@@ -112,3 +112,37 @@ button.blue-button {
 button.blue-button:hover {
   background-color: #0799BC; /* Applied hover color #23689B */
 }
+/* File input container */
+.file-input-container {
+  margin-bottom: 20px;
+}
+
+/* Label for file input */
+.file-input-label {
+  display: inline-block;
+  background-color: #0799bc;
+  color: white;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for file input label */
+.file-input-label:hover {
+  background-color: #055a75;
+}
+
+/* Hidden actual file input */
+.file-input {
+  display: none;
+}
+
+/* File name display */
+.file-name {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #333;
+  font-style: italic;
+}
