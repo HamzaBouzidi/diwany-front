@@ -1,0 +1,61 @@
+<div class="search-container">
+ <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الإقرار" class="search-input" dir="rtl" />
+</div>
+
+<div *ngIf="isLoading" class="spinner">جاري التحميل...</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+ <div class="table-container">
+  <h2>قائمة الإقرارات</h2>
+  <table class="pledge-table" dir="rtl">
+   <thead>
+    <tr>
+     <th>اسم الموظف</th>
+     <th>الرقم الوطني</th>
+     <th>المؤهل العلمي</th>
+     <th>الحالة</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let pledge of filteredPledges" (click)="openModal(pledge)" class="clickable-row">
+     <td>{{ pledge.employeeName }}</td>
+     <td>{{ pledge.employee_rw }}</td>
+     <td>{{ pledge.employeeDegree }}</td>
+     <td>
+      <span *ngIf="pledge.state === 'approved'" class="status accepted">✔️ مقبولة</span>
+      <span *ngIf="pledge.state === 'rejected'" class="status rejected">❌ مرفوضة</span>
+      <span *ngIf="pledge.state === 'pending'" class="status pending">🔄 قيد التنفيذ</span>
+     </td>
+    </tr>
+    <tr *ngIf="filteredPledges.length === 0">
+     <td colspan="4" class="empty-message">لا توجد بيانات لعرضها.</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>
+
+<!-- Modal for Pledge Details -->
+<div *ngIf="isModalVisible" class="modal">
+ <div class="modal-content">
+  <button class="close-btn" (click)="closeModal()">×</button>
+  <h3>تفاصيل الإقرار</h3>
+  <p><strong>اسم الموظف:</strong> {{ selectedPledge?.employeeName }}</p>
+  <p><strong>الرقم الوطني:</strong> {{ selectedPledge?.employee_rw }}</p>
+  <p><strong>المؤهل العلمي:</strong> {{ selectedPledge?.employeeDegree }}</p>
+  <p><strong>الحالة الحالية:</strong>
+   <span *ngIf="selectedPledge?.state === 'approved'" class="status accepted">✔️ مقبولة</span>
+   <span *ngIf="selectedPledge?.state === 'rejected'" class="status rejected">❌ مرفوضة</span>
+   <span *ngIf="selectedPledge?.state === 'pending'" class="status pending">🔄 قيد التنفيذ</span>
+  </p>
+  <div *ngIf="selectedPledge?.documentLink" class="document-links">
+   <h4>رابط الوثيقة:</h4>
+   <button (click)="openDocument(selectedPledge.documentLink)">عرض الوثيقة</button>
+  </div>
+  <div class="button-group" *ngIf="selectedPledge?.state === 'pending'">
+   <button class="approve-btn" (click)="updatePledgeState('approved')">موافقة</button>
+   <button class="reject-btn" (click)="updatePledgeState('rejected')">رفض</button>
+  </div>
+ </div>
+</div>

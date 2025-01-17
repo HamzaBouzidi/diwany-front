@@ -1,0 +1,79 @@
+<div class="toggle-container">
+ <button class="toggle-button" [class.active]="currentView === 'releases'" (click)="toggleView('releases')">
+  طلبات الإخلاء
+ </button>
+ <button class="toggle-button" [class.active]="currentView === 'work-periods'" (click)="toggleView('work-periods')">
+  فترات العمل
+ </button>
+</div>
+
+<div class="search-container" *ngIf="currentView === 'releases'">
+ <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المدير أو الإدارة أو الموظف" class="search-input"
+  dir="rtl" />
+ <i class="fas fa-search search-icon"></i>
+</div>
+
+<!-- Releases Table -->
+<div *ngIf="currentView === 'releases' && !isLoading && !errorMessage">
+ <div class="table-container">
+  <table class="release-table" dir="rtl">
+   <thead>
+    <tr>
+     <th>اسم الموظف</th>
+     <th>الإدارة</th>
+     <th>اسم المدير</th>
+     <th>الحالة</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let release of filteredReleases" (click)="showReason(release)" class="clickable-row">
+     <td>{{ release.employeeName }}</td>
+     <td>{{ release.department }}</td>
+     <td>{{ release.directorName }}</td>
+     <td>
+      <span *ngIf="release.state === 'Approved'" class="status accepted">✔️ مقبولة</span>
+      <span *ngIf="release.state === 'Rejected'" class="status rejected">❌ مرفوضة</span>
+      <span *ngIf="release.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
+     </td>
+    </tr>
+    <tr *ngIf="filteredReleases.length === 0">
+     <td colspan="4" class="empty-message">لا توجد طلبات إخلاء لعرضها.</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>
+
+<!-- Work Periods Table -->
+<div *ngIf="currentView === 'work-periods' && !isLoading && !errorMessage">
+ <div class="table-container">
+  <table class="work-period-table" dir="rtl">
+   <thead>
+    <tr>
+     <th>اسم الموظف</th>
+     <th>بداية الفترة</th>
+     <th>نهاية الفترة</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let period of filteredWorkPeriods" class="clickable-row">
+     <td>{{ period.employeeName }}</td>
+     <td>{{ period.startDate }}</td>
+     <td>{{ period.endDate }}</td>
+    </tr>
+    <tr *ngIf="filteredWorkPeriods.length === 0">
+     <td colspan="3" class="empty-message">لا توجد فترات عمل لعرضها.</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>
+
+<!-- Modal for showing reasons -->
+<div *ngIf="isModalVisible" class="modal">
+ <div class="modal-content">
+  <button class="close-button" (click)="closeModal()">✖</button>
+  <h3>السبب</h3>
+  <p>{{ selectedReason }}</p>
+ </div>
+</div>
