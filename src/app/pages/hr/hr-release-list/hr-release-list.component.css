@@ -1,47 +1,68 @@
+/* Container for the tables */
 .table-container {
   padding: 2rem;
 }
 
+/* Header Styling */
 h2 {
   text-align: center;
   color: #23689B;
   margin-bottom: 1.5rem;
 }
 
-.release-table {
+/* Common Table Styling */
+table {
   width: 100%;
   border-collapse: collapse;
   margin: 0 auto;
 }
 
-.release-table th,
-.release-table td {
+th,
+td {
   padding: 12px;
   text-align: center;
   border: 1px solid #ddd;
 }
 
-.release-table th {
+th {
   background-color: #0799BC;
   color: white;
 }
 
-.release-table tr:nth-child(even) {
+tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-.release-table tr:hover {
+tr:hover {
   background-color: #f1f1f1;
 }
 
-/* Search container */
+/* Release Table Specific */
+.release-table th {
+  background-color: #0799BC;
+}
+
+/* Work Periods Table Specific */
+.work-period-table th {
+  background-color: #23689B; /* Slightly different shade for distinction */
+}
+
+.work-period-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.work-period-table tr:hover {
+  background-color: #e8f4f9; /* Lighter hover effect for work periods */
+}
+
+/* Search Container */
 .search-container {
   position: relative;
   margin: 20px 0;
   text-align: right; /* Align the search input to the right */
 }
 
-/* Search input field */
+/* Search Input Field */
 .search-input {
   padding: 10px 40px 10px 10px; /* Adjust padding for the search icon */
   width: 300px;
@@ -53,7 +74,7 @@ h2 {
   text-align: right; /* Align text to the right */
 }
 
-/* Search icon */
+/* Search Icon */
 .search-icon {
   position: absolute;
   right: 10px;
@@ -63,8 +84,7 @@ h2 {
   color: #aaa;
 }
 
-
-/* Modal styling */
+/* Modal Styling */
 .modal {
   position: fixed;
   top: 0;
@@ -128,6 +148,8 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   text-transform: uppercase;
+    background-color: #0799BC;
+
   color: white;
   transition: background-color 0.3s ease;
 }
@@ -142,5 +164,105 @@ h2 {
 
 .toggle-button:hover {
   background-color: #0799BC; /* Hover effect for buttons */
+}
+
+/* Empty Message Styling */
+.empty-message {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  padding: 20px 0;
+}
+
+/* Loading Spinner (Optional, if used) */
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.spinner::after {
+  content: '';
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ddd;
+  border-top: 5px solid #23689B;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.work-period-table .approve-btn {
+  background-color: #28a745; /* Green */
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.work-period-table .approve-btn:hover {
+  background-color: #218838;
+}
+
+.work-period-table .reject-btn {
+  background-color: #dc3545; /* Red */
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.work-period-table .reject-btn:hover {
+  background-color: #c82333;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 2em;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.close-button {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.done-button {
+  background-color: #28a745;
+  color: white;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 

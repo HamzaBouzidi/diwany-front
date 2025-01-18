@@ -1,1 +1,103 @@
-<p>hr-working-period-report-form works!</p>
+<div class="form-container">
+ <div class="form-card">
+  <!-- Header Section -->
+  <div class="form-header">
+   <img src="assets/logo.png" alt="شعار" class="form-logo" />
+   <h2>تقرير عن فترة الاختبار خلال فترة العمل</h2>
+  </div>
+
+  <!-- Form Section -->
+  <form #reportForm="ngForm" (ngSubmit)="onSubmit(reportForm)">
+   <!-- Form Fields Grid -->
+   <div class="form-grid">
+    <!-- Name -->
+    <div class="form-field">
+     <label for="name">الاسم</label>
+     <span class="p-input-icon-left">
+      <i class="pi pi-user"></i>
+      <input id="name" type="text" name="name" placeholder="أدخل الاسم" [(ngModel)]="name" #nameCtrl="ngModel"
+       required />
+     </span>
+     <div *ngIf="nameCtrl.invalid && nameCtrl.touched" class="error-message">
+      الرجاء إدخال الاسم
+     </div>
+    </div>
+
+    <!-- Job Title -->
+    <div class="form-field">
+     <label for="jobTitle">الوظيفة</label>
+     <span class="p-input-icon-left">
+      <i class="pi pi-briefcase"></i>
+      <input id="jobTitle" type="text" name="jobTitle" placeholder="أدخل الوظيفة" [(ngModel)]="jobTitle"
+       #jobTitleCtrl="ngModel" required />
+     </span>
+     <div *ngIf="jobTitleCtrl.invalid && jobTitleCtrl.touched" class="error-message">
+      الرجاء إدخال الوظيفة
+     </div>
+    </div>
+
+    <!-- National Number -->
+    <div class="form-field">
+     <label for="nationalNumber">الرقم الوطني</label>
+     <span class="p-input-icon-left">
+      <i class="pi pi-id-card"></i>
+      <input id="nationalNumber" type="text" name="nationalNumber" placeholder="أدخل الرقم الوطني"
+       [(ngModel)]="nationalNumber" #nationalNumberCtrl="ngModel" required />
+     </span>
+     <div *ngIf="nationalNumberCtrl.invalid && nationalNumberCtrl.touched" class="error-message">
+      الرجاء إدخال الرقم الوطني
+     </div>
+    </div>
+
+    <!-- Department -->
+    <div class="form-field">
+     <label for="department">الإدارة</label>
+     <span class="p-input-icon-left">
+      <i class="pi pi-sitemap"></i>
+      <input id="department" type="text" name="department" placeholder="أدخل الإدارة" [(ngModel)]="department"
+       #departmentCtrl="ngModel" required />
+     </span>
+     <div *ngIf="departmentCtrl.invalid && departmentCtrl.touched" class="error-message">
+      الرجاء إدخال الإدارة
+     </div>
+    </div>
+
+    <!-- Start Date -->
+    <div class="form-field">
+     <label for="startDate">تاريخ المباشرة</label>
+     <span class="p-input-icon-left">
+      <i class="pi pi-calendar"></i>
+      <input id="startDate" type="date" name="startDate" [(ngModel)]="startDate" #startDateCtrl="ngModel" required />
+     </span>
+     <div *ngIf="startDateCtrl.invalid && startDateCtrl.touched" class="error-message">
+      الرجاء إدخال تاريخ المباشرة
+     </div>
+    </div>
+
+    <!-- End Date -->
+    <div class="form-field">
+     <label for="endDate">تاريخ انتهاء فترة الاختبار</label>
+     <span class="p-input-icon-left">
+      <i class="pi pi-calendar"></i>
+      <input id="endDate" type="date" name="endDate" [(ngModel)]="endDate" #endDateCtrl="ngModel" required />
+     </span>
+     <div *ngIf="endDateCtrl.invalid && endDateCtrl.touched" class="error-message">
+      الرجاء إدخال تاريخ انتهاء فترة الاختبار
+     </div>
+    </div>
+   </div>
+
+   <!-- Form Actions -->
+   <div class="form-actions">
+    <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">
+     إرسال
+    </button>
+   </div>
+  </form>
+
+  <!-- Success Modal -->
+  <app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
+   <h3>تم تقديم التقرير بنجاح</h3>
+  </app-done-modal>
+  </div>
+  </div>

@@ -154,7 +154,7 @@ export class HrDashboardComponent {
           datasets: [
             {
               data: counts,
-              backgroundColor: ['#0799BC', 'coral', 'mediumseagreen'],
+              backgroundColor: ['#0799BC', 'darkgrey', 'mediumseagreen'],
             },
           ],
         },
@@ -226,7 +226,7 @@ export class HrDashboardComponent {
         datasets: [
           {
             data: [this.acceptedExitCount, this.notAcceptedExitCount],
-            backgroundColor: ['#0799BC', 'darksalmon'],
+            backgroundColor: ['#0799BC', '#155E95'],
           },
         ],
       },
@@ -251,7 +251,7 @@ export class HrDashboardComponent {
         datasets: [
           {
             data: [this.acceptedMorningDelayCount, this.notAcceptedMorningDelayCount],
-            backgroundColor: ['darkolivegreen', 'chocolate'],
+            backgroundColor: ['#155E95', 'darkgrey'],
           },
         ],
       },
@@ -283,7 +283,7 @@ export class HrDashboardComponent {
           datasets: [
             {
               data: data,
-              backgroundColor: ['darkolivegreen', 'chocolate'],
+              backgroundColor: ['#155E95', 'darkgrey'],
             },
           ],
         },
@@ -354,7 +354,7 @@ export class HrDashboardComponent {
           datasets: [
             {
               data: datavlu,
-              backgroundColor: ['darkolivegreen', 'darkgrey'],
+              backgroundColor: ['#155E95', 'darkgrey'],
             },
           ],
         },
@@ -409,7 +409,7 @@ export class HrDashboardComponent {
           datasets: [
             {
               data: datavlu,
-              backgroundColor: ['darkorchid', 'chocolate'],
+              backgroundColor: ['#155E95', '#0799BC'],
             },
           ],
         },
@@ -464,7 +464,7 @@ export class HrDashboardComponent {
           datasets: [
             {
               data: datavlu,
-              backgroundColor: ['darkolivegreen', 'chocolate'],
+              backgroundColor: ['#0799BC', 'darkgrey'],
             },
           ],
         },

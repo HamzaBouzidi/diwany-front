@@ -27,6 +27,7 @@
       <span *ngIf="cin.state === 'Rejected'" class="status rejected">❌ مرفوضة</span>
       <span *ngIf="cin.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
      </td>
+     
     </tr>
     <tr *ngIf="filteredCins.length === 0">
      <td colspan="4" class="empty-message">لا توجد بيانات لعرضها.</td>

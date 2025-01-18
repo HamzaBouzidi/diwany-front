@@ -1,0 +1,119 @@
+.table-container {
+  margin: 20px auto;
+  width: 90%;
+  overflow-x: auto;
+}
+
+.nomination-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right; /* Align text to the right for Arabic */
+}
+
+.nomination-table th,
+.nomination-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.nomination-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.view-btn {
+  background-color: #0799bc;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.view-btn:hover {
+  background-color: #0056b3;
+}
+
+.loading-message,
+.empty-message,
+.error-message {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.error-message {
+  color: red;
+}
+.table-container {
+  margin: 20px auto;
+  width: 90%;
+  overflow-x: auto;
+}
+
+.nomination-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+.nomination-table th,
+.nomination-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.nomination-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.view-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.view-btn:hover {
+  background-color: #0799bc;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 2em;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  text-align: right; /* RTL alignment for Arabic */
+}
+
+.details-section p {
+  margin: 0.5em 0;
+}
+
+.close-button {
+  float: left;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #333;
+}

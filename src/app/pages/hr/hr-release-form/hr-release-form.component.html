@@ -1,56 +1,57 @@
 <div class="form-container">
- <div class="form-card">
-  <div class="form-header">
-   <img src="assets/logo.png" alt="شعار" class="form-logo" />
-   <h2>نموذج إخلاء طرف</h2>
-  </div>
+  <div class="form-card">
+    <div class="form-header">
+      <img src="assets/logo.png" alt="شعار" class="form-logo" />
+      <h2>نموذج إخلاء طرف</h2>
+    </div>
 
-  <form #clearanceForm="ngForm" (ngSubmit)="onSubmit(clearanceForm)">
-   <!-- Department Selection -->
-   <div class="form-field">
-    <label for="department">التابع لإدارة / مكتب:</label>
-    <select id="department" name="department" [(ngModel)]="department" (change)="onDepartmentChange()" required>
-     <option value="" disabled selected>اختر الإدارة</option>
-     <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
-    </select>
-   </div>
+    <form #clearanceForm="ngForm" (ngSubmit)="onSubmit(clearanceForm)">
+      <!-- Department Selection -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="department"> لإدارة:</label>
+          <select id="department" name="department" [(ngModel)]="department" (change)="onDepartmentChange()" required>
+            <option value="" disabled selected>اختر الإدارة</option>
+            <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+          </select>
+          </div>
 
-   <!-- Auto-filled Director Info -->
-   <div class="form-field">
-    <label for="directorName">السيد / مدير الإدارة العامة للشؤون التالية:</label>
-    <input id="directorName" type="text" name="directorName" [(ngModel)]="directorName" readonly
-     placeholder="سيتم ملؤه تلقائيًا" />
-   </div>
+        <div class="form-field">
+          <label for="directorName">السيد / مدير الإدارة:</label>
+          <input id="directorName" type="text" name="directorName" [(ngModel)]="directorName" readonly
+            placeholder="سيتم ملؤه تلقائيًا" />
+          </div>
+      </div>
 
-   <div class="form-field">
-    <label for="directorRw">رقم التعريف للمدير:</label>
-    <input id="directorRw" type="text" name="directorRw" [(ngModel)]="directorRw" readonly
-     placeholder="سيتم ملؤه تلقائيًا" />
-   </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="directorRw">رقم التعريف للمدير:</label>
+          <input id="directorRw" type="text" name="directorRw" [(ngModel)]="directorRw" readonly
+            placeholder="سيتم ملؤه تلقائيًا" />
+        </div>
 
-   <!-- Employee Information -->
-   <div class="form-field">
-    <label for="employeeName">بمناسبة إنهاء خدمات:</label>
-    <input id="employeeName" type="text" name="employeeName" placeholder="أدخل اسم الموظف" [(ngModel)]="employeeName"
-     (input)="onEmployeeNameChange()" required />
-   </div>
+        <div class="form-field">
+          <label for="employeeName">بمناسبة إنهاء خدمات:</label>
+          <input id="employeeName" type="text" name="employeeName" placeholder="أدخل اسم الموظف" [(ngModel)]="employeeName"
+            (input)="onEmployeeNameChange()" required />
+        </div>
+          </div>
 
-   <div class="form-field">
-    <label for="employeeRw">رقم التعريف للموظف:</label>
-    <input id="employeeRw" type="text" name="employeeRw" [(ngModel)]="employeeRw" readonly
-     placeholder="سيتم ملؤه تلقائيًا" />
-   </div>
+        <div class="form-field">
+          <label for="employeeRw">رقم التعريف للموظف:</label>
+          <input id="employeeRw" type="text" name="employeeRw" [(ngModel)]="employeeRw" readonly
+            placeholder="سيتم ملؤه تلقائيًا" />
+        </div>
 
-   <!-- Reason Field -->
-   <div class="form-field">
-    <label for="reason">بسبب:</label>
-    <textarea id="reason" name="reason" placeholder="أدخل السبب" [(ngModel)]="reason" required></textarea>
-   </div>
+        <div class="form-field">
+          <label for="reason">بسبب:</label>
+          <textarea id="reason" name="reason" placeholder="أدخل السبب" [(ngModel)]="reason" required></textarea>
+        </div>
 
-   <!-- Form Actions -->
-   <div class="form-actions">
-    <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">إرسال</button>
-   </div>
-  </form>
- </div>
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success blue-button">إرسال</button>
+      </div>
+      </form>
+      </div>
 </div>

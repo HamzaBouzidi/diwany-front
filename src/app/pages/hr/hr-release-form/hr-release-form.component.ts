@@ -93,7 +93,7 @@ export class HrReleaseFormComponent implements OnInit {
           clearanceForm.reset();
           setTimeout(() => {
             this.closeModal(); // Close the modal
-            this.router.navigate(['/dashboard/definitions-autorisations']);
+            this.router.navigate(['/hr/releases-list']);
           }, 3000);
         },
         (error) => {

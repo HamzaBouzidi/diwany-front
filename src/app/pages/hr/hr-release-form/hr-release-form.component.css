@@ -16,7 +16,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2.5rem;
-  max-width: 600px;
+  max-width: 900px; /* Wider form to take up more space */
   width: 100%;
   box-sizing: border-box;
 }
@@ -37,9 +37,16 @@
   margin: 0;
 }
 
+/* Flexbox for Form Rows */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem; /* Space between columns */
+}
+
 .form-field {
+  flex: 1;
   margin-bottom: 1.5rem;
-  width: 100%;
 }
 
 .form-field label {
@@ -50,9 +57,19 @@
   text-align: right;
 }
 
-select,
-input,
+/* Full Row for Reason */
 textarea {
+  width: 100%; /* Ensure the reason textarea takes full width */
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+  height: 100px; /* Fixed height for textarea */
+}
+
+select,
+input {
   width: 100%;
   padding: 0.75rem;
   border-radius: 6px;
@@ -69,7 +86,6 @@ select {
 
 textarea {
   resize: none;
-  height: 100px;
 }
 
 .form-actions {

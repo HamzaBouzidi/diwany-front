@@ -1,0 +1,53 @@
+<!-- Loading Message -->
+<div *ngIf="isLoading" class="loading-message">
+ جاري تحميل البيانات...
+</div>
+
+<!-- Table for Nomination Members -->
+<div *ngIf="!isLoading && members.length > 0" class="table-container">
+ <table class="nomination-table" dir="rtl">
+  <thead>
+   <tr>
+    <th>الاسم</th>
+    <th>الإدارة</th>
+    <th>التفاصيل</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr *ngFor="let member of members">
+    <td>{{ member.user_name }}</td>
+    <td>{{ member.user_direction_nomi }}</td>
+    <td>
+     <button class="view-btn" (click)="viewDetails(member)">
+      عرض التفاصيل
+     </button>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+
+<!-- Empty State -->
+<div *ngIf="!isLoading && members.length === 0" class="empty-message">
+ لا توجد بيانات لعرضها.
+</div>
+
+<!-- Error Message -->
+<div *ngIf="errorMessage" class="error-message">
+ {{ errorMessage }}
+</div>
+
+<!-- Modal for Member Details -->
+<div *ngIf="isModalVisible" class="modal">
+ <div class="modal-content">
+  <button class="close-button" (click)="closeModal()">✖</button>
+  <h2>تفاصيل المرشح</h2>
+  <div class="details-section">
+   <p><strong>الاسم:</strong> {{ selectedMember?.user_name }}</p>
+   <p><strong>الإدارة:</strong> {{ selectedMember?.user_direction_nomi }}</p>
+   <p><strong>الوظيفة:</strong> {{ selectedMember?.user_cu_direction }}</p>
+   <p><strong>الخبرة:</strong> {{ selectedMember?.user_exp }}</p>
+   <p><strong>التاريخ:</strong> {{ selectedMember?.day }}</p>
+  </div>
+ </div>
+</div>

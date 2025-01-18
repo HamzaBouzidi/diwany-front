@@ -7,7 +7,7 @@
  </button>
 </div>
 
-<div class="search-container" *ngIf="currentView === 'releases'">
+<div class="search-container">
  <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المدير أو الإدارة أو الموظف" class="search-input"
   dir="rtl" />
  <i class="fas fa-search search-icon"></i>
@@ -43,31 +43,109 @@
   </table>
  </div>
 </div>
-
 <!-- Work Periods Table -->
 <div *ngIf="currentView === 'work-periods' && !isLoading && !errorMessage">
- <div class="table-container">
-  <table class="work-period-table" dir="rtl">
-   <thead>
-    <tr>
-     <th>اسم الموظف</th>
-     <th>بداية الفترة</th>
-     <th>نهاية الفترة</th>
-    </tr>
-   </thead>
-   <tbody>
-    <tr *ngFor="let period of filteredWorkPeriods" class="clickable-row">
-     <td>{{ period.employeeName }}</td>
-     <td>{{ period.startDate }}</td>
-     <td>{{ period.endDate }}</td>
-    </tr>
-    <tr *ngIf="filteredWorkPeriods.length === 0">
-     <td colspan="3" class="empty-message">لا توجد فترات عمل لعرضها.</td>
-    </tr>
-   </tbody>
-  </table>
- </div>
+  <div class="table-container">
+    <table class="work-period-table" dir="rtl">
+      <thead>
+        <tr>
+          <th>اسم الموظف</th>
+          <th>بداية الفترة</th>
+          <th>نهاية الفترة</th>
+          <th>الحالة</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let period of filteredWorkPeriods" (click)="openEvaluationModal(period)" class="clickable-row">
+            <td>{{ period.employee_name }}</td>
+            <td>{{ period.startDate }}</td>
+            <td>{{ period.endDate }}</td>
+          <td>
+            <span *ngIf="period.state === 'Done'" class="status accepted">✔️ تم</span>
+            <span *ngIf="period.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
+          </td>
+
+        </tr>
+        <tr *ngIf="filteredWorkPeriods.length === 0">
+          <td colspan="5" class="empty-message">لا توجد فترات عمل لعرضها.</td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+          </div>
+          <div *ngIf="isEvaluationModalVisible" class="modal">
+            <div class="modal-content">
+              <button class="close-button" (click)="closeEvaluationModal()">✖</button>
+              <h3>تقييم الأداء</h3>
+          
+              <!-- Evaluation Section -->
+              <table class="evaluation-table" dir="rtl">
+                <thead>
+                  <tr>
+                    <th>البند</th>
+                    <th>أعلى من المستوى</th>
+                    <th>في مستوى المطلوب</th>
+                    <th>أقل من المستوى</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>معرفة الوظيفة</td>
+                    <td><input type="radio" name="jobKnowledge" value="above average" [(ngModel)]="evaluationData.job_knowledge">
+                    </td>
+                    <td><input type="radio" name="jobKnowledge" value="average" [(ngModel)]="evaluationData.job_knowledge"></td>
+                    <td><input type="radio" name="jobKnowledge" value="below standard" [(ngModel)]="evaluationData.job_knowledge">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>الاتقانية</td>
+                    <td><input type="radio" name="jobMastery" value="above average" [(ngModel)]="evaluationData.job_mastery"></td>
+                    <td><input type="radio" name="jobMastery" value="average" [(ngModel)]="evaluationData.job_mastery"></td>
+                    <td><input type="radio" name="jobMastery" value="below standard" [(ngModel)]="evaluationData.job_mastery">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>مهارات التعامل مع الآخرين</td>
+                    <td><input type="radio" name="teamwork" value="above average"
+                        [(ngModel)]="evaluationData.job_communication_skills"></td>
+                    <td><input type="radio" name="teamwork" value="average" [(ngModel)]="evaluationData.job_communication_skills">
+                    </td>
+                    <td><input type="radio" name="teamwork" value="below standard"
+                        [(ngModel)]="evaluationData.job_communication_skills"></td>
+                  </tr>
+                  <tr>
+                    <td>حل المشكلات</td>
+                    <td><input type="radio" name="problemSolving" value="above average"
+                        [(ngModel)]="evaluationData.job_problem_solving"></td>
+                    <td><input type="radio" name="problemSolving" value="average"
+                        [(ngModel)]="evaluationData.job_problem_solving"></td>
+                    <td><input type="radio" name="problemSolving" value="below standard"
+                        [(ngModel)]="evaluationData.job_problem_solving"></td>
+                  </tr>
+                  <tr>
+                    <td>إدارة الوقت</td>
+                    <td><input type="radio" name="timeManagement" value="above average"
+                        [(ngModel)]="evaluationData.job_time_management"></td>
+                    <td><input type="radio" name="timeManagement" value="average"
+                        [(ngModel)]="evaluationData.job_time_management"></td>
+                    <td><input type="radio" name="timeManagement" value="below standard"
+                        [(ngModel)]="evaluationData.job_time_management"></td>
+                  </tr>
+                  <tr>
+                    <td>التفكير واتخاذ القرارات</td>
+                    <td><input type="radio" name="decisionMaking" value="above average"
+                        [(ngModel)]="evaluationData.job_decision_making"></td>
+                    <td><input type="radio" name="decisionMaking" value="average"
+                        [(ngModel)]="evaluationData.job_decision_making"></td>
+                    <td><input type="radio" name="decisionMaking" value="below standard"
+                        [(ngModel)]="evaluationData.job_decision_making"></td>
+                  </tr>
+                </tbody>
+              </table>
+<button class="done-button" (click)="submitEvaluation()">تم</button>
+  </div>
 </div>
+
 
 <!-- Modal for showing reasons -->
 <div *ngIf="isModalVisible" class="modal">
