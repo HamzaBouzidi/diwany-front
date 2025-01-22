@@ -1,25 +1,18 @@
 .sidebar {
-
-
+    width: 15%; 
+    max-width: 300px; 
+    min-width: 200px; 
+    height: 100%; 
+    background-color: #23689B;
     position: fixed;
-    display: flex;
-    flex-direction: column;
     right: 0;
-    
-    background-color: #23689B; /* Subtle, distinguished off-white color */
-    transition: all 0.3s ease;
-    border: none;
-    padding: 0;
-    border-bottom-left-radius: 20px; /* Add rounding to bottom-left corner */
+    top: 0;
     z-index: 1000;
-    width: 300px;
-    height: 930px;
-
-
- border-radius: 15px;
+    padding: 20px;
+    overflow-y: auto;
     margin-top: 70px;
-    
-    margin-right: 3px; 
+    margin-right: 5px; 
+    border-radius: 15px;
 }
 
 
@@ -155,17 +148,16 @@
     /* Green color for text on hover */
 }
 
-
 .footer {
-    padding: 1.8rem;
+    padding: 0rem;
     /* Increased padding for footer */
     border-top: 2px solid #e0e0e0;
 }
 
 .logo-img {
-    width: 6rem;
+    width: 9rem;
     /* Increased logo size */
-    height: 6rem;
+    height: 9rem;
     display: block;
     margin: 0 auto;
 }

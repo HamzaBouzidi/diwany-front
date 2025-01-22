@@ -18,6 +18,8 @@ export class HrHealthAssuranceListComponent implements OnInit {
   isLoading = true;
   errorMessage: string | null = null;
   isModalVisible = false;
+  notifications: string[] = [];
+
 
   constructor(private healthAssuranceService: HealthAssuranceService) { }
 
@@ -25,7 +27,7 @@ export class HrHealthAssuranceListComponent implements OnInit {
     this.fetchHealthAssurances();
   }
 
-  fetchHealthAssurances(): void {
+ /* fetchHealthAssurances(): void {
     this.isLoading = true;
     this.healthAssuranceService.getAllHealthAssurances().subscribe(
       (data) => {
@@ -39,7 +41,26 @@ export class HrHealthAssuranceListComponent implements OnInit {
       }
     );
   }
+*/
 
+  fetchHealthAssurances(): void {
+    this.isLoading = true;
+    this.healthAssuranceService.getAllHealthAssurances().subscribe(
+      (data) => {
+        this.healthAssurances = data.map((assurance: any) => ({
+          ...assurance,
+          isPending: assurance.state === 'Pending'
+        }));
+        this.checkForPendingAssurances();
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error fetching health assurances:', error);
+        this.errorMessage = 'تعذر تحميل طلبات التأمين الصحي.';
+        this.isLoading = false;
+      }
+    );
+  }
   get filteredHealthAssurances(): any[] {
     return this.healthAssurances.filter(
       (assurance) =>
@@ -79,5 +100,23 @@ export class HrHealthAssuranceListComponent implements OnInit {
   openDocument(documentPath: string): void {
     const fullUrl = `${environment.apiBaseUrl}/${documentPath}`;
     window.open(fullUrl, '_blank');
+  }
+
+  checkForPendingAssurances(): void {
+    const pendingAssurances = this.healthAssurances.filter((assurance) => assurance.isPending);
+    if (pendingAssurances.length > 0) {
+      this.addNotification(`هناك ${pendingAssurances.length} طلبات تأمين صحي قيد الانتظار.`);
+    }
+  }
+
+  addNotification(message: string): void {
+    this.notifications.push(message);
+    setTimeout(() => {
+      this.notifications.shift();
+    }, 4000); // Remove notification after 4 seconds
+  }
+
+  closeNotification(index: number): void {
+    this.notifications.splice(index, 1); // Remove notification manually
   }
 }

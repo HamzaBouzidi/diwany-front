@@ -20,13 +20,14 @@ export class HrPledgeListComponent implements OnInit {
   errorMessage: string = '';
   isModalVisible: boolean = false;
   selectedPledge: any = null;
+  notifications: string[] = [];
 
   constructor(private pledgeService: PledgeService) { }
 
   ngOnInit(): void {
     this.fetchPledges();
   }
-
+/*
   fetchPledges(): void {
     this.isLoading = true;
     this.pledgeService.getAllPledges().subscribe(
@@ -42,6 +43,32 @@ export class HrPledgeListComponent implements OnInit {
       }
     );
   }
+*/
+
+  fetchPledges(): void {
+    this.isLoading = true;
+    this.pledgeService.getAllPledges().subscribe(
+      (data) => {
+        const now = new Date();
+        // Map the data and identify new pledges
+        this.pledges = data.map((pledge: any) => ({
+          ...pledge,
+          //isNew: pledge.state === 'pending' && this.isNewRequest(pledge.createdAt), // Mark as new
+          isPending: pledge.state === 'pending',
+        }));
+        this.filteredPledges = [...this.pledges];
+        // this.checkForNewPledges(); // Check for new pledges and add notifications
+        this.checkForPendingPledges();
+        this.isLoading = false;
+      },
+      (error: HttpErrorResponse) => {
+        console.error('Error fetching pledges:', error);
+        this.errorMessage = 'Failed to load pledges. Please try again.';
+        this.isLoading = false;
+      }
+    );
+  }
+
 
   openModal(pledge: any): void {
     this.selectedPledge = pledge;
@@ -80,7 +107,40 @@ export class HrPledgeListComponent implements OnInit {
     );
   }
 
+  // Check if the pledge is new (created within the last 24 hours)
+  isNewRequest(createdAt: string): boolean {
+    const oneDayAgo = new Date();
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+    return new Date(createdAt) > oneDayAgo;
+  }
 
+  // Check for new pledges and add notifications
+  /* checkForNewPledges(): void {
+     const newPledges = this.pledges.filter((pledge) => pledge.isNew);
+     newPledges.forEach((pledge) => {
+       this.addNotification(`إقرار جديد: ${pledge.employeeName}`);
+     });
+   }
+ */
+  // Check for pending pledges and add notifications
+  checkForPendingPledges(): void {
+    const pendingPledges = this.pledges.filter((pledge) => pledge.isPending);
+    if (pendingPledges.length > 0) {
+      this.addNotification(`هناك ${pendingPledges.length} إقرارات قيد التنفيذ.`);
+    }
+  }
+  // Add a notification
+  addNotification(message: string): void {
+    this.notifications.push(message);
+    setTimeout(() => {
+      this.notifications.shift(); // Remove the notification after 4 seconds
+    }, 4000);
+  }
+
+  // Close a specific notification
+  closeNotification(index: number): void {
+    this.notifications.splice(index, 1);
+  }
 
 
 }

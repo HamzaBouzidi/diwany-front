@@ -6,7 +6,10 @@
   فترات العمل
  </button>
 </div>
-
+<div *ngFor="let notification of notifications; let i = index" class="notification-popup">
+  <span>{{ notification }}</span>
+  <button class="close-btn" (click)="closeNotification(i)">x</button>
+</div>
 <div class="search-container">
  <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المدير أو الإدارة أو الموظف" class="search-input"
   dir="rtl" />
@@ -26,7 +29,8 @@
     </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let release of filteredReleases" (click)="showReason(release)" class="clickable-row">
+    <tr *ngFor="let release of filteredReleases.slice().reverse()" (click)="showReason(release)" class="clickable-row"
+      [ngClass]="{ 'highlight-pending': release.isPending }">
      <td>{{ release.employeeName }}</td>
      <td>{{ release.department }}</td>
      <td>{{ release.directorName }}</td>
@@ -56,7 +60,8 @@
         </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let period of filteredWorkPeriods" (click)="openEvaluationModal(period)" class="clickable-row">
+          <tr *ngFor="let period of filteredWorkPeriods.slice().reverse()" (click)="openEvaluationModal(period)"
+            [ngClass]="{ 'highlight-pending': period.isPending }" class="clickable-row">
             <td>{{ period.employee_name }}</td>
             <td>{{ period.startDate }}</td>
             <td>{{ period.endDate }}</td>

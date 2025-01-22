@@ -1,0 +1,35 @@
+<div class="upload-page">
+ <div class="page-title">
+  <h2>رفع الوثائق</h2>
+  <p>يرجى اختيار وتحميل الوثيقة المطلوبة</p>
+ </div>
+
+ <div class="divider"></div>
+
+ <div class="upload-container">
+  <div class="upload-card">
+   <div class="upload-header">
+    <h3>رفع ملف جديد</h3>
+   </div>
+   <div class="upload-body">
+    <p>قم باختيار ملف من جهازك لتحميله. الملفات المدعومة هي PDF، DOCX، وصور.</p>
+    <input type="file" id="fileInput" class="file-input" accept=".pdf, .docx, .jpg, .png, .jpeg"
+     (change)="onFileSelected($event)" />
+    <button class="upload-button" (click)="onUpload()">تحميل الملف</button>
+   </div>
+  </div>
+
+  <div class="instructions-card">
+   <div class="instructions-header">
+    <h3>تعليمات التحميل</h3>
+   </div>
+   <div class="instructions-body">
+    <ul>
+     <li>الحد الأقصى لحجم الملف: 10 ميجابايت</li>
+     <li>يجب أن تكون الملفات بصيغة PDF أو DOCX أو صور</li>
+     <li>تأكد من أن الملف لا يحتوي على معلومات حساسة</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>

@@ -180,3 +180,86 @@
   background-color: #c82333; /* Darker Red */
 
 }
+
+.new-request {
+  background-color: pink; /* Highlight rows with a pink background */
+  color: black; /* Ensure text is readable */
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.notification-popup {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: #ffcc00;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  color: #333;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notification-popup .close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.notification-popup .close-btn:hover {
+  color: #ff0000; /* Red on hover for the close button */
+}
+/* Highlight for new requests */
+.new-request {
+  background-color: pink; /* Light orange */
+  animation: fadeIn 4s ease-in-out;
+  color: red; /* Smooth fade-in animation */
+}
+
+/* Animation for the row */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Optional: Add hover effect for better interactivity */
+.new-request:hover {
+  background-color: #ffe3c6; /* Slightly darker orange */
+}
+
+.highlight-pending {
+  background-color: pink; /* Highlight rows with a pink background */
+  color: red; /* Text color for readability */
+  animation: fadeIn 2.5s ease-in-out; /* Smooth fade-in animation */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

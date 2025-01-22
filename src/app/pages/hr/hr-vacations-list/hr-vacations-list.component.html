@@ -21,7 +21,7 @@
     </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let vacation of vacations">
+    <tr *ngFor="let vacation of vacations.slice().reverse()">
      <td>{{ vacation.name }}</td>
      <td>{{ vacation.department }}</td>
      <td>{{ vacation.vacationStartDay | date: 'MMM dd, yyyy' }}</td>

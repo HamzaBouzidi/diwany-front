@@ -1,7 +1,13 @@
 <div class="search-container">
  <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الإقرار" class="search-input" dir="rtl" />
 </div>
-
+<!-- Notifications -->
+<div *ngIf="notifications.length" class="notification-container">
+ <div *ngFor="let notification of notifications; let i = index" class="notification-popup">
+  {{ notification }}
+  <button class="close-btn" (click)="closeNotification(i)">×</button>
+ </div>
+</div>
 <div *ngIf="isLoading" class="spinner">جاري التحميل...</div>
 <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
@@ -18,7 +24,13 @@
     </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let pledge of filteredPledges" (click)="openModal(pledge)" class="clickable-row">
+    <!-- 
+                    <tr *ngFor="let pledge of filteredPledges.slice().reverse()" (click)="openModal(pledge)" class="clickable-row"
+                 [ngClass]="{ 'new-request': pledge.isNew }">
+                -->
+    <tr *ngFor="let pledge of filteredPledges.slice().reverse()" (click)="openModal(pledge)" class="clickable-row"
+     [ngClass]="{ 'highlight-pending': pledge.isPending }">
+
      <td>{{ pledge.employeeName }}</td>
      <td>{{ pledge.employee_rw }}</td>
      <td>{{ pledge.employeeDegree }}</td>

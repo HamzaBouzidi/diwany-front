@@ -14,7 +14,7 @@
    </tr>
   </thead>
   <tbody>
-   <tr *ngFor="let member of members">
+   <tr *ngFor="let member of members.slice().reverse()">
     <td>{{ member.user_name }}</td>
     <td>{{ member.user_direction_nomi }}</td>
     <td>

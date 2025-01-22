@@ -21,6 +21,7 @@ export class HrReleaseListComponent implements OnInit {
   errorMessage: string = '';
   filteredWorkPeriods: any[] = [];
   currentView: 'releases' | 'work-periods' = 'releases';
+  notifications: string[] = [];
 
 
   isEvaluationModalVisible = false;
@@ -50,7 +51,7 @@ export class HrReleaseListComponent implements OnInit {
   }
 
   // Fetch all releases
-  fetchReleases(): void {
+ /* fetchReleases(): void {
     this.releaseService.getReleases().subscribe(
       (data) => {
         this.releases = data;
@@ -64,9 +65,27 @@ export class HrReleaseListComponent implements OnInit {
       }
     );
   }
-
+*/
+  fetchReleases(): void {
+    this.releaseService.getReleases().subscribe(
+      (data) => {
+        this.releases = data.map((release: any) => ({
+          ...release,
+          isPending: release.state === 'Pending', // Highlight pending releases
+        }));
+        this.filteredReleases = this.releases;
+        this.checkForPendingReleases();
+        this.isLoading = false;
+      },
+      (error) => {
+        this.errorMessage = 'خطأ في جلب طلبات الإخلاء.';
+        console.error('Error fetching releases:', error);
+        this.isLoading = false;
+      }
+    );
+  }
   // Fetch all work periods
-  fetchWorkPeriods(): void {
+ /* fetchWorkPeriods(): void {
     this.evaluationReportService.getAllReports().subscribe(
       (response) => {
         if (response.success) {
@@ -79,6 +98,29 @@ export class HrReleaseListComponent implements OnInit {
       },
       (error) => {
         this.errorMessage = 'خطأ في جلب البيانات.';
+        console.error('Error fetching work periods:', error);
+        this.isLoading = false;
+      }
+    );
+  }
+    */
+  fetchWorkPeriods(): void {
+    this.evaluationReportService.getAllReports().subscribe(
+      (response) => {
+        if (response.success) {
+          this.reports = response.data.map((period: any) => ({
+            ...period,
+            isPending: period.state === 'Pending', // Highlight pending work periods
+          }));
+          this.filteredWorkPeriods = this.reports;
+          this.checkForPendingWorkPeriods();
+        } else {
+          this.errorMessage = response.message || 'فشل في جلب فترات العمل.';
+        }
+        this.isLoading = false;
+      },
+      (error) => {
+        this.errorMessage = 'خطأ في جلب فترات العمل.';
         console.error('Error fetching work periods:', error);
         this.isLoading = false;
       }
@@ -217,5 +259,31 @@ export class HrReleaseListComponent implements OnInit {
         console.error(`Error updating work period ${period.REPORT_ID} state:`, error);
       }
     );
+  }
+
+
+  checkForPendingReleases(): void {
+    const pendingReleases = this.releases.filter((release) => release.isPending);
+    if (pendingReleases.length > 0) {
+      this.addNotification(`هناك ${pendingReleases.length} طلبات إخلاء قيد الانتظار.`);
+    }
+  }
+
+  checkForPendingWorkPeriods(): void {
+    const pendingPeriods = this.reports.filter((period) => period.isPending);
+    if (pendingPeriods.length > 0) {
+      this.addNotification(`هناك ${pendingPeriods.length} فترات عمل قيد الانتظار.`);
+    }
+  }
+
+  addNotification(message: string): void {
+    this.notifications.push(message);
+    setTimeout(() => {
+      this.notifications.shift(); // Remove the oldest notification
+    }, 4000);
+  }
+
+  closeNotification(index: number): void {
+    this.notifications.splice(index, 1); // Manually close the notification
   }
 }

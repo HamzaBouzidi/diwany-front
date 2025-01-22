@@ -22,14 +22,19 @@ export class VacationListComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
+  notifications: string[] = [];
+
+
   constructor(private vacationService: VacationService) { }
 
   ngOnInit(): void {
     this.loadMyVacations();
     this.loadEmployeeVacations();
+
   }
 
   loadMyVacations(): void {
+
     this.isLoading = true;
     this.vacationService.getMyVacations().subscribe({
       next: (data) => {
@@ -54,9 +59,12 @@ export class VacationListComponent implements OnInit {
   }
 
   loadEmployeeVacations(): void {
+    // Capture the current time when the data is loaded
+    const now = new Date();
     this.isLoading = true;
     this.vacationService.getVacationsByManager().subscribe({
       next: (data) => {
+        console.log('Raw backend data:', data.vacations);
         this.employees = (data.vacations || []).map((vacation: any) => ({
           id: vacation.id,
           name: vacation.name,
@@ -66,8 +74,14 @@ export class VacationListComponent implements OnInit {
           vacationDays: vacation.vacationDays,
           vacationType: vacation.vacationDescription || 'إجازة',
           state: this.determineVacationState(vacation),
+          createdAt: vacation.createdAt,
+          isPending: vacation.bossApprovalStatus === 'Pending',
+          // isNew: vacation.bossApprovalStatus === 'Pending' && this.isNewVacation(vacation.createdAt),
           profilePicture: 'https://randomuser.me/api/portraits/men/1.jpg'
+
         }));
+        //console.log('Mapped employees:', this.employees);
+        this.checkForNewRequests(); 
         this.isLoading = false;
       },
       error: (error) => {
@@ -125,4 +139,71 @@ export class VacationListComponent implements OnInit {
       employee.vacationType.includes(this.searchTerm)
     );
   }
+
+  isNewVacation(createdAt: string): boolean {
+    const oneDayAgo = new Date();
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1); // Calculate 24 hours ago
+    const vacationDate = new Date(createdAt); // Convert `createdAt` to a Date object
+
+    console.log('Comparing Dates:', {
+      oneDayAgo: oneDayAgo.toISOString(),
+      vacationDate: vacationDate.toISOString(),
+      isNew: vacationDate > oneDayAgo
+    });
+
+    return vacationDate > oneDayAgo; // Compare if vacationDate is within the last 24 hours
+  }
+
+
+
+  /* checkForNewRequests(): void {
+     //console.log('Checking for new requests:', this.employees);
+     this.notifications = []; // Clear old notifications
+ 
+     // Ensure the state is compared with 'Pending' exactly as set in the backend
+     const newRequests = this.employees.filter(
+       (employee) => employee.state === 'قيد الانتظار' && employee.isNew
+       // (employee) => employee.isNew == true
+ 
+     );
+ 
+     console.log('New requests:', newRequests); // Log filtered requests
+ 
+     // Push notifications for new requests
+     newRequests.forEach((request) => {
+       this.addNotification(`طلب إجازة جديدة من ${request.name}`);
+     });
+ 
+     console.log('Notifications:', this.notifications); // Log notifications array
+   }
+ */
+  checkForNewRequests(): void {
+    this.notifications = []; // Clear old notifications
+
+    // Filter pending requests
+    const pendingRequests = this.employees.filter((employee) => employee.isPending);
+
+    console.log('Pending requests:', pendingRequests); // Log filtered requests
+
+    // Push notifications for pending requests
+    if (pendingRequests.length > 0) {
+      this.addNotification(`هناك ${pendingRequests.length} طلبات إجازة قيد الانتظار.`);
+    }
+
+    console.log('Notifications:', this.notifications); // Log notifications array
+  }
+  addNotification(message: string): void {
+    this.notifications.push(message);
+
+    // Automatically remove the notification after 2 seconds
+    setTimeout(() => {
+      this.notifications.shift(); // Remove the first notification in the array
+    }, 4000);
+  }
+  closeNotification(index: number): void {
+    this.notifications.splice(index, 1); // Remove the notification at the given index
+  }
+
+
+
 }

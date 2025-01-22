@@ -3,6 +3,11 @@
     dir="rtl" />
   <i class="fas fa-search search-icon"></i>
 </div>
+<div *ngFor="let notification of notifications; let i = index" class="notification-popup">
+  <span>{{ notification }}</span>
+  <button class="close-btn" (click)="closeNotification(i)">×</button>
+</div>
+
 
 <div class="toggle-buttons">
   <button class="toggle-button" (click)="toggleTable('myVacations')" [class.active]="showMyVacations">
@@ -23,7 +28,6 @@
 
 <!-- My Vacations Table -->
 <div *ngIf="!isLoading && showMyVacations && !errorMessage">
-  <h2>إجازاتي</h2>
   <div class="table-container">
     <table class="vacation-table" dir="rtl">
       <thead>
@@ -36,7 +40,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let vacation of myVacations">
+        <!--<tr *ngFor="let vacation of myVacations"> -->
+        <tr *ngFor="let vacation of myVacations.slice().reverse()">
+
           <td>{{ vacation.vacationStartDate | date: 'MMM dd, yyyy' }}</td>
           <td>{{ vacation.vacationEndDate | date: 'MMM dd, yyyy' }}</td>
           <td>{{ vacation.vacationDays }}</td>
@@ -54,7 +60,6 @@
 
 <!-- Employee Vacations Table -->
 <div *ngIf="!isLoading && !showMyVacations && !errorMessage">
-  <h2>إجازات الموظفين</h2>
   <div class="table-container">
     <table class="vacation-table" dir="rtl">
       <thead>
@@ -70,7 +75,13 @@
         </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let employee of filteredEmployees">
+        <!--<tr *ngFor="let employee of filteredEmployees"> -->
+        <!-- 
+                                  <tr *ngFor="let employee of filteredEmployees.slice().reverse()" [ngClass]="{ 'new-request': employee.isNew }">
+                                  -->
+        <tr *ngFor="let employee of filteredEmployees.slice().reverse()" [ngClass]=" { 'highlight-pending' : employee.isPending
+                  }">
+
             <td>
             <img [src]="employee.profilePicture" alt="صورة الموظف" class="profile-img" />
             <span class="employee-name">{{ employee.name }}</span>

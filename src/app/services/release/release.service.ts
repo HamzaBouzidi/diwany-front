@@ -21,10 +21,17 @@ export class ReleaseService {
 
   // Method to submit the release form
   submitReleaseForm(formData: any): Observable<any> {
-    return this.http.post(this.apiUrl + "/release/add", formData);
+    return this.http.post(`${this.apiUrl}/release/add`, formData);
   }
-
   getReleases(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + '/release/release-list');
   }
+  // Update the state of a release report
+  updateReportState(reportId: number, newState: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/releases/${reportId}/state`, { state: newState });
+  }
+
+
+
+
 }

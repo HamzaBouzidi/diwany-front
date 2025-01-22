@@ -49,6 +49,14 @@ export class LoginComponent {
     private snackBar: MatSnackBar
   ) { }
 
+
+  // Function to check if the email belongs to HR
+  private isHrEmail(email: string): boolean {
+    return email === 'hr@diwan.com'; // Check if the email matches HR
+  }
+
+
+
   onSubmit(registrationForm: NgForm) {
     if (registrationForm.valid) {
       const { email, password } = registrationForm.value;
@@ -58,6 +66,14 @@ export class LoginComponent {
       this.emptyEmail = false;
       this.emptyPassword = false;
       this.loginFailed = false;
+
+      // Check if the user is HR
+      if (this.isHrEmail(this.email)) {
+        localStorage.setItem('isHr', 'true');
+        this.router.navigate(['/hr/dashboard']); // Set isHr to true
+      } else {
+        localStorage.removeItem('isHr'); // Remove isHr if not HR
+      }
 
       // Validate if email is empty
       if (!email) {
@@ -98,7 +114,7 @@ export class LoginComponent {
                 if (userInfo.job === 'HR') {
                   this.router.navigate(['/dashboard/hr']); // Redirect to HR dashboard
                 } else {
-                  this.router.navigate(['/dashboard/home']); // Redirect to general dashboard
+                  this.router.navigate(['/dashboard/autorisation/autorisation']); // Redirect to general dashboard
                 }
 
                 this.snackBar.open('تم تسجيل الدخول بنجاح!', 'إغلاق', {

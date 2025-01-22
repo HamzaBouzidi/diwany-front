@@ -75,7 +75,7 @@ export class ExitAuthorisationService {
   }
 
   getExitCounts(): Observable<any> {
-    return this.http.get(this.apiUrl + '/authorisation/counts');
+    return this.http.get(this.apiUrl + '/exit-authorizations/exit-counts');
   }
 
   getAllExitAuthorizations(): Observable<any> {

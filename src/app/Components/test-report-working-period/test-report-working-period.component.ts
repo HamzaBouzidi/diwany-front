@@ -51,7 +51,7 @@ export class TestReportWorkingPeriodComponent {
         decisionMaking: this.decisionMaking
       };
 
-      this.evaluationReportService.submitReport(reportData).subscribe(
+      this.evaluationReportService.addReport(reportData).subscribe(
         (response) => {
           console.log('Evaluation report submitted successfully:', response);
           this.isModalVisible = true;

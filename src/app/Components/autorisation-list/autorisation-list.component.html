@@ -3,6 +3,13 @@
   <i class="fas fa-search search-icon"></i>
 </div>
 
+<div *ngIf="notifications.length" class="notification-container">
+  <div *ngFor="let notification of notifications; let i = index" class="notification-popup">
+    {{ notification }}
+    <button class="close-btn" (click)="closeNotification(i)">×</button>
+  </div>
+</div>
+
 <div class="toggle-buttons">
   <button class="toggle-button" (click)="toggleTable('myExits')" [class.active]="showMyExits">
     أذوناتي
@@ -42,7 +49,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let exit of filteredMyExits">
+        <tr *ngFor="let exit of filteredMyExits.slice().reverse()">
           <td>{{ exit.day | date: 'MMM dd, yyyy' }}</td>
           <td>{{ exit.exitStartTime }}</td>
           <td>{{ exit.returnTime }}</td>
@@ -78,7 +85,9 @@
           </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let exit of filteredEmployeesExits">
+          <!-- <tr *ngFor="let exit of filteredEmployeesExits.slice().reverse()" [ngClass]="{ 'new-request': exit.isNew }"> -->
+          <tr *ngFor="let exit of filteredEmployeesExits.slice().reverse()" [ngClass]="{ 'highlight-pending': exit.isPending }">
+
               <td>{{ exit.name }}</td>
               <td>{{ exit.day | date: 'MMM dd, yyyy' }}</td>
               <td>{{ exit.exitStartTime }}</td>
@@ -117,7 +126,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let delay of filteredMyMorningDelays">
+                  <tr *ngFor="let delay of filteredMyMorningDelays.slice().reverse()">
                     <td>{{ delay.day | date: 'MMM dd, yyyy' }}</td>
                     <td>{{ delay.time }}</td>
                     <td>{{ delay.description }}</td>
@@ -151,7 +160,10 @@
                   </tr>
                 </thead>
                 <tbody>
-        <tr *ngFor="let delay of filteredEmployeesMorningDelays">
+      <!-- <tr *ngFor="let delay of filteredEmployeesMorningDelays.slice().reverse()" [ngClass]="{ 'new-request': delay.isNew }"> -->
+      <tr *ngFor="let delay of filteredEmployeesMorningDelays.slice().reverse()"
+        [ngClass]="{ 'highlight-pending': delay.isPending }">
+
           <td>{{ delay.name }}</td>
           <td>{{ delay.day | date: 'MMM dd, yyyy' }}</td>
           <td>{{ delay.time }}</td>

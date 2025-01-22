@@ -1,38 +1,117 @@
-<div class="report-container">
-  <h2>إدارة التقارير</h2>
+<!-- 
+<div class="toggle-container">
+  <button class="toggle-button" [class.active]="currentView === 'releases'" (click)="toggleView('releases')">
+    طلبات الإخلاء
+  </button>
 
-  <!-- Buttons to load different report types -->
-  <div class="report-buttons">
-    <button (click)="onReportTypeChange('member')" [class.active]="selectedReportType === 'member'">تقرير العضو</button>
-    <button (click)="onReportTypeChange('release')" [class.active]="selectedReportType === 'release'">تقرير
-      الإفراج</button>
-    <button (click)="onReportTypeChange('evaluation')" [class.active]="selectedReportType === 'evaluation'">تقرير
-      التقييم</button>
+    <button class="toggle-button" [class.active]="currentView === 'work-periods'" (click)="toggleView('work-periods')">
+      فترات العمل
+    </button>
+    
+    
+    </div>
+    -->
+
+    <div *ngFor="let notification of notifications" class="notification-popup">
+      {{ notification }}
+      <button class="close-btn" (click)="notifications.shift()">×</button>
+    </div>
+    
+    <h2>طلبات الإخلاء</h2>
+    <div class="search-container">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المدير أو الإدارة أو الموظف" class="search-input"
+        dir="rtl" (input)="applyFilter()" />
+      <i class="fas fa-search search-icon"></i>
+      </div>
+      
+      <!-- Releases Table -->
+      <div *ngIf="currentView === 'releases' && !isLoading && !errorMessage">
+        <div class="table-container">
+          <table class="release-table" dir="rtl">
+            <thead>
+              <tr>
+                <th>اسم الموظف</th>
+                <th>الإدارة</th>
+                <th>اسم المدير</th>
+                <th>الحالة</th>
+                <th>تحديت</th>
+      
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let release of filteredReleases.slice().reverse()" (click)="showReason(release)"
+                [ngClass]="{ 'highlight-pending': release.isPending }" class="clickable-row">
+                <td>{{ release.employeeName }}</td>
+                <td>{{ release.department }}</td>
+                <td>{{ release.directorName }}</td>
+                <td>
+                  <span *ngIf="release.state === 'Approved'" class="status accepted">✔️ مقبولة</span>
+                  <span *ngIf="release.state === 'Rejected'" class="status rejected">❌ مرفوضة</span>
+                  <span *ngIf="release.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
+                </td>
+                <td>
+                  <!-- Show buttons only if the state is 'Pending' -->
+                  <div class="button-group" *ngIf="release.state === 'Pending'">
+                    <button class="approve-btn"
+                      (click)="updateReleaseState(release, 'Approved'); $event.stopPropagation()">موافقة</button>
+                    <button class="reject-btn"
+                      (click)="updateReleaseState(release, 'Rejected'); $event.stopPropagation()">رفض</button>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="filteredReleases.length === 0">
+                <td colspan="4" class="empty-message">لا توجد طلبات إخلاء لعرضها.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
   </div>
 
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الاسم أو الوظيفة" class="search-input"
-      (input)="applyFilter()" />
-  </div>
-
-  <!-- Dynamic Reports Table -->
-  <div class="table-wrapper">
-    <table class="report-table" dir="rtl">
+<!-- Work Periods Table -->
+<!-- 
+<div *ngIf="currentView === 'work-periods' && !isLoading && !errorMessage">
+  <div class="table-container">
+    <table class="work-period-table" dir="rtl">
       <thead>
         <tr>
-          <th *ngFor="let header of tableHeaders">{{ header }}</th>
+          <th>اسم الموظف</th>
+          <th>بداية الفترة</th>
+          <th>نهاية الفترة</th>
+          <th>الحالة</th>
+          <th>تحديت</th>
+
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let report of filteredReports">
-          <td *ngFor="let key of getKeys(report)">{{ report[key] }}</td>
-          <td class="action-buttons">
-            <button class="btn-view">عرض</button>
-            <button class="btn-edit">تعديل</button>
+        <tr *ngFor="let period of filteredWorkPeriods" class="clickable-row">
+          <td>{{ period.employee_name }}</td>
+          <td>{{ period.startDate }}</td>
+          <td>{{ period.endDate }}</td>
+          <td>
+            <span *ngIf="period.state === 'Done'" class="status accepted">✔️ مقبولة</span>
+            <span *ngIf="period.state === 'Pending'" class="status pending">🔄 قيد التنفيذ</span>
           </td>
+          <td>
+            <div class="button-group" *ngIf="period.state === 'Pending'">
+              <button class="approve-btn" (click)="updateWorkPeriodState(period, 'Done')">تم الانتهاء</button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredWorkPeriods.length === 0">
+          <td colspan="4" class="empty-message">لا توجد فترات عمل لعرضها.</td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+-->
+
+
+<!-- Modal for showing reasons -->
+<div *ngIf="isModalVisible" class="modal">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeModal()">✖</button>
+    <h3>السبب</h3>
+    <p>{{ selectedReason }}</p>
   </div>
 </div>

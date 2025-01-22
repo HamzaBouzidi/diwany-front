@@ -19,11 +19,41 @@ export class EvaluationReportService {
 
   constructor(private http: HttpClient) { }
 
-  submitReport(reportData: any): Observable<any> {
-    return this.http.post(this.apiUrl + "/evaluation-report/add", reportData);
+  addReport(reportData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/working-period-report/add`, reportData);
   }
-
   getEvaluationReports(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + "/evaluation-report" + '/eval-list');
   }
+
+
+  /**
+ * Fetch all reports
+ * @returns Observable containing the list of all reports
+ */
+  getAllReports(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/working-period-report/all`);
+  }
+
+  // Update the state of a work period
+  updateWorkPeriodState(workPeriodId: number, newState: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/working-period-report/${workPeriodId}/state`, { state: newState });
+  }
+
+  // Method to update work period state
+  updateWorkPeriod(workPeriodId: number, newState: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/work-periods/${workPeriodId}/state`, { state: newState });
+  }
+
+
+  /**
+ * Update the evaluation of a work period.
+ * @param id - The ID of the work period to update.
+ * @param evaluationData - The evaluation fields and state to update.
+ * @returns Observable of the API response.
+ */
+  updateWorkPeriodEvaluation(id: number, evaluationData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/work-periods/${id}/evaluation`, evaluationData);
+  }
+
 }

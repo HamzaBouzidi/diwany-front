@@ -1,26 +1,25 @@
-<nav class="navbar  ">
- <div class="navbar-left">
-  <img src="assets/logo.png" class="logo" alt="Logo" />
-  <div class="nav-buttons">
-   <button class="nav-button add-post-btn">إضافة منشور</button>
-   <button class="nav-button forum-btn">منتدى</button>
-  </div>
+<nav class="navbar">
+   <div class="navbar-left">
+      <img src="assets/logo.png" class="logo" alt="Logo" />
+      <div class="nav-buttons">
+         <button class="nav-button add-post-btn">إضافة منشور</button>
+         <button class="nav-button forum-btn">منتدى</button>
+      </div>
+   </div>
 
- </div>
-
- <div class="navbar-right">
-
-  <div class="nav-buttons">
-
-   <i class="fas fa-envelope" style='font-size:26px'><sup><small class="smalll"> &nbsp; 99 &nbsp;</small> </sup></i>
-   <i class="fas fa-user" style='font-size:26px'><sup><small class="smalll"> &nbsp; 1 &nbsp; </small></sup></i>
-
-
-
-  </div>
-
- </div>
-
+   <div class="navbar-right">
+      <div class="nav-buttons">
+         <i class="fas fa-envelope" style="font-size:26px">
+            <sup><small class="smalll">&nbsp; 99 &nbsp;</small></sup>
+         </i>
+         <i class="fas fa-user" style="font-size:26px">
+            <sup><small class="smalll">&nbsp; 1 &nbsp;</small></sup>
+         </i>
+         
+         <!-- Logout Button -->
+         <button class="nav-button logout-btn" (click)="onLogout()">تسجيل الخروج</button>
+         </div>
+   </div>
 </nav>
 
 
@@ -69,11 +68,17 @@
    <li>
     <a class="nav-link" href="/hr/health-assurance-list">
      <span class="icon-container"><i class="fas fa-building"></i></span>
-     <span class="nav-text"> الضمانات الصحية</span>
+   <span class="nav-text"> التأمين الصحي</span>
     </a>
    </li>
-   <li>
-    <a class="nav-link" href="#">
+      <li>
+      <a class="nav-link" href="/hr/pledge-list">
+         <span class="icon-container"> <i class="fas fa-sign"></i></span>
+         <span class="nav-text"> إقرار وتعهد</span>
+      </a>
+      </li>
+      <li>
+         <a class="nav-link" href="/hr/reports">
      <span class="icon-container"><i class="fas fa-tasks"></i></span>
      <span class="nav-text">إعداد التقارير </span>
     </a>
@@ -83,7 +88,7 @@
 
 
   <div class="footer">
-   <img src="assets/logo.png" class="logo-img" alt="logo" />
+   <img src="assets/new-logo.png" class="logo-img" alt="logo" />
   </div>
  </div>
 </div>

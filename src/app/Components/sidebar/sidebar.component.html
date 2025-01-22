@@ -17,9 +17,7 @@
 
       <i class="fas fa-envelope" style='font-size:26px' ><sup><small class="smalll"> &nbsp; 99  &nbsp;</small> </sup></i>  
       <i class="fas fa-user" style='font-size:26px' ><sup><small class="smalll"> &nbsp; 1  &nbsp;  </small></sup></i>  
-     
-       
-
+      <button class="nav-button logout-btn" (click)="onLogout()">تسجيل الخروج</button>
     </div>
   
    </div>
@@ -32,10 +30,10 @@
 <div class="sidebar">
   <div class="sidebar-content">
     <div class="profile-container">
-      <img class="round" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKH4ezp2wULtl_BXpCI209OU8Rd5HaTR_Uw&s" alt="user" />
+      <img class="round" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user" />
       <div class="profile-text">
-        <h2 class="profile-name"> عبد الرزاق احمد سالم</h2>
-        <p class="profile-title">مراجع مالي اول</p>
+        <h2 class="profile-name"> {{employeeName}}</h2>
+        <p class="profile-title"> {{job_title}}</p>
       </div>
     </div>
     
@@ -62,9 +60,10 @@
         </a>
       </li>
       <li>
-        <a class="nav-link" href="/dashboard/definitions-autorisations/health-assurance">
+        <a class="nav-link" href="/dashboard/definitions-autorisations/reports">
           <span class="icon-container"><i class="fas fa-folder-open"></i></span>
-          <span class="nav-text">نماذج اخرى</span>
+          <span class="nav-text">التقارير
+          </span>
         </a>
       </li>
     </ul>
@@ -99,7 +98,7 @@
     </ul>
     
     <div class="footer">
-      <img src="assets/logo.png" class="logo-img" alt="logo" />
+      <img src="assets/new-logo.png" class="logo-img" alt="logo" />
     </div>
   </div>
 </div>

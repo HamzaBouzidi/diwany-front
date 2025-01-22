@@ -17,6 +17,7 @@ export class HrNationalIdentityCardListComponent implements OnInit {
   isLoading = true;
   errorMessage: string | null = null;
   searchTerm: string = '';
+  notifications: string[] = [];
 
   constructor(private cinService: CinService) { }
 
@@ -30,8 +31,10 @@ export class HrNationalIdentityCardListComponent implements OnInit {
       (data) => {
         this.cins = data.map((cin: any) => ({
           ...cin,
-          stateLabel: this.mapState(cin.state), // Map state to human-readable format
+          stateLabel: this.mapState(cin.state),
+          isPending: cin.state === 'Pending', 
         }));
+        this.checkForPendingCins();
         this.isLoading = false;
       },
       (error) => {
@@ -93,5 +96,24 @@ export class HrNationalIdentityCardListComponent implements OnInit {
         }
       );
     }
+  }
+
+  checkForPendingCins(): void {
+    const pendingCins = this.cins.filter((cin) => cin.isPending);
+    if (pendingCins.length > 0) {
+      this.addNotification(`هناك ${pendingCins.length} بطاقات تعريف تنتظر المعالجة.`);
+    }
+  }
+
+  // Add notification
+  addNotification(message: string): void {
+    this.notifications.push(message);
+    setTimeout(() => {
+      this.notifications.shift();
+    }, 4000);
+  }
+
+  closeNotification(index: number): void {
+    this.notifications.splice(index, 1);
   }
 }

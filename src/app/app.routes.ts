@@ -17,7 +17,6 @@ import { HealthAssuranceComponent } from './Components/health-assurance/health-a
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { LayoutComponent } from './Components/layout/layout.component';
 import { AuthLayoutComponentComponent } from './layouts/auth-layout-component/auth-layout-component.component';
-import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { HrAuthorizationsListComponent } from './pages/hr/hr-authorizations-list/hr-authorizations-list.component';
@@ -28,6 +27,14 @@ import { HrVacationsListComponent } from './pages/hr/hr-vacations-list/hr-vacati
 import { HrWorkingPeriodReportFormComponent } from './pages/hr/hr-working-period-report-form/hr-working-period-report-form.component';
 import { HrWorkingPeriodReportListComponent } from './pages/hr/hr-working-period-report-list/hr-working-period-report-list.component';
 import { HrLayoutComponent } from './layouts/hr-layout/hr-layout.component';
+import { HrReleaseFormComponent } from './pages/hr/hr-release-form/hr-release-form.component';
+import { HrReleaseListComponent } from './pages/hr/hr-release-list/hr-release-list.component';
+import { HrReportsComponent } from './pages/hr/hr-reports/hr-reports.component';
+import { PledgeUploadComponent } from './Components/pledge-upload/pledge-upload.component';
+import { HrPledgeListComponent } from './pages/hr/hr-pledge-list/hr-pledge-list.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HrGuard } from './guards/hr.guard';
+import { HrNominationListComponent } from './pages/hr/hr-nomination-list/hr-nomination-list.component';
 
 export const routes: Routes = [
 
@@ -54,14 +61,15 @@ export const routes: Routes = [
             { path: 'definitions-autorisations/acknowledgment-pledge', component: AcknowledgmentPledgeComponent },
             { path: 'definitions-autorisations/reports', component: ReportsComponent },
             { path: 'definitions-autorisations/health-assurance', component: HealthAssuranceComponent },
-            { path: 'home', component: HomeComponent },
+            //{ path: 'home', component: HomeComponent },
+            { path: 'pledge-upload', component: PledgeUploadComponent },
 
         ]
     },
     {
         path: 'hr',
         component: HrLayoutComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [HrGuard],
         children: [
             { path: 'authorizations-list', component: HrAuthorizationsListComponent },
             { path: 'vacations-list', component: HrVacationsListComponent },
@@ -70,9 +78,12 @@ export const routes: Routes = [
             { path: 'national-card-list', component: HrNationalIdentityCardListComponent },
             { path: 'working-period/form', component: HrWorkingPeriodReportFormComponent },
             { path: 'working-period/list', component: HrWorkingPeriodReportListComponent },
-
-
-
+            { path: 'release-form', component: HrReleaseFormComponent },
+            { path: 'releases-list', component: HrReleaseListComponent },
+            { path: 'reports', component: HrReportsComponent },
+            { path: 'pledge-list', component: HrPledgeListComponent },
+            { path: 'work-period-report-form', component: HrWorkingPeriodReportFormComponent },
+            { path: 'nomination-list', component: HrNominationListComponent },
 
 
 

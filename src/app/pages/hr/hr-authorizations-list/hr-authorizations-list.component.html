@@ -30,7 +30,7 @@
     </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let exit of filteredExitAuthorizations">
+    <tr *ngFor="let exit of filteredExitAuthorizations.slice().reverse()">
      <td>{{ exit.name }}</td>
      <td>{{ exit.day | date: 'MMM dd, yyyy' }}</td>
      <td>{{ exit.exitStartTime }}</td>
@@ -64,7 +64,7 @@
     </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let delay of filteredMorningDelays">
+    <tr *ngFor="let delay of filteredMorningDelays.slice().reverse()">
      <td>{{ delay.name }}</td>
      <td>{{ delay.day | date: 'MMM dd, yyyy' }}</td>
      <td>{{ delay.time }}</td>

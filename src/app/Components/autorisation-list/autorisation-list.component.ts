@@ -40,6 +40,10 @@ export class AutorisationListComponent implements OnInit {
   isEmployeesExits: boolean = false;
   isEmployeesMorningDelays: boolean = false;
 
+
+  notifications: string[] = [];
+
+
   constructor(
     private exitAuthService: ExitAuthorisationService,
     private morningAuthService: MorningAuthorisationService
@@ -79,8 +83,14 @@ export class AutorisationListComponent implements OnInit {
       next: (data) => {
         this.employeesExits = (data.exitAuthorizations || []).map((exit: any) => ({
           ...exit,
-          state: this.mapState(exit.bossApprovalStatus)
+          state: this.mapState(exit.bossApprovalStatus),
+          isPending: exit.bossApprovalStatus === 'Pending',
+          // isNew: exit.bossApprovalStatus === 'Pending' && this.isNewRequest(exit.createdAt),
+
         }));
+        this.checkForPendingExits();
+        // this.checkForNewRequests();
+
         this.isLoading = false;
       },
       error: (error: HttpErrorResponse) => {
@@ -117,8 +127,14 @@ export class AutorisationListComponent implements OnInit {
       next: (response: { morningDelays: any[] }) => {
         this.employeesMorningDelays = (response.morningDelays || []).map((delay: any) => ({
           ...delay,
-          state: this.mapState(delay.bossApprovalStatus)
+          state: this.mapState(delay.bossApprovalStatus),
+          isPending: delay.bossApprovalStatus === 'Pending',
+          //isNew: delay.bossApprovalStatus === 'Pending' && this.isNewRequest(delay.createdAt),
+
         }));
+        this.checkForPendingMorningDelays();
+        // this.checkForNewMorningDelays();
+
         this.isLoading = false;
       },
       error: (error: HttpErrorResponse) => {
@@ -233,4 +249,54 @@ export class AutorisationListComponent implements OnInit {
       delay.description?.includes(this.searchTerm)
     );
   }
+
+
+  isNewRequest(createdAt: string): boolean {
+    const oneDayAgo = new Date();
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+    return new Date(createdAt) > oneDayAgo;
+  }
+  /*
+    checkForNewRequests(): void {
+      const newRequests = this.employeesExits.filter((exit) => exit.isNew);
+      newRequests.forEach((request) => {
+        this.notifications.push(`طلب إذن جديد من ${request.name}`);
+      });
+    }
+  */
+  // Notifications for Pending Exits
+  checkForPendingExits(): void {
+    const pendingExits = this.employeesExits.filter((exit) => exit.isPending);
+    if (pendingExits.length > 0) {
+      this.addNotification(`هناك ${pendingExits.length} طلبات إذن خروج قيد الانتظار.`);
+    }
+  }
+
+  // Notifications for Pending Morning Delays
+  checkForPendingMorningDelays(): void {
+    const pendingDelays = this.employeesMorningDelays.filter((delay) => delay.isPending);
+    if (pendingDelays.length > 0) {
+      this.addNotification(`هناك ${pendingDelays.length} تأخيرات صباحية قيد الانتظار.`);
+    }
+  }
+  // Add notification
+  addNotification(message: string): void {
+    this.notifications.push(message);
+    setTimeout(() => {
+      this.notifications.shift(); // Remove the notification after 4 seconds
+    }, 4000);
+  }
+  closeNotification(index: number): void {
+    this.notifications.splice(index, 1);
+  }
+
+  /*
+    // Check for New Morning Delays
+    checkForNewMorningDelays(): void {
+      const newDelays = this.employeesMorningDelays.filter((delay) => delay.isNew);
+      newDelays.forEach((delay) => {
+        this.notifications.push(`تأخير جديد من ${delay.name}`);
+      });
+    }
+      */
 }

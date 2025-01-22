@@ -204,14 +204,14 @@ export class HrDashboardComponent {
 
   fetchCounts() {
     this.exitAuthorisationService.getExitCounts().subscribe((data) => {
-      this.acceptedExitCount = data.accepted;
-      this.notAcceptedExitCount = data.notAccepted;
+      this.acceptedExitCount = data.approved;
+      this.notAcceptedExitCount = data.refusedCount;
       this.createExitDoughnutChart();
     });
 
     this.morningAuthorisationService.getMorningDelayCounts().subscribe((data) => {
-      this.acceptedMorningDelayCount = data.accepted;
-      this.notAcceptedMorningDelayCount = data.notAccepted;
+      this.acceptedMorningDelayCount = data.approved;
+      this.notAcceptedMorningDelayCount = data.refusedCount;
       this.createMorningDoughnutChart();
     });
   }
@@ -270,8 +270,6 @@ export class HrDashboardComponent {
 
 
 
-
-
   createAgeEmployeeState() {
     if (!this.ageEmployeeCanvas || this.ageEmployeeChart) return;
     this.userInfoService.getDistinctcount().subscribe((data) => {
@@ -299,29 +297,6 @@ export class HrDashboardComponent {
       this.ageEmployeeChart = new Chart(this.ageEmployeeCanvas.nativeElement, ageEmployeeConfig);
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   createEmployeeSpeciality() {
@@ -375,10 +350,6 @@ export class HrDashboardComponent {
   }
 
 
-
-
-
-
   createEmployeeJob() {
     if (!this.ageJobCanvas || this.ageJobChart) return;
 
@@ -428,9 +399,6 @@ export class HrDashboardComponent {
       this.ageJobChart = new Chart(this.ageJobCanvas.nativeElement, ageJobConfig);
     });
   }
-
-
-
 
 
 

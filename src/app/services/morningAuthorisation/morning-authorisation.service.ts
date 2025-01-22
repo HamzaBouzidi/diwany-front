@@ -38,7 +38,7 @@ export class MorningAuthorisationService {
   }
 
   getMorningDelayCounts(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/morning-delay/counts`);
+    return this.http.get(`${this.apiUrl}/morning-delays/morning-delay-counts`);
   }
 
 

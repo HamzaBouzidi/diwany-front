@@ -231,3 +231,66 @@
 .document-links .danger:hover {
   background-color: #c82333; /* Darker red on hover */
 }
+
+
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.notification-popup {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: #ffcc00;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  color: #333;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notification-popup .close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.notification-popup .close-btn:hover {
+  color: #ff0000; 
+}
+.new-request {
+  animation: fadeIn 4s ease-in-out;
+  color: red; 
+}
+
+table tr.highlight-pending {
+  color: red ; 
+  animation: fadeIn 2.5s ease-in-out; 
+}
+/* Fade-in animation for rows */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+

@@ -4,48 +4,19 @@ html, body {
   height: 100%;
   width: 100%;
   font-family: 'Cairo', sans-serif;
+  overflow: hidden; /* Prevent scrolling on the main page */
+  font-size: 18px; /* Increase the base font size for scaling */
 }
 
-.dashboard-layout {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.sidebar h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  margin: 10px 0;
-  font-size: 1.1rem;
-  cursor: pointer;
-  color: #D9DAB0;
-}
-
-.sidebar ul li:hover {
-  color: #F4F5DB;
-}
-
-/* Main content grid layout */
 .dashboard-grid {
-  flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 6 equal-width columns */
-  grid-gap: 20px;
-  padding: 20px;
-  height: 100%;
-  overflow-y: auto;
+  grid-gap: 40px; /* Larger gap between grid items */
+  padding: 40px; /* Increased padding for overall layout */
   box-sizing: border-box;
+  height: auto; /* Allow the grid to grow based on content */
+  min-height: 100%; /* Ensure it spans the full height of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 /* Chart sizes */
@@ -55,54 +26,97 @@ html, body {
   justify-content: center;
   align-items: center;
   background: whitesmoke;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 5px;
+  border-radius: 16px; /* Larger border radius */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+  padding: 40px; /* Larger padding for spacing inside the container */
+  height: 600px; /* Increased height for charts */
 }
 
 .chart-container.large {
-  grid-column: span 2; /* Spans 4 columns */
-  grid-row: span 1; /* Spans 2 rows */
+  grid-column: span 3; /* Spans 3 columns */
+  height: 500px; /* Larger height for big charts */
 }
 
+
 .chart-container.small {
-  grid-column: span 1; /* Spans 2 columns */
-  grid-row: span 1;
+  grid-column: span 2; /* Spans 2 columns */
+  height: 500px; /* Increased height for small charts */
 }
 
 /* Chart titles */
 .chart-container h4 {
   font-family: 'tahoma';
-  font-size: 1.25rem;
+  font-size: 2rem; /* Increased font size */
   font-weight: bold;
   color: #23689B; /* Title color */
-  margin-bottom: 20px;
+  margin-bottom: 40px; /* More space below the title */
+  text-align: center; /* Center-align the text */
 }
 
 /* Canvas styling */
 canvas {
-  width: 100% ;
-  height: 25% ;
+  width: 100%; /* Fill the container width */
+  height: 100%; /* Fill the container height */
 }
 
 /* Responsive adjustments */
 @media screen and (max-width: 1024px) {
   .dashboard-grid {
     grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+    grid-gap: 30px; /* Adjusted gap for medium screens */
+    padding: 30px; /* Adjusted padding */
   }
 
-  .chart-container.large, .chart-container.small {
-    grid-column: span 3; /* Large and small span 3 columns on medium screens */
+  .chart-container.large {
+    grid-column: span 3; /* Large charts span the entire width */
+    height: 700px; /* Adjusted height */
+  }
+
+
+  .chart-container.small {
+    grid-column: span 2; /* Small charts remain smaller */
+    height: 400px; /* Adjusted height */
   }
 }
 
 @media screen and (max-width: 768px) {
   .dashboard-grid {
     grid-template-columns: 1fr; /* Stack charts on small screens */
+    grid-gap: 20px; /* Smaller gap for small screens */
+    padding: 20px; /* Reduced padding */
   }
 
   .chart-container {
-    grid-column: span 2; /* Every chart takes up the full width on small screens */
-    grid-row: span 1;
+    grid-column: span 1; /* Every chart takes up the full width */
+    height: 600px; /* Adjusted height for smaller screens */
   }
 }
+
+/* Add scroll behavior to the grid */
+body, .dashboard-grid {
+  overflow-y: auto; /* Enable vertical scrolling */
+  scroll-behavior: smooth; /* Smooth scrolling for better UX */
+}
+
+/* Sidebar adjustments (if present) */
+.sidebar h3 {
+  font-size: 2.5rem; /* Increase sidebar title font size */
+  margin-bottom: 30px; /* Add more space below titles */
+}
+
+.sidebar ul li {
+  font-size: 1.5rem; /* Increase sidebar list item font size */
+  margin: 20px 0; /* Add more space between list items */
+}
+
+.sidebar ul li:hover {
+  color: #F4F5DB; /* Keep hover color consistent */
+}
+
+/* Footer adjustments (if present) */
+.footer {
+  font-size: 1.5rem; /* Increase font size in the footer */
+  padding: 20px; /* Add padding for spacing */
+  text-align: center;
+}
+

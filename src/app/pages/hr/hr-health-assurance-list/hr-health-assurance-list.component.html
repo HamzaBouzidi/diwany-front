@@ -1,6 +1,10 @@
 <div class="search-container">
  <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المستخدم" class="search-input" dir="rtl" />
 </div>
+<div *ngFor="let notification of notifications; let i = index" class="notification-popup">
+ <span>{{ notification }}</span>
+ <button class="close-btn" (click)="closeNotification(i)">x</button>
+</div>
 
 <div *ngIf="isLoading" class="spinner">Loading...</div>
 <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
@@ -17,7 +21,8 @@
     </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let assurance of filteredHealthAssurances" (click)="openModal(assurance)" class="clickable-row">
+    <tr *ngFor="let assurance of filteredHealthAssurances.slice().reverse()" (click)="openModal(assurance) "
+     [ngClass]="{ 'highlight-pending': assurance.isPending }" class="clickable-row">
      <td>{{ assurance.name }}</td>
      <td>{{ assurance.administration }}</td>
      <td>

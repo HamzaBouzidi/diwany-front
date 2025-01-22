@@ -137,3 +137,10 @@ button.blue-button:hover {
   font-size: 1rem;
   color: #333;
 }
+
+.form-actions {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  gap: 1rem; /* Add space between buttons */
+  margin-top: 2rem; /* Add space above the buttons */
+}

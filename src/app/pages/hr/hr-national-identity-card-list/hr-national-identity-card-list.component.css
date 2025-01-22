@@ -205,3 +205,68 @@
   margin-bottom: 20px; /* Add some spacing below the heading */
   padding-right: 10px; /* Optional: Add padding to the right for spacing */
 }
+
+
+/* Highlight rows with pending state */
+.highlight-pending {
+  background-color: pink; /* Highlight rows with a pink background */
+  color: red; /* Ensure text is readable */
+  animation: fadeIn 2.5s ease-in-out; /* Smooth fade-in animation */
+}
+
+/* Fade-in animation for rows */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Notification popup */
+.notification-popup {
+  position: fixed;
+  bottom: 10px; /* Adjusted to match earlier design */
+  left: 10px; /* Adjusted to match earlier design */
+  background: #ffcc00;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  color: #333;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeOut 5s ease-in-out forwards; /* Notification fades out after 5 seconds */
+}
+
+/* Notification fade-out animation */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Close button styling */
+.notification-popup .close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.notification-popup .close-btn:hover {
+  color: #ff0000; /* Red on hover for the close button */
+}
+

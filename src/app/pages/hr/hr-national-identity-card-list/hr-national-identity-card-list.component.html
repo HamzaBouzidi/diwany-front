@@ -1,7 +1,13 @@
 <div class="search-container">
  <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المستخدم" class="search-input" dir="rtl" />
 </div>
-
+<!-- Notifications -->
+<div *ngIf="notifications.length" class="notification-container">
+ <div *ngFor="let notification of notifications; let i = index" class="notification-popup">
+  {{ notification }}
+  <button class="close-btn" (click)="closeNotification(i)">×</button>
+ </div>
+</div>
 <div *ngIf="isLoading" class="spinner">Loading...</div>
 <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
@@ -18,7 +24,8 @@
     </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let cin of filteredCins" (click)="openModal(cin)" class="clickable-row">
+    <tr *ngFor="let cin of filteredCins.slice().reverse()" (click)="openModal(cin)" class="clickable-row"
+     [ngClass]="{ 'highlight-pending': cin.isPending }">
      <td>{{ cin.user_name }}</td>
      <td>{{ cin.user_natio_num }}</td>
      <td>{{ cin.user_sifa }}</td>

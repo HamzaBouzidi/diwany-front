@@ -22,12 +22,16 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/fonts/arabfont.js"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/pink-bluegrey.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/fonts/arabfont.js"
+
+            ]
           },
           "configurations": {
             "production": {
@@ -99,7 +103,10 @@
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/fonts/arabfont.js"
+
+            ]
           }
         }
       }
