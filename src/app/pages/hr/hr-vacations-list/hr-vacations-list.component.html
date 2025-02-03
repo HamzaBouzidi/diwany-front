@@ -1,5 +1,6 @@
 <div class="search-container">
- <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الموظف أو نوع الإجازة" class="search-input"
+ <input type="text" [(ngModel)]="searchTerm" (input)="filterVacations()" placeholder="ابحث عن الموظف"
+  class="search-input"
   dir="rtl" />
  <i class="fas fa-search search-icon"></i>
 </div>
@@ -13,6 +14,7 @@
    <thead>
     <tr>
      <th>اسم الموظف</th>
+     <th> الرقم الوظيفي</th>
      <th>القسم</th>
      <th>تاريخ بدء الإجازة</th>
      <th>تاريخ نهاية الإجازة</th>
@@ -21,8 +23,11 @@
     </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let vacation of vacations.slice().reverse()">
+    <!-- <tr *ngFor="let vacation of vacations.slice().reverse()"> -->
+    <tr *ngFor="let vacation of filteredVacations.slice().reverse()">
      <td>{{ vacation.name }}</td>
+     <td>{{ vacation.employee_rw }}</td>
+
      <td>{{ vacation.department }}</td>
      <td>{{ vacation.vacationStartDay | date: 'MMM dd, yyyy' }}</td>
      <td>{{ vacation.vacationEndDate | date: 'MMM dd, yyyy' }}</td>

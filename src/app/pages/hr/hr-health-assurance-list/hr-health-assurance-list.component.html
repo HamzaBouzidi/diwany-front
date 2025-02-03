@@ -1,5 +1,6 @@
 <div class="search-container">
- <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المستخدم" class="search-input" dir="rtl" />
+ <input type="text" [(ngModel)]="searchTerm" (input)="filterHealthAssurances()" placeholder="ابحث عن الموظف"
+  class="search-input" dir="rtl" />
 </div>
 <div *ngFor="let notification of notifications; let i = index" class="notification-popup">
  <span>{{ notification }}</span>
@@ -16,6 +17,7 @@
    <thead>
     <tr>
      <th>اسم الموظف</th>
+      <th> الرقم الوظيفي</th>
      <th>الإدارة</th>
      <th>الحالة</th>
     </tr>
@@ -24,6 +26,8 @@
     <tr *ngFor="let assurance of filteredHealthAssurances.slice().reverse()" (click)="openModal(assurance) "
      [ngClass]="{ 'highlight-pending': assurance.isPending }" class="clickable-row">
      <td>{{ assurance.name }}</td>
+     <td>{{ assurance.employee_rw }}</td>
+
      <td>{{ assurance.administration }}</td>
      <td>
       <span *ngIf="assurance.state === 'Approved'" class="status accepted">✔️ مقبولة</span>

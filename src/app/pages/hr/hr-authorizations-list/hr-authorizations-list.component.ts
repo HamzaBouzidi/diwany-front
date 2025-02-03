@@ -17,7 +17,11 @@ export class HrAuthorizationsListComponent implements OnInit {
   isLoading = true;
   errorMessage: string | null = null;
   searchTerm: string = '';
-  showExitAuthorizations: boolean = true; // Toggle between exit and morning delays table
+  showExitAuthorizations: boolean = true;
+  filteredExitAuthorizations: any[] = [];
+  filteredMorningDelays: any[] = [];
+
+
 
   constructor(
     private exitauthorizationService: ExitAuthorisationService,
@@ -39,12 +43,16 @@ export class HrAuthorizationsListComponent implements OnInit {
         // Adjust based on the response structure
         this.exitAuthorizations = (exits.exitAuthorizations || exits || []).map((auth: any) => ({
           ...auth,
-          state: this.mapState(auth.bossApprovalStatus) // Map state to Arabic
+          state: this.mapState(auth.bossApprovalStatus) 
         }));
         this.morningDelays = (delays.morningDelays || delays || []).map((delay: any) => ({
           ...delay,
-          state: this.mapState(delay.bossApprovalStatus) // Map state to Arabic
+          state: this.mapState(delay.bossApprovalStatus) 
         }));
+
+        // Initialize filtered lists
+        this.filteredExitAuthorizations = [...this.exitAuthorizations];
+        this.filteredMorningDelays = [...this.morningDelays];
         this.isLoading = false;
       })
       .catch((error) => {
@@ -58,6 +66,7 @@ export class HrAuthorizationsListComponent implements OnInit {
     this.showExitAuthorizations = table === 'exitAuthorizations';
   }
 
+  /*
   get filteredExitAuthorizations(): any[] {
     return this.exitAuthorizations.filter((auth) =>
       auth.name.includes(this.searchTerm) || auth.exitDescription.includes(this.searchTerm)
@@ -67,6 +76,28 @@ export class HrAuthorizationsListComponent implements OnInit {
   get filteredMorningDelays(): any[] {
     return this.morningDelays.filter((delay) =>
       delay.name.includes(this.searchTerm) || delay.description.includes(this.searchTerm)
+    );
+  }
+*/
+  filterAuthorizations(): void {
+    const searchTermLower = this.searchTerm.toLowerCase().trim();
+
+    if (!searchTermLower) {
+      this.filteredExitAuthorizations = [...this.exitAuthorizations];
+      this.filteredMorningDelays = [...this.morningDelays];
+      return;
+    }
+
+    this.filteredExitAuthorizations = this.exitAuthorizations.filter((auth) =>
+      auth.name?.toLowerCase().includes(searchTermLower) ||
+      auth.exitDescription?.toLowerCase().includes(searchTermLower) ||
+      auth.employee_rw?.toString().includes(searchTermLower) // Search by employee number
+    );
+
+    this.filteredMorningDelays = this.morningDelays.filter((delay) =>
+      delay.name?.toLowerCase().includes(searchTermLower) ||
+      delay.description?.toLowerCase().includes(searchTermLower) ||
+      delay.employee_rw?.toString().includes(searchTermLower) // Search by employee number
     );
   }
 

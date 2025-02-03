@@ -12,9 +12,10 @@ import { CommonModule } from '@angular/common';
 })
 export class HrVacationsListComponent implements OnInit {
   vacations: any[] = [];
+  filteredVacations: any[] = [];
   isLoading = true;
   errorMessage: string | null = null;
-  searchTerm: string = ''; // For filtering
+  searchTerm: string = ''; 
 
   constructor(private vacationService: VacationService) { }
 
@@ -27,6 +28,7 @@ export class HrVacationsListComponent implements OnInit {
     this.vacationService.getAllVacations().subscribe(
       (data) => {
         this.vacations = data;
+        this.filteredVacations = data;
         this.isLoading = false;
       },
       (error) => {
@@ -34,6 +36,23 @@ export class HrVacationsListComponent implements OnInit {
         this.errorMessage = 'Failed to load vacations. Please try again later.';
         this.isLoading = false;
       }
+    );
+  }
+
+  filterVacations(): void {
+    const searchTermLower = this.searchTerm.toLowerCase().trim();
+
+    if (!searchTermLower) {
+      this.filteredVacations = this.vacations;
+      return;
+    }
+
+    this.filteredVacations = this.vacations.filter((vacation) =>
+      vacation.name?.toLowerCase().includes(searchTermLower) ||
+      vacation.department?.toLowerCase().includes(searchTermLower) ||
+      vacation.bossApprovalStatus?.toLowerCase().includes(searchTermLower) ||
+      vacation.employee_rw?.toLowerCase().includes(searchTermLower)
+
     );
   }
 

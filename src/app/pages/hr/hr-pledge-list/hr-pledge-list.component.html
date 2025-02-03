@@ -1,5 +1,6 @@
 <div class="search-container">
- <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الإقرار" class="search-input" dir="rtl" />
+<input type="text" [(ngModel)]="searchTerm" (input)="filterPledges()" placeholder="ابحث عن الموظف" class="search-input"
+   dir="rtl" />
 </div>
 <!-- Notifications -->
 <div *ngIf="notifications.length" class="notification-container">
@@ -18,7 +19,7 @@
    <thead>
     <tr>
      <th>اسم الموظف</th>
-     <th>الرقم الوطني</th>
+      <th> الرقم الوظيفي</th>
      <th>المؤهل العلمي</th>
      <th>الحالة</th>
     </tr>

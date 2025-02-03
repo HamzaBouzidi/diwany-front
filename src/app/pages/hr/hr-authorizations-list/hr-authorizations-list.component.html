@@ -1,5 +1,6 @@
 <div class="search-container">
- <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن الموظف أو نوع الإذن" class="search-input" dir="rtl" />
+ <input type="text" [(ngModel)]="searchTerm" (input)="filterAuthorizations()" placeholder="ابحث عن الموظف أو نوع الإذن"
+  class="search-input" dir="rtl" />
  <i class="fas fa-search search-icon"></i>
 </div>
 
@@ -22,6 +23,7 @@
    <thead>
     <tr>
      <th>اسم الموظف</th>
+     <th> الرقم الوظيفي</th>
      <th>التاريخ</th>
      <th>وقت الخروج</th>
      <th>وقت العودة</th>
@@ -32,6 +34,8 @@
    <tbody>
     <tr *ngFor="let exit of filteredExitAuthorizations.slice().reverse()">
      <td>{{ exit.name }}</td>
+     <td>{{ exit.employee_rw }}</td>
+
      <td>{{ exit.day | date: 'MMM dd, yyyy' }}</td>
      <td>{{ exit.exitStartTime }}</td>
      <td>{{ exit.returnTime }}</td>
@@ -57,6 +61,8 @@
    <thead>
     <tr>
      <th>اسم الموظف</th>
+     <th> الرقم الوظيفي</th>
+
      <th>التاريخ</th>
      <th>وقت التأخير</th>
      <th>الوصف</th>
@@ -66,6 +72,8 @@
    <tbody>
     <tr *ngFor="let delay of filteredMorningDelays.slice().reverse()">
      <td>{{ delay.name }}</td>
+          <td>{{ delay.employee_rw }}</td>
+
      <td>{{ delay.day | date: 'MMM dd, yyyy' }}</td>
      <td>{{ delay.time }}</td>
      <td>{{ delay.description }}</td>

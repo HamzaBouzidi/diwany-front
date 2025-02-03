@@ -56,6 +56,7 @@ export class HrPledgeListComponent implements OnInit {
           //isNew: pledge.state === 'pending' && this.isNewRequest(pledge.createdAt), // Mark as new
           isPending: pledge.state === 'pending',
         }));
+
         this.filteredPledges = [...this.pledges];
         // this.checkForNewPledges(); // Check for new pledges and add notifications
         this.checkForPendingPledges();
@@ -101,9 +102,19 @@ export class HrPledgeListComponent implements OnInit {
     }
   }
 
+
   filterPledges(): void {
+    const searchTermLower = this.searchTerm.toLowerCase().trim();
+
+    if (!searchTermLower) {
+      this.filteredPledges = [...this.pledges];
+      return;
+    }
+
     this.filteredPledges = this.pledges.filter((pledge) =>
-      pledge.employeeName.includes(this.searchTerm)
+      pledge.employeeName?.toLowerCase().includes(searchTermLower) ||
+      pledge.employee_rw?.toString().includes(searchTermLower) || // Allow searching by employee number
+      pledge.employeeDegree?.toLowerCase().includes(searchTermLower)
     );
   }
 

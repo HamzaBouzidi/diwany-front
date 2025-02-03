@@ -14,6 +14,7 @@ import { EvaluationReportService } from '../../../services/evaluationReport/eval
 export class HrReleaseListComponent implements OnInit {
   releases: any[] = [];
   reports: any[] = [];
+  workPeriods: any[] = [];
 
   filteredReleases: any[] = [];
   searchTerm: string = '';
@@ -82,6 +83,29 @@ export class HrReleaseListComponent implements OnInit {
         console.error('Error fetching releases:', error);
         this.isLoading = false;
       }
+    );
+  }
+
+  filterData(): void {
+    const searchTermLower = this.searchTerm.toLowerCase().trim();
+
+    if (!searchTermLower) {
+      this.filteredReleases = [...this.releases];
+      this.filteredWorkPeriods = [...this.workPeriods];
+      return;
+    }
+
+    this.filteredReleases = this.releases.filter((release) =>
+      release.employeeName?.toLowerCase().includes(searchTermLower) ||
+      release.employeeRw?.toString().includes(searchTermLower) ||
+      release.department?.toLowerCase().includes(searchTermLower) ||
+      release.directorName?.toLowerCase().includes(searchTermLower)
+    );
+
+    this.filteredWorkPeriods = this.workPeriods.filter((period) =>
+      period.employee_name?.toLowerCase().includes(searchTermLower) ||
+      period.startDate?.toLowerCase().includes(searchTermLower) ||
+      period.endDate?.toLowerCase().includes(searchTermLower)
     );
   }
   // Fetch all work periods

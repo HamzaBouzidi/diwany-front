@@ -11,7 +11,7 @@
   <button class="close-btn" (click)="closeNotification(i)">x</button>
 </div>
 <div class="search-container">
- <input type="text" [(ngModel)]="searchTerm" placeholder="ابحث عن المدير أو الإدارة أو الموظف" class="search-input"
+<input type="text" [(ngModel)]="searchTerm" (input)="filterData()" placeholder="ابحث عن الموظف" class="search-input"
   dir="rtl" />
  <i class="fas fa-search search-icon"></i>
 </div>
@@ -23,6 +23,7 @@
    <thead>
     <tr>
      <th>اسم الموظف</th>
+      <th> الرقم الوظيفي</th>
      <th>الإدارة</th>
      <th>اسم المدير</th>
      <th>الحالة</th>
@@ -32,6 +33,7 @@
     <tr *ngFor="let release of filteredReleases.slice().reverse()" (click)="showReason(release)" class="clickable-row"
       [ngClass]="{ 'highlight-pending': release.isPending }">
      <td>{{ release.employeeName }}</td>
+    <td>{{ release.employeeRw }}</td>
      <td>{{ release.department }}</td>
      <td>{{ release.directorName }}</td>
      <td>

@@ -17,7 +17,8 @@
   <table class="cin-table" dir="rtl">
    <thead>
     <tr>
-     <th>اسم المستخدم</th>
+     <th>اسم الموظف</th>
+     <th> الرقم الوظيفي</th>
      <th>الرقم الوطني</th>
      <th>الصفة</th>
      <th>الحالة</th>
@@ -27,6 +28,8 @@
     <tr *ngFor="let cin of filteredCins.slice().reverse()" (click)="openModal(cin)" class="clickable-row"
      [ngClass]="{ 'highlight-pending': cin.isPending }">
      <td>{{ cin.user_name }}</td>
+     <td>{{ cin.user_ref_emp }}</td>
+
      <td>{{ cin.user_natio_num }}</td>
      <td>{{ cin.user_sifa }}</td>
      <td>

@@ -21,6 +21,7 @@ export class HrHealthAssuranceListComponent implements OnInit {
   notifications: string[] = [];
 
 
+  filteredHealthAssurances: any[] = [];
   constructor(private healthAssuranceService: HealthAssuranceService) { }
 
   ngOnInit(): void {
@@ -51,6 +52,7 @@ export class HrHealthAssuranceListComponent implements OnInit {
           ...assurance,
           isPending: assurance.state === 'Pending'
         }));
+        this.filteredHealthAssurances = [...this.healthAssurances];
         this.checkForPendingAssurances();
         this.isLoading = false;
       },
@@ -61,6 +63,23 @@ export class HrHealthAssuranceListComponent implements OnInit {
       }
     );
   }
+
+
+  filterHealthAssurances(): void {
+    const searchTermLower = this.searchTerm.toLowerCase().trim();
+
+    if (!searchTermLower) {
+      this.filteredHealthAssurances = [...this.healthAssurances];
+      return;
+    }
+
+    this.filteredHealthAssurances = this.healthAssurances.filter((assurance) =>
+      assurance.name?.toLowerCase().includes(searchTermLower) ||
+      assurance.administration?.toLowerCase().includes(searchTermLower) ||
+      assurance.employee_rw?.toString().includes(searchTermLower) // Allow searching by employee number
+    );
+  }
+  /*
   get filteredHealthAssurances(): any[] {
     return this.healthAssurances.filter(
       (assurance) =>
@@ -68,7 +87,7 @@ export class HrHealthAssuranceListComponent implements OnInit {
         assurance.administration.includes(this.searchTerm)
     );
   }
-
+*/
   openModal(assurance: any): void {
     this.selectedAssurance = assurance;
     this.isModalVisible = true;
