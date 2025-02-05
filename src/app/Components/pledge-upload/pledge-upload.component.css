@@ -110,3 +110,8 @@
       width: 100%;
     }
   }
+
+  .button-container {
+  display: flex;
+  gap: 15px; /* Adds space between buttons */
+}

@@ -23,7 +23,8 @@ export class VacationListComponent implements OnInit {
   errorMessage: string | null = null;
 
   notifications: string[] = [];
-
+  filteredEmployees: any[] = [];
+  filteredMyVacations: any[] = [];
 
   constructor(private vacationService: VacationService) { }
 
@@ -48,6 +49,8 @@ export class VacationListComponent implements OnInit {
           state: this.determineVacationState(vacation),
           profilePicture: 'https://randomuser.me/api/portraits/men/1.jpg'
         }));
+        this.filteredMyVacations = [...this.myVacations];
+
         this.isLoading = false;
       },
       error: (error) => {
@@ -81,6 +84,8 @@ export class VacationListComponent implements OnInit {
 
         }));
         //console.log('Mapped employees:', this.employees);
+        this.filteredEmployees = [...this.employees];
+
         this.checkForNewRequests(); 
         this.isLoading = false;
       },
@@ -132,13 +137,15 @@ export class VacationListComponent implements OnInit {
   toggleTable(view: 'myVacations' | 'employeeVacations'): void {
     this.showMyVacations = view === 'myVacations';
   }
-
+/*
   get filteredEmployees() {
     return this.employees.filter((employee) =>
       employee.name.includes(this.searchTerm) ||
       employee.vacationType.includes(this.searchTerm)
     );
   }
+*/
+
 
   isNewVacation(createdAt: string): boolean {
     const oneDayAgo = new Date();
@@ -203,6 +210,57 @@ export class VacationListComponent implements OnInit {
   closeNotification(index: number): void {
     this.notifications.splice(index, 1); // Remove the notification at the given index
   }
+
+  // --- Search Filtering ---
+
+
+  // Unified search function that filters both tables based on searchTerm
+  filterVacations(): void {
+    const term = this.searchTerm.toLowerCase().trim();
+
+    if (!term) {
+      this.filteredMyVacations = [...this.myVacations];
+      this.filteredEmployees = [...this.employees];
+      return;
+    }
+
+    // For My Vacations: filter by vacation type, state, and formatted start/end dates.
+    this.filteredMyVacations = this.myVacations.filter(vacation => {
+      // Format dates as "Jan 30, 2025" using the en-US locale
+      const startDateStr = new Date(vacation.vacationStartDate)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase();
+      const endDateStr = new Date(vacation.vacationEndDate)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase();
+
+      return vacation.vacationType?.toLowerCase().includes(term) ||
+        vacation.state?.toLowerCase().includes(term) || // 🔥 Filter by vacation state (e.g., مقبولة, مرفوضة, قيد الانتظار)
+        startDateStr.includes(term) ||
+        endDateStr.includes(term);
+    });
+
+    // For Employee Vacations: filter by employee name, employee_rw, vacation type, state, and dates.
+    this.filteredEmployees = this.employees.filter(employee => {
+      // Format start and end dates using the 'en-US' locale to get a format like "Jan 30, 2025"
+      const startDateStr = new Date(employee.vacationStartDate)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase();
+      const endDateStr = new Date(employee.vacationEndDate)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase();
+
+      return (
+        employee.name?.toLowerCase().includes(term) ||
+        employee.employee_rw?.toString().includes(term) || // 🔥 Filter by employee-rw
+        employee.vacationType?.toLowerCase().includes(term) ||
+        employee.state?.toLowerCase().includes(term) || // 🔥 Filter by vacation state
+        startDateStr.includes(term) ||
+        endDateStr.includes(term)
+      );
+    });
+  }
+
 
 
 

@@ -47,6 +47,16 @@ export class ShortVacationRequestComponent implements OnInit {
 
   isModalVisible: boolean = false;
 
+  availableVacationDays: number = 0;
+
+
+
+
+  isSuccessModalVisible: boolean = false; // Shows after successful submission
+  isErrorModalVisible: boolean = false; // Shows when requested days exceed available days
+  remainingVacationDays: number = 0; // Stores remaining days after valid submission
+
+
   openModal() {
     this.isModalVisible = true;
   }
@@ -85,6 +95,7 @@ export class ShortVacationRequestComponent implements OnInit {
         (response) => {
           this.employeeName = response.nm || '';
           this.selectedDepartment = response.d || '';
+          this.availableVacationDays = response.ras || 0;
         },
         (error) => {
           console.error('Error fetching user info:', error);
@@ -117,17 +128,40 @@ export class ShortVacationRequestComponent implements OnInit {
     this.vacationEndDate = currentDate.toISOString().split('T')[0];
   }
 
-  onVacationDurationChange() {
-    this.calculateVacationEndDate();
+  // onVacationDurationChange() {
+  // this.calculateVacationEndDate();
+  //}
+
+  onVacationDurationChange(): void {
+    if (this.vacationDuration! > this.availableVacationDays) {
+      this.isErrorModalVisible = true;
+    } else {
+      this.calculateVacationEndDate();
+    }
+  }
+
+  closeErrorModal(): void {
+    this.isErrorModalVisible = false;
+    this.vacationDuration = undefined; // Reset duration input
   }
 
   onVacationStartDateChange() {
     this.calculateVacationEndDate();
   }
 
+
+  showErrorModal(): void {
+    this.isErrorModalVisible = true;
+  }
+
+  /* closeErrorModal(): void {
+     this.isErrorModalVisible = false;
+   }
+     */
   // Method to handle form submission
-  onSubmit(form: NgForm): void {
+ /* onSubmit(form: NgForm): void {
     if (form.valid) {
+
       const vacationData = {
         employee_rw: this.ref_emp,
         name: this.employeeName,
@@ -143,32 +177,51 @@ export class ShortVacationRequestComponent implements OnInit {
         (response) => {
 
           console.log(vacationData);
-          
-        /*  this.messageService.add({
-            severity: 'success',
-            summary: 'تم إرسال الطلب',
-            detail: 'تم تقديم طلب الإجازة بنجاح'
-          });
-*/
+
           setTimeout(() => {
             this.router.navigate(['/dashboard/vacations/vacations-list']);
           }, 1000);
         },
         (error) => {
-        /*  this.messageService.add({
-            severity: 'error',
-            summary: 'خطأ في الطلب',
-            detail: 'حدث خطأ أثناء تقديم الطلب'
-          });*/
+
           console.error('Error submitting vacation request:', error);
         }
       );
     } else {
-     /* this.messageService.add({
-        severity: 'error',
-        summary: 'خطأ في الطلب',
-        detail: 'يرجى تعبئة الحقول بشكل صحيح'
-      });*/
+
     }
+  }
+  */
+
+
+  onSubmit(form: NgForm): void {
+    if (!form.valid || this.vacationDuration! > this.availableVacationDays) {
+      return;
+    }
+
+    const vacationData = {
+      employee_rw: this.ref_emp,
+      name: this.employeeName,
+      department: this.selectedDepartment,
+      vacationDays: this.vacationDuration,
+      vacationStartDay: this.vacationStartDate,
+      vacationEndDate: this.vacationEndDate,
+      vacationDescription: this.vacationPurpose
+    };
+
+    this.vacationService.addVacation(vacationData).subscribe(
+      (response) => {
+        this.remainingVacationDays = this.availableVacationDays - this.vacationDuration!;
+        this.isSuccessModalVisible = true;
+      },
+      (error) => {
+        console.error('Error submitting vacation request:', error);
+      }
+    );
+  }
+
+  closeSuccessModal(): void {
+    this.isSuccessModalVisible = false;
+    this.router.navigate(['/dashboard/vacations/vacations-list']);
   }
 }

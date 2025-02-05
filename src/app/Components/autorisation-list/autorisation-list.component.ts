@@ -44,6 +44,13 @@ export class AutorisationListComponent implements OnInit {
   notifications: string[] = [];
 
 
+
+  filteredMyExits: any[] = [];
+  filteredEmployeesExits: any[] = [];
+  filteredMyMorningDelays: any[] = [];
+  filteredEmployeesMorningDelays: any[] = [];
+
+
   constructor(
     private exitAuthService: ExitAuthorisationService,
     private morningAuthService: MorningAuthorisationService
@@ -66,6 +73,8 @@ export class AutorisationListComponent implements OnInit {
           ...exit,
           state: this.mapState(exit.bossApprovalStatus)
         }));
+        this.filteredMyExits = [...this.myExits];
+
         this.isLoading = false;
       },
       error: (error: HttpErrorResponse) => {
@@ -88,6 +97,8 @@ export class AutorisationListComponent implements OnInit {
           // isNew: exit.bossApprovalStatus === 'Pending' && this.isNewRequest(exit.createdAt),
 
         }));
+        this.filteredEmployeesExits = [...this.employeesExits];
+
         this.checkForPendingExits();
         // this.checkForNewRequests();
 
@@ -110,6 +121,8 @@ export class AutorisationListComponent implements OnInit {
           ...delay,
           state: this.mapState(delay.bossApprovalStatus)
         }));
+        this.filteredMyMorningDelays = [...this.myMorningDelays];
+
         this.isLoading = false;
       },
       error: (error: HttpErrorResponse) => {
@@ -132,6 +145,8 @@ export class AutorisationListComponent implements OnInit {
           //isNew: delay.bossApprovalStatus === 'Pending' && this.isNewRequest(delay.createdAt),
 
         }));
+        this.filteredEmployeesMorningDelays = [...this.employeesMorningDelays];
+
         this.checkForPendingMorningDelays();
         // this.checkForNewMorningDelays();
 
@@ -224,7 +239,7 @@ export class AutorisationListComponent implements OnInit {
     this.isEmployeesExits = tableType === 'employeesExits';
     this.isEmployeesMorningDelays = tableType === 'employeesMorningDelays';
   }
-
+/*
   // Filtered Data
   get filteredMyExits(): any[] {
     return this.myExits.filter((exit) =>
@@ -247,6 +262,130 @@ export class AutorisationListComponent implements OnInit {
   get filteredEmployeesMorningDelays(): any[] {
     return this.employeesMorningDelays.filter((delay) =>
       delay.description?.includes(this.searchTerm)
+    );
+  }
+
+
+  // ------------------ Search Filtering ------------------
+  // Here we add search-by-date for employee records as well as by name, employee_rw, and description.
+
+  // For My Exits: Filter by exit description and created date.
+  get filteredMyExits(): any[] {
+    const term = this.searchTerm.toLowerCase().trim();
+    if (!term) {
+      return this.myExits;
+    }
+    return this.myExits.filter(exit =>
+      exit.exitDescription?.toLowerCase().includes(term) ||
+      new Date(exit.createdAt)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase()
+        .includes(term)
+    );
+  }
+
+  // For Employees' Exits: Filter by exit description, employee name, employee_rw, and created date.
+  get filteredEmployeesExits(): any[] {
+    const term = this.searchTerm.toLowerCase().trim();
+    if (!term) {
+      return this.employeesExits;
+    }
+    return this.employeesExits.filter(exit =>
+      exit.exitDescription?.toLowerCase().includes(term) ||
+      exit.name?.toLowerCase().includes(term) ||
+      exit.employee_rw?.toString().includes(term) ||
+      new Date(exit.createdAt)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase()
+        .includes(term)
+    );
+  }
+
+  // For My Morning Delays: Filter by delay description and created date.
+  get filteredMyMorningDelays(): any[] {
+    const term = this.searchTerm.toLowerCase().trim();
+    if (!term) {
+      return this.myMorningDelays;
+    }
+    return this.myMorningDelays.filter(delay =>
+      delay.description?.toLowerCase().includes(term) ||
+      new Date(delay.createdAt)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase()
+        .includes(term)
+    );
+  }
+
+  // For Employees' Morning Delays: Filter by delay description, employee name, employee_rw, and created date.
+  get filteredEmployeesMorningDelays(): any[] {
+    const term = this.searchTerm.toLowerCase().trim();
+    if (!term) {
+      return this.employeesMorningDelays;
+    }
+    return this.employeesMorningDelays.filter(delay =>
+      delay.description?.toLowerCase().includes(term) ||
+      delay.name?.toLowerCase().includes(term) ||
+      delay.employee_rw?.toString().includes(term) ||
+      new Date(delay.createdAt)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase()
+        .includes(term)
+    );
+  }
+
+  */
+  filterAuthorizations(): void {
+    const term = this.searchTerm.toLowerCase().trim();
+    if (!term) {
+      this.filteredMyExits = [...this.myExits];
+      this.filteredEmployeesExits = [...this.employeesExits];
+      this.filteredMyMorningDelays = [...this.myMorningDelays];
+      this.filteredEmployeesMorningDelays = [...this.employeesMorningDelays];
+      return;
+    }
+
+    // For My Exits: Filter by exit description, state, and date
+    this.filteredMyExits = this.myExits.filter(exit =>
+      exit.exitDescription?.toLowerCase().includes(term) ||
+      exit.state?.toLowerCase().includes(term) || // 🔥 Filter by state (e.g., مقبولة, مرفوضة, قيد الانتظار)
+      new Date(exit.day)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase()
+        .includes(term)
+    );
+
+    // For Employees' Exits: Filter by exit description, state, employee name, RW number, and date
+    this.filteredEmployeesExits = this.employeesExits.filter(exit =>
+      exit.exitDescription?.toLowerCase().includes(term) ||
+      exit.state?.toLowerCase().includes(term) || // 🔥 Filter by state
+      exit.name?.toLowerCase().includes(term) ||
+      exit.employee_rw?.toString().includes(term) ||
+      new Date(exit.day)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase()
+        .includes(term)
+    );
+
+    // For My Morning Delays: Filter by description, state, and date
+    this.filteredMyMorningDelays = this.myMorningDelays.filter(delay =>
+      delay.description?.toLowerCase().includes(term) ||
+      delay.state?.toLowerCase().includes(term) || // 🔥 Filter by state
+      new Date(delay.day)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase()
+        .includes(term)
+    );
+
+    // For Employees' Morning Delays: Filter by description, state, employee name, RW number, and date
+    this.filteredEmployeesMorningDelays = this.employeesMorningDelays.filter(delay =>
+      delay.description?.toLowerCase().includes(term) ||
+      delay.state?.toLowerCase().includes(term) || // 🔥 Filter by state
+      delay.name?.toLowerCase().includes(term) ||
+      delay.employee_rw?.toString().includes(term) ||
+      new Date(delay.day)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toLowerCase()
+        .includes(term)
     );
   }
 

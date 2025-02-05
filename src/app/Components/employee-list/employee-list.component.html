@@ -1,0 +1,39 @@
+<h2>إدارة المستخدمين</h2>
+
+<!-- 🔍 Search Bar -->
+<div class="search-container">
+ <input type="text" class="search-input" placeholder="🔍 ابحث عن مستخدم..." [(ngModel)]="searchQuery">
+</div>
+
+<!-- 📊 Users Table -->
+<table class="user-table">
+ <thead>
+  <tr>
+   <th>الاسم</th>
+   <th>البريد الإلكتروني</th>
+   <th>الهاتف</th>
+   <th>الإجراءات</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr *ngFor="let user of filteredUsers()">
+   <td>{{ user.user_name }}</td>
+   <td>{{ user.user_email }}</td>
+   <td>{{ user.user_phone }}</td>
+
+   <td>
+
+    <button class="btn delete-btn" (click)="deleteUser(user.USER_ID)">🗑 حذف</button>
+   </td>
+  </tr>
+  <tr *ngIf="filteredUsers().length === 0">
+   <td colspan="7" class="empty-message">لا يوجد مستخدمون.</td>
+  </tr>
+ </tbody>
+</table>
+
+<!-- 🔔 Notification Popup -->
+<div *ngIf="showNotification" class="notification-popup">
+ <span>{{ notificationMessage }}</span>
+ <button class="close-btn" (click)="closeNotification()">×</button>
+</div>

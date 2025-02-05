@@ -1,0 +1,285 @@
+/*
+.sidebar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    background-color: #23689B; 
+    transition: all 0.3s ease;
+    border: none;
+    padding: 0;
+    border-bottom-left-radius: 20px; 
+    z-index: 1000;
+    width: 300px;
+    height: 930px;
+    border-radius: 15px;
+    margin-top: 70px;
+    margin-right: 3px; 
+}
+*/
+
+.sidebar {
+    width: 15%; 
+    max-width: 300px; 
+    min-width: 200px; 
+    height: 100%; 
+    background-color: #23689B;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    margin-top: 70px;
+    margin-right: 5px; 
+    border-radius: 15px;
+}
+
+
+.sidebar-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    /* Stack image and text vertically */
+    align-items: center;
+    /* Center align items horizontally */
+    padding: 25px;
+    margin-bottom: 0px;
+    /* Add some space below the profile section */
+}
+
+.round {
+    border-radius: 50%;
+    border-top: 50%;
+    ;
+    height: 6rem;
+    /* Slightly larger image */
+    width: 6rem;
+    /* Match height for a perfect circle */
+    object-fit: cover;
+    /* Ensure the image covers the area without distortion */
+    border: 2px solid #ccc;
+    margin-bottom: 5px;
+    /* Space between image and text */
+}
+
+.profile-text {
+    text-align: center;
+    /* Center text horizontally */
+    border-top: 2px solid #e0e0e0;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* Make the name bold */
+    color: #D9DAB0;
+    /* Darker color for better visibility */
+    margin: 0;
+    /* Remove any default margin */
+}
+
+.profile-title {
+    font-size: 1.2rem;
+    color: #F4F5DB;
+    /* Slightly darker gray for better visibility */
+    margin: 7px 0 0 0;
+    /* Margin on top, no margin on other sides */
+
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #F4F5DB;
+    /* Light gray color for section titles */
+    padding-right: 1.5rem;
+    margin-top: 1px;
+    /* Reduced space above the section title */
+    margin-bottom: 1px;
+    /* Reduced space below the section title */
+    text-align: right;
+
+
+}
+
+.custom-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: right;
+    flex-grow: 1;
+}
+
+.nav-link {
+    color: #F4F5DB;
+    /* Set the text color to #F4F5DB */
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 3.25rem;
+    /* Increased link height */
+    text-decoration: none;
+    padding-right: 1.5rem;
+    border-right: 3px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    direction: rtl;
+    font-size: 1.25rem;
+    /* Increased nav link text size */
+}
+
+.nav-link:hover {
+    color: #81B622;
+    /* Green color for hover state */
+    border-right-color: #81B622;
+    /* Green border on hover */
+}
+
+.nav-text {
+    margin-left: 0.5rem;
+    font-size: 18px;
+    /* Increased text size */
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #F4F5DB;
+    /* Set the text color to #F4F5DB */
+    transition: color 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+
+.nav-link:hover .nav-text {
+    color: #487E95;
+    /* Green color for text on hover */
+}
+
+
+.footer {
+    padding: 0rem;
+    /* Increased padding for footer */
+    border-top: 2px solid #e0e0e0;
+}
+
+.logo-img {
+    width: 12rem;
+    /* Increased logo size */
+    height: 12rem;
+    display: block;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+}
+
+.icon-container {
+    margin-left: 1rem;
+    font-size: 1.4rem;
+    /* Adjust icon size */
+    color: #F4F5DB;
+    /* Same color as the text */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.navbar {
+    background-color: #384B70;
+    color: white;
+    width: 100%;
+    height: 65px;
+ 
+    display: flex;
+    
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+ 
+
+}
+
+.smalll {
+   font-size: 16px;
+   color: white; 
+   background-color: orangered;
+   border-radius: 10px;
+   padding-left: 2px;
+   padding-top: 2px;
+   padding-bottom: 2px;
+ 
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+
+.navbar-right {
+     
+     
+   
+   padding-left:100px;
+}
+
+
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    /* Adds space between the two buttons */
+}
+
+.nav-button {
+    background-color: #555;
+    border: 1px solid #777;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-post-btn {
+    background-color: #5A5A5A;
+}
+
+.forum-btn {
+    background-color: #FFD700;
+    border: 1px solid #FFC107;
+    color: black;
+}
+
+.nav-button:hover {
+    opacity: 0.9;
+}

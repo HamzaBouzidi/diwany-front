@@ -5,6 +5,12 @@
       <h2>طلب إجازة</h2>
     </div>
     <p-toast></p-toast>
+<!-- Available Vacation Days -->
+<div class="form-field">
+  <label>الأيام المتاحة</label>
+  <input type="text" [value]="availableVacationDays" disabled class="readonly-input" />
+</div>
+
     <form #vacationForm="ngForm" (ngSubmit)="onSubmit(vacationForm)">
       <!-- Employee Details -->
       <div class="form-row align-items-center">
@@ -13,7 +19,7 @@
           <input id="employeeName" type="text" name="employeeName" [(ngModel)]="employeeName" disabled class="readonly-input" />
           </div>
         <div class="form-field">
-          <label for="department">الادارة التي ينتمي اليها</label>
+          <label for="department">الإدارة</label>
           <input id="department" type="text" name="department" [(ngModel)]="selectedDepartment" disabled class="readonly-input" />
           </div>
           </div>
@@ -21,43 +27,55 @@
       <!-- Vacation Duration and Start Date -->
       <div class="form-row">
         <div class="form-field">
-          <label for="vacationDuration">مدة الاجازة</label>
+          <label for="vacationDuration">مدة الإجازة</label>
           <span class="p-input-icon-left">
             <i class="pi pi-clock"></i>
-            <input id="vacationDuration" type="number" name="vacationDuration" placeholder="أدخل مدة الاجازة"
+            <input id="vacationDuration" type="number" name="vacationDuration" placeholder="أدخل مدة الإجازة"
               [(ngModel)]="vacationDuration" (ngModelChange)="onVacationDurationChange()" required min="1" max="30" />
           </span>
         </div>
 
         <div class="form-field">
-          <label for="vacationStartDate">التاريخ بدء الاجازة</label>
+          <label for="vacationStartDate">تاريخ بدء الإجازة</label>
           <input id="vacationStartDate" type="date" name="vacationStartDate" [(ngModel)]="vacationStartDate"
             (ngModelChange)="onVacationStartDateChange()" required />
-          </div>
-          </div>
+        </div>
+        </div>
 
-<div class="form-field">
-  <label for="vacationEndDate">التاريخ نهاية الاجازة</label>
-  <input id="vacationEndDate" type="text" name="vacationEndDate" [(ngModel)]="vacationEndDate" disabled
-    class="readonly-input" />
-  </div>
-
-<!-- Vacation Purpose -->
+      <!-- Vacation End Date -->
       <div class="form-field">
-        <label for="vacationPurpose">الغرض من الحصول على الاجازة</label>
+        <label for="vacationEndDate">تاريخ نهاية الإجازة</label>
+        <input id="vacationEndDate" type="text" name="vacationEndDate" [(ngModel)]="vacationEndDate" disabled
+          class="readonly-input" />
+        </div>
+
+      <!-- Vacation Purpose -->
+      <div class="form-field">
+        <label for="vacationPurpose">الغرض من الإجازة</label>
         <textarea id="vacationPurpose" name="vacationPurpose" placeholder="أدخل الغرض" rows="3" [(ngModel)]="vacationPurpose"
           required></textarea>
       </div>
 
+      <!-- Submit Button -->
       <div class="form-actions">
-        <button type="submit" class="p-button-rounded p-button-outlined p-button-success" [disabled]="vacationForm.invalid"
-          (click)="openModal()">
+        <button type="submit" class="p-button-rounded p-button-outlined p-button-success" [disabled]="vacationForm.invalid">
           إرسال
         </button>
-        <app-done-modal [isVisible]="isModalVisible" (close)="closeModal()">
-          <h3>الرجاء انتظار قرار المعنيين بالأمر,</h3>
-        </app-done-modal>
       </div>
     </form>
   </div>
+</div>
+<!-- ✅ Error Modal -->
+<div *ngIf="isErrorModalVisible" class="modal error-modal">
+  <button class="close-button" (click)="closeErrorModal()">✖</button>
+  <h3>عذرًا، لا يمكنك طلب هذه الإجازة</h3>
+  <p>رصيد الإجازات المتبقي لديك: <strong>{{ availableVacationDays }}</strong> يومًا.</p>
+  <p>يرجى تقليل عدد الأيام المطلوبة.</p>
+</div>
+
+<!-- ✅ Success Modal -->
+<div *ngIf="isSuccessModalVisible" class="modal success-modal">
+  <button class="close-button" (click)="closeSuccessModal()">✖</button>
+  <h3>تم تقديم طلبك بنجاح!</h3>
+  <p>رصيد الإجازات المتبقي لديك: <strong>{{ remainingVacationDays }}</strong> يومًا.</p>
 </div>

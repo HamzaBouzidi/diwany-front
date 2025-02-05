@@ -1,184 +1,174 @@
 :host {
   display: block;
-  direction: rtl; /* Ensure RTL structure is set */
+  direction: rtl; /* Ensure RTL structure */
 }
 
+/* Centering the form */
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 50px); /* Adjust height to leave space for the footer */
-  background-color: #f9f9f9; /* Light gray background for the form container */
+  min-height: calc(100vh - 50px); /* Adjust height to leave space for footer */
+  background-color: #f9f9f9;
 }
 
 .form-card {
   background-color: #ffffff;
-  border-radius: 8px; /* Slightly less rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2.5rem;
-  max-width: 1200px; /* Set larger max-width for full space */
-  width: 100%; /* Form takes full space */
-  box-sizing: border-box; /* Ensures padding is included in the element's width */
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-header {
   display: flex;
-  flex-direction: column; /* Stack the logo and title vertically */
+  flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
 }
 
 .form-logo {
-  height: 120px; /* Adjust the height of the logo as needed */
-  margin-bottom: 15px; /* Space between logo and title */
+  height: 120px;
+  margin-bottom: 15px;
 }
 
 h2 {
-  color: #23689B; /* Dark gray for the heading */
+  color: #23689B;
   font-size: 1.8rem;
-  margin: 0; /* Remove margin to align properly with the logo */
-  text-align: center; /* Center the heading text */
+  margin: 0;
+  text-align: center;
 }
 
-/* Flexbox for form rows */
+/* Style for form rows */
 .form-row {
   display: flex;
-  flex-wrap: wrap; /* Ensures that fields wrap if necessary */
-  gap: 1.5rem; /* Spacing between fields */
+  flex-wrap: wrap;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
-  justify-content: space-between; /* Space between form fields */
-  align-items: center; /* Vertically align the fields */
+  justify-content: space-between;
+  align-items: center;
 }
 
 .form-field {
   flex: 1;
-  min-width: 300px; /* Minimum width to avoid shrinking too much */
-  box-sizing: border-box; /* Ensures padding/margin does not cause overflow */
-  text-align: right; /* Ensure labels and input fields are aligned to the right */
+  min-width: 300px;
+  box-sizing: border-box;
+  text-align: right;
 }
 
 .form-field label {
   display: block;
   margin-bottom: 0.75rem;
   font-weight: bold;
-  color: #555555; /* Medium gray for labels */
-  text-align: right; /* Right-align labels for RTL */
+  color: #555555;
+  text-align: right;
 }
 
-.p-input-icon-left {
-  position: relative;
-  display: flex;
-  align-items: center;
+/* Style for input fields */
+input, select, textarea {
   width: 100%;
-}
-
-.p-input-icon-left .pi {
-  position: absolute;
-  right: 10px; /* Place icon on the right for RTL */
-  color: #888888; /* Light gray for icons */
-}
-
-/* Style for text input fields */
-.p-input-icon-left input,
-.p-input-icon-left textarea,
-input[type="text"],
-input[type="number"],
-input[type="date"],
-textarea#vacationPurpose,
-select {
-  padding-left: 1rem; /* Adjust padding for input */
-  padding-right: 2.5rem; /* Adjust padding for RTL with input icon */
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  border-radius: 6px; /* Slightly less rounded corners */
+  padding: 0.75rem;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  width: 100%;
   font-size: 1rem;
   transition: border-color 0.3s;
-  box-sizing: border-box; /* Ensures padding does not cause overflow */
+  box-sizing: border-box;
 }
 
-/* Focus effect for all input fields */
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="date"]:focus,
-textarea:focus,
-textarea#vacationPurpose:focus,
-select:focus {
-  border-color: #777777; /* Darker gray for focus */
+input:focus, select:focus, textarea:focus {
+  border-color: #23689B;
 }
 
-/* Specific width and height for "الغرض من الحصول على الاجازة" */
-textarea#vacationPurpose {
-  width: 100%; /* Ensure it stays within form boundaries */
-  height: 100px; /* Adjust height as needed */
-  resize: none;
-  box-sizing: border-box; /* Ensures padding does not cause overflow */
-}
-
-/* Style for form actions (buttons) */
+/* Submit button styles */
 .form-actions {
   display: flex;
-  justify-content: center; /* Center the button */
+  justify-content: center;
   margin-top: 2rem;
 }
 
 button {
-  width: 100%; /* Make the button full-width */
+  width: 100%;
   font-size: 1rem;
   padding: 0.75rem;
-  border-radius: 6px; /* Slightly less rounded corners */
-  background-color: #555555; /* Medium gray for buttons */
+  border-radius: 6px;
+  background-color: #555555;
   border: none;
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-/* Hover effect for buttons */
 button:hover {
-  background-color: #333333; /* Darker gray on hover */
+  background-color: #333333;
 }
 
-/* Specific styles for success button */
 .p-button-success {
-  background-color: #23689B ;
-  border-color: #23689B ;
+  background-color: #23689B;
+  border-color: #23689B;
+}
+/* ✅ General Modal Styling */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  background: #ffffff; /* Ensures white background */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  text-align: center;
 }
 
-.radio-group {
-  display: flex;
-  justify-content: flex-start; /* Aligns items to the start (right in RTL) */
-  gap: 1rem; /* Space between radio options */
-  margin-bottom: 1.5rem; /* Space between this field and the next one */
+/* ✅ Dark Overlay Background */
+.modal::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
 }
 
-.radio-group label {
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  color: #555555; /* Medium gray */
+/* ✅ Close Button (Top-Left, Smaller) */
+.close-button {
+  position: absolute;
+  top: 8px;
+  left: 8px; /* Top-left positioning */
+  background: none;
+  border: none;
+  font-size: 1rem; /* Smaller size */
+  font-weight: bold;
+  color: #555; /* Medium gray */
+  cursor: pointer;
+  padding: 0.5rem;
 }
 
-.radio-group input[type="radio"] {
-  margin-left: 0.5rem; /* Space between the radio button and the label */
-}
-.error-message {
-  color: red;
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
+.close-button:hover {
+  color: #e53935; /* Red hover effect */
 }
 
-/* Highlight invalid inputs with a red border */
-input.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched {
-  border-color: red;
-}
-.p-toast {
-  z-index: 9999; /* Ensure it appears above other content */
+/* ✅ Modal Title */
+.modal h3 {
+  font-size: 1.2rem;
+  color: #23689B;
+  margin-bottom: 1rem;
 }
 
-.p-toast-message {
-  font-size: 1rem;
+/* ✅ Success Modal */
+.success-modal {
+  background: #ffffff; /* Ensures white background */
+  border-left: 6px solid #4caf50; /* Green left border */
+}
+
+/* ✅ Error Modal */
+.error-modal {
+  background: #ffffff; /* Ensures white background */
+  border-left: 6px solid #e53935; /* Red left border */
 }

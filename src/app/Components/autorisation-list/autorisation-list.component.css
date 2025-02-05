@@ -239,3 +239,9 @@
     opacity: 1;
   }
 }
+
+h2 {
+  text-align: right;
+  direction: rtl; /* Ensures proper alignment for Arabic text */
+  margin-right: 20px; /* Adds spacing from the right edge */
+}

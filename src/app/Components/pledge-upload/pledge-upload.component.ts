@@ -118,6 +118,16 @@ export class PledgeUploadComponent implements OnInit {
     }
   }
 
+
+  onDownload(): void {
+    const filePath = 'assets/pledge.pdf'; // Path to the file in assets
+    const anchor = document.createElement('a'); // Create a temporary anchor element
+    anchor.href = filePath;
+    anchor.download = 'pledge.pdf'; // Set the file name for the downloaded file
+    anchor.click(); // Trigger the download
+  }
+
+
   // Reset file selection
   private resetFile(): void {
     this.fileName = '';

@@ -15,7 +15,11 @@
     <p>قم باختيار ملف من جهازك لتحميله. الملفات المدعومة هي PDF، DOCX، وصور.</p>
     <input type="file" id="fileInput" class="file-input" accept=".pdf, .docx, .jpg, .png, .jpeg"
      (change)="onFileSelected($event)" />
-    <button class="upload-button" (click)="onUpload()">تحميل الملف</button>
+<div class="button-container">
+ <button class="upload-button" (click)="onUpload()">رفع الملف</button>
+ <button class="upload-button" (click)="onDownload()">تحميل الملف</button>
+</div>
+
    </div>
   </div>
 

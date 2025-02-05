@@ -15,10 +15,10 @@ import { TokenService } from '../../services/token/token.service';
 export class ReportsComponent implements OnInit {
   // Properties
   searchTerm: string = '';
-  reports: any[] = []; // For work periods
-  releases: any[] = []; // For release requests
-  filteredReports: any[] = []; // Filtered work periods
-  filteredReleases: any[] = []; // Filtered release requests
+  reports: any[] = [];
+  releases: any[] = [];
+  filteredReports: any[] = [];
+  filteredReleases: any[] = []; 
   filteredWorkPeriods: any[] = [];
   refEmp: string | undefined;
   currentView: 'releases' | 'work-periods' = 'releases';
@@ -179,18 +179,29 @@ export class ReportsComponent implements OnInit {
   }
 
   applyFilter(): void {
-    const search = this.searchTerm.toLowerCase();
-    if (this.currentView === 'releases') {
-      this.filteredReleases = this.releases.filter((release) =>
-        this.matchesSearch(release)
-      );
-    } else if (this.currentView === 'work-periods') {
-      this.filteredWorkPeriods = this.reports.filter(
-        (period) =>
-          period.employee_name?.toLowerCase().includes(search) // Use optional chaining (?)
-      );
+    const term = this.searchTerm.toLowerCase().trim();
+
+    if (!term) {
+      this.filteredReleases = [...this.releases];
+      this.filteredWorkPeriods = [...this.reports];
+      return;
     }
+
+    // 🔹 Filter Release Requests by Employee Name, Department, Director Name, and State
+    this.filteredReleases = this.releases.filter(release =>
+      release.employeeName?.toLowerCase().includes(term) ||  // Search by Employee Name
+      release.department?.toLowerCase().includes(term) ||    // Search by Department
+      release.directorName?.toLowerCase().includes(term) ||  // Search by Director Name
+      this.mapState(release.state).toLowerCase().includes(term) // 🔥 Search by State (مقبولة, مرفوضة, قيد الانتظار)
+    );
+
+    // 🔹 Filter Work Periods by Employee Name and State
+    this.filteredWorkPeriods = this.reports.filter(period =>
+      period.employee_name?.toLowerCase().includes(term) ||  // Search by Employee Name
+      this.mapState(period.state).toLowerCase().includes(term) // 🔥 Search by State
+    );
   }
+
 
 
   // Match search term
@@ -271,6 +282,20 @@ export class ReportsComponent implements OnInit {
         console.error(`Error updating release ${release.id} state:`, error);
       }
     );
+  }
+
+
+  mapState(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'approved':
+        return 'مقبولة';
+      case 'rejected':
+        return 'مرفوضة';
+      case 'pending':
+        return 'قيد الانتظار';
+      default:
+        return status; // Return the original state if it does not match predefined values
+    }
   }
 
 }
