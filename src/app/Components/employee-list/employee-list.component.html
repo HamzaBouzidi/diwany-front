@@ -1,8 +1,8 @@
-<h2>إدارة المستخدمين</h2>
+<h2>إدارة الموظفين</h2>
 
 <!-- 🔍 Search Bar -->
 <div class="search-container">
- <input type="text" class="search-input" placeholder="🔍 ابحث عن مستخدم..." [(ngModel)]="searchQuery">
+ <input type="text" class="search-input" placeholder=" ابحث عن موظف..." [(ngModel)]="searchQuery">
 </div>
 
 <!-- 📊 Users Table -->
@@ -10,14 +10,16 @@
  <thead>
   <tr>
    <th>الاسم</th>
+   <th> الرقم الوظيفي</th>
    <th>البريد الإلكتروني</th>
    <th>الهاتف</th>
    <th>الإجراءات</th>
   </tr>
  </thead>
  <tbody>
-  <tr *ngFor="let user of filteredUsers()">
+  <tr *ngFor="let user of filteredUsers()" (click)="openEditPermissionsModal(user)" class="clickable-row">
    <td>{{ user.user_name }}</td>
+   <td>{{ user.user_ref_emp }}</td>
    <td>{{ user.user_email }}</td>
    <td>{{ user.user_phone }}</td>
 
@@ -36,4 +38,48 @@
 <div *ngIf="showNotification" class="notification-popup">
  <span>{{ notificationMessage }}</span>
  <button class="close-btn" (click)="closeNotification()">×</button>
+</div>
+<!-- ⚙️ Edit Permissions Modal -->
+<div *ngIf="isModalVisible" class="modal">
+ <div class="modal-content">
+  <button class="close-button" (click)="closeModal()">✖</button>
+  <h3>تعديل صلاحيات المستخدم</h3>
+
+  <div class="permissions-group">
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_vacation']"> طلب إجازة</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_vacation_list']"> قائمة الإجازات</label>
+
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_exit_auth']"> طلب إذن خروج</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_exit_auth_list']"> قائمة أذونات
+    الخروج</label>
+
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_morning_delay']"> طلب تأخير
+    صباحي</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_morning_delay_list']"> قائمة التأخير
+    الصباحي</label>
+
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_nomination']"> طلب ترشيح</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_nomination_list']"> قائمة الترشيحات</label>
+
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_pledge']"> طلب تعهد</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_pledge_list']"> قائمة التعهدات</label>
+
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_release']"> طلب إفراج</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_release_list']"> قائمة الإفراجات</label>
+
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_cin']"> طلب بطاقة الهوية</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_cin_list']"> عرض بطاقات الهوية</label>
+
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_health_assurance']"> طلب تأمين
+    صحي</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_health_assurance_list']"> عرض التأمين
+    الصحي</label>
+
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['request_reports']"> طلب تقارير</label>
+   <label><input type="checkbox" [(ngModel)]="selectedUser.permissions['view_reports']"> عرض التقارير</label>
+  </div>
+
+  <!-- ✅ Save Button -->
+  <button class="save-btn" (click)="updateUserPermissions()">حفظ التعديلات</button>
+ </div>
 </div>

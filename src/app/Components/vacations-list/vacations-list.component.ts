@@ -6,6 +6,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { VacationService } from '../../services/vacation/vacation.service';
+import { TokenService } from '../../services/token/token.service';
+import { UserInfoService } from '../../services/user/user-info.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vacation-list',
@@ -26,13 +29,21 @@ export class VacationListComponent implements OnInit {
   filteredEmployees: any[] = [];
   filteredMyVacations: any[] = [];
 
-  constructor(private vacationService: VacationService) { }
+  userPermissions = {
+    view_vacation_list: false
+  };
+
+  constructor(private vacationService: VacationService, private tokenService: TokenService, private userInfoService: UserInfoService, private router: Router) { }
 
   ngOnInit(): void {
+    //this.loadUserPermissions();
     this.loadMyVacations();
     this.loadEmployeeVacations();
 
   }
+
+
+
 
   loadMyVacations(): void {
 

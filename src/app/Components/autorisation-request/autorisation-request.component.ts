@@ -7,6 +7,7 @@ import { ExitAuthorisationService } from '../../services/exitAuthorisation/exit-
 import { DoneModalComponent } from "../../shared/modal/done-modal/done-modal.component";
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NotificationService } from '../../services/notification/notification.service';
 
 @Component({
   selector: 'app-autorisation-request',
@@ -26,6 +27,8 @@ export class AutorisationRequestComponent {
 
   constructor(
     private userService: UserInfoService,
+    private notificationService: NotificationService,
+
     private tokenService: TokenService,
     private exitAuthorizationService: ExitAuthorisationService,
     private router: Router
@@ -82,6 +85,28 @@ export class AutorisationRequestComponent {
         (response) => {
           console.log('Form submitted successfully', response);
           this.isModalVisible = true;
+          // Step 2: Retrieve the director RW (Manager)
+          if (this.ref_emp) {
+            this.userService.getDirectorRw(this.ref_emp).subscribe(
+              (directorRw) => {
+                console.log('Director RW:', directorRw);
+
+                // Step 3: Send a notification to the director
+                const notificationText = `طلب إذن خروج جديد من ${this.employeeName}`;
+                this.notificationService.addNotification(notificationText, this.ref_emp!, directorRw).subscribe(
+                  () => {
+                    console.log('Notification sent successfully');
+                  },
+                  (error) => {
+                    console.error('Error sending notification:', error);
+                  }
+                );
+              },
+              (error) => {
+                console.error('Error retrieving Director RW:', error);
+              }
+            );
+          }
 
           setTimeout(() => {
             this.closeModal(); // Close the modal

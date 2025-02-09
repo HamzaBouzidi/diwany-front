@@ -6,45 +6,47 @@
 <div class="divider"></div> <!-- Divider line before the cards -->
 
 <div class="card-container">
-  <div class="card">
+  <div class="card" *ngIf="userPermissions.request_exit_auth">
     <div class="card-header">
       <h3>طلب اذن بالخروج مبكر</h3>
     </div>
     <div class="card-body">
-      <p>الخروج المبكر  قبل انتهاء الدوام الرسمي</p>
-         <a href="dashboard/autorisation/autorisation-request">
+      <p>الخروج المبكر قبل انتهاء الدوام الرسمي</p>
+      <a href="dashboard/autorisation/autorisation-request">
 
-      <button class="card-button"> قم بالطلب الآن</button>
+        <button class="card-button"> قم بالطلب الآن</button>
 
-         </a>
+      </a>
 
     </div>
   </div>
-  
-  <div class="card">
+
+  <div class="card" *ngIf="userPermissions.request_morning_delay">
     <div class="card-header">
       <h3>طلب الإذن بالدخول المتأخر</h3>
     </div>
     <div class="card-body">
       <p>من هذا القسم يمكنك عرض جميع الإجازات الصادرة لجميع الموظفين المسجلين لديك.</p>
-     <a href="/dashboard/autorisation/morning-autorisation-request">
-          <button class="card-button"> قم بالطلب الآن</button>      
-     </a> 
+      <a href="/dashboard/autorisation/morning-autorisation-request">
+        <button class="card-button"> قم بالطلب الآن</button>
+      </a>
 
-      
+
     </div>
   </div>
-  
+
   <div class="card">
     <div class="card-header">
       <h3>قائمة الأذونات </h3>
     </div>
     <div class="card-body">
-      <p>الإجازات السنوية و الطارئة ... يمكنك النظام من عرض و متابعة كل الإجازات الخاصة بك و الموظفين لديك، حتى لو كنت مديرًا أو ليس لديك صلاحية كاملة في العمل.</p>
+      <p>الإجازات السنوية و الطارئة ... يمكنك النظام من عرض و متابعة كل الإجازات الخاصة بك و الموظفين لديك، حتى لو كنت
+        مديرًا أو ليس لديك صلاحية كاملة في العمل.</p>
       <a href="/dashboard/autorisation/autorisation-list">
-        <button class="card-button">قم بطلبك الآن</button>
+        <button class="card-button"> اطلع الآن</button>
       </a>
-      
+
     </div>
   </div>
 </div>
+

@@ -6,7 +6,7 @@
 <div class="divider"></div> <!-- Divider line before the cards -->
 
 <div class="card-container">
-  <div class="card">
+  <div class="card" *ngIf="userPermissions.request_cin">
     <div class="card-header">
       <h3>نموذج اصدار بطاقة التعريف</h3>
     </div>
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" *ngIf="userPermissions.request_nomination">
     <div class="card-header">
       <h3>نموذج ترشيح الحصول على صفة عضو</h3>
     </div>
@@ -34,7 +34,7 @@
 
   </div>
 
-  <div class="card">
+  <div class="card" *ngIf="userPermissions.request_pledge">
   <div class="card-header">
     <h3>إقرار و تعهد</h3>
   </div>
@@ -48,7 +48,7 @@
 
 
 
-<div class="card">
+<div class="card" *ngIf="userPermissions.request_health_assurance">
   <div class="card-header">
     <h3> نموذج التأمين الصحي </h3>
   </div>

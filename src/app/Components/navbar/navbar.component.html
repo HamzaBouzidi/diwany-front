@@ -1,0 +1,45 @@
+<nav class="navbar">
+ <div class="navbar-left">
+  <img src="assets/logo.png" class="logo" alt="Logo" />
+  <div class="nav-buttons">
+   <button class="nav-button add-post-btn">إضافة منشور</button>
+   <button class="nav-button forum-btn">منتدى</button>
+  </div>
+ </div>
+
+ <div class="navbar-right">
+  <div class="nav-icons">
+   <!-- Notification Icon -->
+   <div class="notification-container">
+    <i class="fas fa-envelope" style="font-size:26px;" (click)="toggleNotifications()">
+     <sup><small class="smalll">{{ notifications.length }}</small></sup>
+    </i>
+
+
+    <!-- Notification Dropdown -->
+    <div class="notification-dropdown" *ngIf="showNotifications">
+     <div *ngIf="notifications.length === 0" class="empty-notification">
+      لا توجد إشعارات جديدة
+     </div>
+     <ul *ngIf="notifications.length > 0">
+      <li *ngFor="let notif of notifications">
+       <div class="notification-text">
+        <span>{{ notif.text }}</span>
+       </div>
+       <!-- Delete button -->
+       <button class="delete-btn" (click)="deleteNotification(notif.id)">
+        <i class="fas fa-trash"></i>
+       </button>
+      </li>
+     </ul>
+    </div>
+
+
+   </div>
+
+   <!-- User Profile -->
+   <i class="fas fa-user" style="font-size:26px;"></i>
+   <button class="nav-button logout-btn" (click)="onLogout()">تسجيل الخروج</button>
+  </div>
+ </div>
+</nav>

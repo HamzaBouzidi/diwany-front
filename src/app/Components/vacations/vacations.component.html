@@ -6,21 +6,12 @@
 
 <div class="divider"></div> <!-- Divider line before the cards -->
 
-<div class="card-container">
-  <!--  
-  <div class="card">
-    <div class="card-header">
-      <h3>إعداد رموز الإجازات</h3>
-    </div>
-    <div class="card-body">
-      <p>يتيح النظام لمراقبة الموارد البشرية تنظيم وضعية كل موظف لديك من تشريحها و توزيعها لتسهيل العمل بين طلب الإجازة
-        السنوية ومرضية و الإجازة الطارئة و غيرها...</p>
-      <button class="card-button">إعداد الرموز</button>
-    </div>
-  </div>
-  -->
+<!-- ✅ Show cards only if the user has permissions -->
+<div class="card-container"
+  *ngIf="userPermissions.request_vacation || userPermissions.view_vacation_list; else noAccess">
 
-  <div class="card">
+  <!-- ✅ Show "قائمة الإجازات" only if user has `view_vacation_list` permission -->
+  <div class="card" *ngIf="userPermissions.view_vacation_list">
     <div class="card-header">
       <h3>قائمة الإجازات</h3>
     </div>
@@ -28,24 +19,27 @@
       <p>من هذا القسم يمكنك عرض جميع الإجازات الصادرة لجميع الموظفين المسجلين لديك.</p>
       <a href="/dashboard/vacations/vacations-list">
         <button class="card-button">عرض الإجازات</button>
-        
-        </a>
-
-
+      </a>
     </div>
   </div>
 
-  <div class="card">
+  <!-- ✅ Show "طلب إجازة" only if user has `request_vacation` permission -->
+  <div class="card" *ngIf="userPermissions.request_vacation">
     <div class="card-header">
       <h3>طلب إجازة</h3>
     </div>
     <div class="card-body">
-      <p>الإجازات السنوية و الطارئة ... يمكنك النظام من عرض و متابعة كل الإجازات الخاصة بك و الموظفين لديك، حتى لو كنت
-        مديرًا أو ليس لديك صلاحية كاملة في العمل.</p>
+      <p>الإجازات السنوية و الطارئة ... يمكنك النظام من عرض و متابعة كل الإجازات الخاصة بك و الموظفين لديك.</p>
       <a href="/dashboard/vacations/vacation-request">
         <button class="card-button">قم بطلبك الآن</button>
       </a>
-
     </div>
   </div>
+
 </div>
+<!-- ✅ "No Access" Message -->
+<ng-template #noAccess>
+  <div class="no-access-message">
+    <p>ليس لديك صلاحية للوصول إلى هذا القسم.</p>
+  </div>
+</ng-template>

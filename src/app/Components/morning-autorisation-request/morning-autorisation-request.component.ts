@@ -6,6 +6,7 @@ import { UserInfoService } from '../../services/user/user-info.service';
 import { TokenService } from '../../services/token/token.service';
 import { DoneModalComponent } from "../../shared/modal/done-modal/done-modal.component";
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification/notification.service';
 @Component({
   selector: 'app-morning-autorisation-request',
   standalone: true,
@@ -25,6 +26,8 @@ export class MorningLateRequestComponent {
   constructor(
 
     private userService: UserInfoService,
+    private notificationService: NotificationService,
+
     private tokenService: TokenService,
     private exitAuthorizationService: MorningAuthorisationService,
     private router: Router
@@ -79,6 +82,30 @@ export class MorningLateRequestComponent {
         (response) => {
           console.log('Form submitted successfully', response);
           this.isModalVisible = true;
+
+          // Step 2: Retrieve the director RW (Manager)
+          if (this.ref_emp) {
+            this.userService.getDirectorRw(this.ref_emp).subscribe(
+              (directorRw) => {
+                console.log('Director RW:', directorRw);
+
+                // Step 3: Send a notification to the director
+                const notificationText = `طلب إذن تأخير صباحي جديد من ${this.employeeName}`;
+                this.notificationService.addNotification(notificationText, this.ref_emp!, directorRw).subscribe(
+                  () => {
+                    console.log('Notification sent successfully');
+                  },
+                  (error) => {
+                    console.error('Error sending notification:', error);
+                  }
+                );
+              },
+              (error) => {
+                console.error('Error retrieving Director RW:', error);
+              }
+            );
+          }
+
           setTimeout(() => {
             this.closeModal();
             this.router.navigate(['/dashboard/autorisation/autorisation-list']);

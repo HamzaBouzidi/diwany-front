@@ -15,6 +15,7 @@ import { TokenService } from '../../services/token/token.service';
 import { UserInfoService } from '../../services/user/user-info.service';
 import { VacationService } from '../../services/vacation/vacation.service';
 import { DoneModalComponent } from "../../shared/modal/done-modal/done-modal.component";
+import { NotificationService } from '../../services/notification/notification.service';
 
 @Component({
   selector: 'app-short-vacation-request',
@@ -66,11 +67,14 @@ export class ShortVacationRequestComponent implements OnInit {
   }
 
   constructor(
-    private messageService: MessageService,
+    private userInfoService: UserInfoService,
+    private notificationService: NotificationService,
+
     private userService: UserInfoService,
     private tokenService: TokenService,
     private vacationService: VacationService,
-    private router: Router // Inject Router here
+    private router: Router 
+
   ) { }
 
   ngOnInit(): void {
@@ -213,6 +217,32 @@ export class ShortVacationRequestComponent implements OnInit {
       (response) => {
         this.remainingVacationDays = this.availableVacationDays - this.vacationDuration!;
         this.isSuccessModalVisible = true;
+        // 1. Récupérer le directeur RW
+        if (this.ref_emp) {
+          this.userInfoService.getDirectorRw(this.ref_emp).subscribe(
+            (directorRw) => {
+
+              console.log(directorRw)
+              // 2. Créer la notification après avoir récupéré le directeur RW
+              const notificationText = `طلب إجازة جديد من ${this.employeeName}`;
+              this.notificationService.addNotification(notificationText, this.ref_emp!, directorRw).subscribe(
+                () => {
+                  console.log('Notification envoyée avec succès');
+                },
+                (error) => {
+                  console.error('Erreur lors de l\'envoi de la notification:', error);
+                }
+              );
+            },
+            (error) => {
+              console.error('Erreur lors de la récupération du directeur RW:', error);
+            }
+          );
+        }
+
+
+
+
       },
       (error) => {
         console.error('Error submitting vacation request:', error);

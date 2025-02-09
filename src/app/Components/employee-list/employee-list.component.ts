@@ -18,6 +18,11 @@ export class EmployeeListComponent {
   notificationMessage: string = '';
 
 
+  isModalVisible: boolean = false;
+  selectedUser: any = null;
+
+
+
   constructor(private userInfoService: UserInfoService) { }
 
   ngOnInit(): void {
@@ -39,9 +44,43 @@ export class EmployeeListComponent {
   // 🔍 Filter Users by Search
   filteredUsers(): any[] {
     return this.users.filter(user =>
-      user.user_name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      user.user_name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      user.user_ref_emp?.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
+
+
+  // 🔥 Open Modal and Load User Permissions
+  openEditPermissionsModal(user: any): void {
+    this.selectedUser = { ...user, permissions: { ...user } }; // Clone user data
+    this.isModalVisible = true;
+  }
+
+  // ✅ Close Modal
+  closeModal(): void {
+    this.isModalVisible = false;
+    this.selectedUser = null;
+  }
+
+  // ✅ Save Updated Permissions
+  updateUserPermissions(): void {
+    if (!this.selectedUser) return;
+
+    const updatedPermissions = { ...this.selectedUser.permissions };
+
+    this.userInfoService.updateUserPermissions(this.selectedUser.USER_ID, updatedPermissions).subscribe(
+      () => {
+        this.showNotificationPopup("تم تحديث صلاحيات المستخدم بنجاح ✅");
+        this.loadUsers(); // Refresh user list
+        this.closeModal();
+      },
+      (error) => {
+        console.error('Error updating permissions:', error);
+        this.showNotificationPopup("فشل تحديث الصلاحيات ❌");
+      }
+    );
+  }
+
 
   // ✅ Approve User
   approveUser(userId: number): void {

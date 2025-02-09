@@ -3,11 +3,12 @@ import { NgClass } from '@angular/common'; // Import NgClass if needed
 import { Router } from '@angular/router';
 import { UserInfoService } from '../../services/user/user-info.service';
 import { TokenService } from '../../services/token/token.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgClass], 
+  imports: [NgClass, NavbarComponent], 
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })

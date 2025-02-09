@@ -1,5 +1,5 @@
 .sidebar {
-    width: 15%; 
+    width: 14%; 
     max-width: 300px; 
     min-width: 200px; 
     height: 100%; 
@@ -155,11 +155,31 @@
 }
 
 .logo-img {
-    width: 9rem;
-    /* Increased logo size */
-    height: 9rem;
+    width: 7rem; /* Default size */
+    max-width: 100%; /* Ensures it does not exceed its container */
+    height: auto; /* Maintain aspect ratio */
     display: block;
     margin: 0 auto;
+}
+
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+    .logo-img {
+        width: 5rem; /* Smaller size for tablets */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .logo-img {
+        width: 4rem; /* Smaller size for mobile */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo-img {
+        width: 3rem; /* Even smaller size for very small screens */
+    }
 }
 
 .icon-container {
@@ -171,33 +191,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-.navbar {
-    background-color: #384B70;
-    color: white;
-    width: 100%;
-    height: 65px;
- 
-    display: flex;
-    
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
- 
-
-}
 
 .smalll {
    font-size: 16px;
@@ -217,20 +210,6 @@
     margin-right: 15px;
 }
 
-.navbar-left {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-
-
-.navbar-right {
-     
-     
-   
-   padding-left:100px;
-}
 
 
 
@@ -263,3 +242,22 @@
 .nav-button:hover {
     opacity: 0.9;
 }
+
+.logo-img {
+    width: 12rem;
+    /* Increased logo size */
+    height: 10rem;
+    display: block;
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+
+.icon-container {
+    margin-left: 1rem;
+    font-size: 1.4rem;
+    /* Adjust icon size */
+    color: #F4F5DB;
+    /* Same color as the text */
+}
+
+

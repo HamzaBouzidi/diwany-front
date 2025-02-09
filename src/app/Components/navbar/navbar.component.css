@@ -1,0 +1,244 @@
+
+.navbar {
+  background-color: #384B70;
+  color: white;
+  width: 100%;
+  height: 64px;
+  position: fixed;
+  top: 0;
+  left: 0; 
+  right: 0;
+
+  z-index: 1100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo de la navbar */
+.logo {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+/* Conteneur gauche de la navbar */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  padding-right: 1%;
+  padding-left: 1%;
+
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  padding-right: 1%;
+  padding-left: 1%;
+
+}
+
+/* Conteneur des boutons */
+.nav-buttons {
+  display: flex;
+  gap: 15px; /* Ajoute de l'espace entre les boutons */
+}
+
+/* Style général des boutons */
+.nav-button {
+  background-color: #555;
+  border: 1px solid #777;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Effet hover sur les boutons */
+.nav-button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Bouton "إضافة منشور" */
+.add-post-btn {
+  background-color: #5A5A5A;
+}
+
+/* Bouton "منتدى" */
+.forum-btn {
+  background-color: #FFD700;
+  border: 1px solid #FFC107;
+  color: black;
+}
+
+/* Icônes des notifications */
+.nav-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Icônes (ex: messages, utilisateurs) */
+.nav-icons i {
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* Effet hover sur les icônes */
+.nav-icons i:hover {
+  transform: scale(1.2);
+}
+
+/* Badge de notification */
+.notification-badge {
+  font-size: 12px;
+  color: white;
+  background-color: orangered;
+  border-radius: 50%;
+  padding: 3px 6px;
+  position: relative;
+  top: -10px;
+  right: -5px;
+  font-weight: bold;
+}
+
+/* ----- RESPONSIVE DESIGN ----- */
+
+/* Pour les écrans plus petits */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .navbar-left, .navbar-right {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-icons {
+    justify-content: center;
+  }
+}
+
+
+
+
+/* Notification Container */
+.notification-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Notification Dropdown */
+.notification-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 280px; /* Increased width for better spacing */
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.notification-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Flexbox for alignment */
+.notification-dropdown li {
+  display: flex;
+  justify-content: space-between; /* Ensures text is left, button is right */
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  gap: 10px; /* Space between text and delete button */
+}
+
+.notification-dropdown li:last-child {
+  border-bottom: none;
+}
+
+/* Ensure text does not push delete button */
+.notification-text {
+  flex-grow: 1; /* Allows text to take available space */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Delete Button */
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  transition: transform 0.2s ease;
+}
+
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+/* Empty Notification */
+.empty-notification {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  color: #777;
+}
+
+/* Notification Badge */
+.smalll {
+  font-size: 14px;
+  color: white;
+  background-color: orangered;
+  border-radius: 50%;
+  padding: 4px 7px;
+  font-weight: bold;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+/* Delete Button (only icon in red) */
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s ease;
+}
+
+.delete-btn i {
+  color: red; /* Make the trash icon red */
+  font-size: 16px;
+}
+
+.delete-btn:hover {
+  transform: scale(1.2);
+}

@@ -113,3 +113,13 @@ body {
     font-size: 1.2rem; /* Adjust paragraph size for small screens */
   }
 }
+.no-access-message {
+  text-align: center;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #ffe3e3;
+  color: #d9534f;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
